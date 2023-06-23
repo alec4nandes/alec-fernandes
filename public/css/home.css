@@ -1,0 +1,272 @@
+@import url("https://api.fontshare.com/v2/css?f[]=switzer@300,500,700&f[]=gambarino@400&display=swap");
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #edf6ff;
+  font-family: "Switzer", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.3rem;
+  margin: 0;
+}
+body a,
+body .gallery .content {
+  color: rgb(105, 138, 199);
+}
+body a {
+  text-decoration: none;
+  transition: opacity 0.5s;
+}
+body a:hover {
+  opacity: 0.5;
+}
+body h1,
+body h2 {
+  font-family: "Switzer", sans-serif;
+  text-align: center;
+}
+body h2 {
+  color: #626e79;
+}
+body h3,
+body h4,
+body h5,
+body h6 {
+  font-weight: 500;
+}
+body h4 {
+  color: #626e79;
+}
+body .small-link-heading a {
+  font-size: 1rem;
+  font-weight: 300;
+}
+body .date-posted {
+  color: #888;
+}
+body header {
+  height: 100vh;
+  width: 40vw;
+  background-image: url("/assets/ocean-gliderport-background.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+}
+body header,
+body header h1,
+body header #header-forms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body header h1 {
+  color: #fff;
+  flex: 1;
+  font-size: 4.5vw;
+  text-align: center;
+}
+body header #header-forms {
+  width: 100%;
+  background-color: rgba(128, 147, 177, 0.85);
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 0;
+  text-align: center;
+}
+body header #header-forms #contact-link {
+  width: 100%;
+  background-color: rgb(105, 138, 199);
+  box-sizing: border-box;
+  color: #edf6ff;
+  font-weight: bold;
+  padding: 5px;
+  position: relative;
+  top: 3px;
+  transition: background-color 1s, color 1s;
+}
+body header #header-forms #contact-link:hover {
+  background-color: #edf6ff;
+  color: rgb(105, 138, 199);
+  opacity: 1;
+}
+body header #header-forms form,
+body header #header-forms p {
+  margin: 0;
+}
+body header #header-forms form button,
+body header #header-forms form input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #eee;
+  border: 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  padding: 3px 5px;
+}
+body header #header-forms form button {
+  width: 80px;
+  background-color: #e0efff;
+  color: rgb(105, 138, 199);
+}
+body header #header-forms form button:hover {
+  background-color: #edf6ff;
+  cursor: pointer;
+}
+body header #header-forms form input {
+  width: 160px;
+}
+body header #header-forms p {
+  color: #fff;
+}
+body main {
+  color: #444;
+  padding: 35px 4.2vw;
+  padding-left: 44.2vw;
+}
+body main section {
+  padding: 35px 0;
+}
+body main section#tags ul {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1px 5px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+body main section#tags ul li {
+  display: inline-flex;
+}
+body main section#tags ul li:last-child::after {
+  content: "";
+}
+body main section#tags ul li::after {
+  content: ", ";
+}
+body main section h2 {
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 30px;
+  margin-top: 0;
+}
+body main section .content-bubble {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px rgba(50, 50, 50, 0.5);
+  display: flex;
+}
+body main section .content-bubble.post .feature-image {
+  min-height: 15.5333333333vw;
+  border-radius: 15px 0 0 15px;
+}
+body main section .content-bubble.gallery .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+body main section .content-bubble.gallery .feature-image {
+  height: 15.5333333333vw;
+  max-height: 200px;
+  border-radius: 0 15px 15px 0;
+}
+body main section .content-bubble .content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px 10px;
+}
+body main section .content-bubble .content * {
+  margin: 0;
+}
+body main section .content-bubble .feature-image {
+  height: auto;
+  width: 40%;
+  background-position: center;
+  background-size: cover;
+}
+body main section #projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5vw;
+  justify-content: center;
+}
+body main section #projects > a {
+  color: #fff;
+  text-decoration: none;
+}
+body main section #projects > a:hover {
+  opacity: 0.5;
+}
+body main section #projects > a > div {
+  height: 15.5333333333vw;
+  max-height: 200px;
+  max-width: 200px;
+  width: 15.5333333333vw;
+  background-color: #111;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(50, 50, 50, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+body main section #projects > a > div .project-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  border-radius: 10px 10px 0 0;
+  flex: 1;
+}
+body main section #projects > a > div span {
+  width: 100%;
+  background-color: #626e79;
+  border-radius: 0 0 10px 10px;
+  box-sizing: border-box;
+  line-height: 1rem;
+  padding: 2px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 725px) {
+  html,
+  body {
+    height: auto;
+  }
+  body {
+    flex-direction: column;
+  }
+  body header {
+    height: 400px;
+    width: 100%;
+    position: relative;
+  }
+  body header h1 {
+    font-size: 10vw;
+  }
+  body main {
+    padding-left: 4.2vw;
+  }
+  body main section .content-bubble.post .feature-image {
+    height: auto;
+    min-height: 28.8666666667vw;
+  }
+  body main section .content-bubble.gallery .feature-image {
+    height: 28.8666666667vw;
+  }
+  body main section #projects > a > div {
+    height: 28.8666666667vw;
+    width: 28.8666666667vw;
+  }
+}/*# sourceMappingURL=home.css.map */
