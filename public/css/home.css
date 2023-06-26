@@ -1,4 +1,5 @@
 @import url("https://api.fontshare.com/v2/css?f[]=switzer@300,500,700&f[]=gambarino@400&display=swap");
+@import "comma-list.css";
 html,
 body {
   height: 100%;
@@ -135,24 +136,6 @@ body main {
 }
 body main section {
   padding: 35px 0;
-}
-body main section#tags ul {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1px 5px;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-}
-body main section#tags ul li {
-  display: inline-flex;
-}
-body main section#tags ul li:last-child::after {
-  content: "";
-}
-body main section#tags ul li::after {
-  content: ", ";
 }
 body main section h2 {
   font-size: 30px;

@@ -4,7 +4,27 @@
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Alec Fernandes &mdash; Portfolio & Blog</title>
         <!-- meta_tags -->
+        <meta name="type" property="og:type" content="website"/>
+        <meta name="title" property="og:title" content="Alec Fernandes &mdash; Portfolio & Blog"/>
+        <meta name="url" property="og:url" content="https://fern.haus"/>
+        <meta
+            name="description"
+            property="og:description"
+            content="Writer and web developer. Follow me @alec4nandes on most major socials."/>
+        <meta name="image"
+            property="og:image"
+            content="https://fern.haus/assets/ocean-gliderport-background.jpg"/>
+        <!-- twitter meta tags -->
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@alec4nandes"/>
+        <meta name="twitter:title" content="Alec Fernandes &mdash; Portfolio & Blog"/>
+        <meta name="twitter:description"
+            content="Writer and web developer. Follow me @alec4nandes on most major socials."/>
+        <meta name="twitter:image"
+            content="https://fern.haus/assets/ocean-gliderport-background.jpg"/>
+        <!-- end meta tags -->
         <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
         <link rel="stylesheet" href="/css/home.css"/>
     </head>
@@ -37,19 +57,19 @@
                         class="feature-image"
                         style="
                             background-image: url(
-                                '{{ collections.posts.latest_post.feature_image }}'
+                                '{{ posts.latest_post.feature_image }}'
                             );
                         "
                     ></a>
                     <div class="content">
                         <h3>
                             <a href="./blog">
-                                {{ collections.posts.latest_post.title }}
+                                {{ posts.latest_post.title }}
                             </a>
                         </h3>
-                        <h4>{{ collections.posts.latest_post.subtitle }}</h4>
+                        <h4>{{ posts.latest_post.subtitle }}</h4>
                         <p class="date-posted">
-                            {{ collections.posts.latest_post.formatted_date }}
+                            {{ posts.latest_post.formatted_date }}
                         </p>
                         <p>
                             <a href="./blog">(read more)</a>
@@ -60,8 +80,8 @@
             <section>
                 <h2>Projects</h2>
                 <div id="projects">
-                    {% for project in collections.posts.projects %}
-                        <a href="/post/?id={{ project.post_id }}">
+                    {% for project in posts.projects %}
+                        <a href="/blog/{{ project.post_id }}.html">
                             <div>
                                 <div
                                     class="project-image"
@@ -90,8 +110,8 @@
             </section>
             <section id="tags">
                 <h2>Tags</h2>
-                <ul>
-                    {% for tag in collections.posts.all_tags %}
+                <ul class="commas">
+                    {% for tag in posts.all_tags %}
                         <li>
                             <a href="/search/?tag={{ tag }}">{{ tag }}</a>
                         </li>
@@ -99,5 +119,6 @@
                 </ul>
             </section>
         </main>
+        <script src="/src/scripts.js"></script>
     </body>
 </html>

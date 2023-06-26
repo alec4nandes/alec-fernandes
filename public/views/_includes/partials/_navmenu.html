@@ -1,0 +1,82 @@
+<div class="subscribe-container">
+    <div class="subscribe">
+        <button class="open-nav" onclick="toggleNavMenu(true)">
+            <img src="/assets/icons8-menu-64.png" alt=""/>
+        </button>
+        <nav class="closed">
+            <button class="close-nav" onclick="toggleNavMenu(false)">
+                <img src="/assets/icons8-close-30.png" alt=""/>
+            </button>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/blog">Blog</a>
+                </li>
+                <li>
+                    <a href="/contact">Contact</a>
+                </li>
+            </ul>
+            <h2 class="nav-heading">
+                Projects
+                <a
+                    href="https://github.com/alec4nandes"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    <img src="/assets/icons8-github-30.png" alt=""/>
+                </a>
+            </h2>
+            <ul>
+                {% for project in posts.projects %}
+                    <li>
+                        <a href="/blog/{{ project.post_id }}.html">
+                            {{ project.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <h2 class="nav-heading">Graphic Design</h2>
+            <ul>
+                <li>
+                    <a href="/gallery">Gallery</a>
+                </li>
+            </ul>
+            <h2 class="nav-heading">Tags</h2>
+            <ul>
+                {% for tag in posts.all_tags %}
+                    <li>
+                        <a href="/search/?tag={{ tag }}">{{ tag }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <form class="subscribe-form single-line-form">
+            <input type="email" name="email" placeholder="email"/>
+            <button>subscribe</button>
+        </form>
+        <div class="social-icons">
+            <a
+                href="https://twitter.com/alec4nandes"
+                target="_blank"
+                rel="noopener"
+            >
+                <img
+                    src="/assets/icons8-twitter-32.png"
+                    alt="Twitter icon of little bird"
+/>
+            </a>
+            <a
+                href="https://instagram.com/alec4nandes"
+                target="_blank"
+                rel="noopener"
+            >
+                <img
+                    src="/assets/icons8-instagram-32.png"
+                    alt="Instagram icon of polaroid camera"
+/>
+            </a>
+        </div>
+    </div>
+</div>
