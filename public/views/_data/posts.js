@@ -2,12 +2,14 @@ const { collection, getDocs } = require("firebase/firestore");
 const { db } = require("./database.js");
 
 module.exports = async function () {
-    const allPosts = await getPostsData("posts");
+    const allPosts = await getPostsData("posts"),
+        tagData = groupTags(allPosts);
     return {
         all_posts: allPosts,
         latest_post: allPosts[0],
         projects: getProjects(allPosts),
-        all_tags: getAllTags(allPosts),
+        tag_data: tagData,
+        all_tags: Object.keys(tagData).sort(),
     };
 };
 
@@ -73,9 +75,9 @@ function getProjects(posts) {
         }));
 }
 
-function getAllTags(posts) {
-    const tags = posts.map(({ tags }) => tags).flat(Infinity),
-        unique = [...new Set(tags)];
-    unique.sort();
-    return unique;
+function groupTags(posts) {
+    return posts.reduce((acc, post) => {
+        post.tags.forEach((tag) => acc[tag]?.push(post) || (acc[tag] = [post]));
+        return acc;
+    }, {});
 }

@@ -12,9 +12,6 @@ body {
   position: relative;
   z-index: 0;
 }
-body.preload * {
-  transition: none !important;
-}
 body .date-posted {
   color: #999;
 }
@@ -121,10 +118,10 @@ body main .save-or-delete-buttons button:last-child {
 body a,
 body button.button-link {
   color: rgb(105, 138, 199);
-  transition: color 0.5s, opacity 0.5s;
 }
 body a:hover,
 body button.button-link:hover {
+  transition: color 0.5s, opacity 0.5s;
   opacity: 0.6;
 }
 body button.button-link {

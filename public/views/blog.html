@@ -37,35 +37,10 @@ pagination:
     </head>
     <body>
         {% include "partials/_smallheader.html" %}
-        {% include "partials/_navmenu.html" %}
         {% include "partials/_pagination.html" %}
         <main>
             {% for post in pagination.items %}
-                <article>
-                    <h2 class="title">
-                        <a href="/blog/{{ post.post_id }}.html">{{ post.title }}</a>
-                    </h2>
-                    <h3 class="subtitle">{{ post.subtitle }}</h3>
-                    <p class="date-posted">{{ post.formatted_date }}</p>
-                    <figure>
-                        <img src="{{ post.feature_image}}"/>
-                        <figcaption>{{ post.feature_image_caption }}</figcaption>
-                    </figure>
-                    <div>{{ post.content }}</div>
-                    <div class="tags">
-                        tags:
-                        <ul class="commas">
-                            {% for tag in post.tags %}
-                                <li>
-                                    <a href="/search/?tag={{ tag }}">{{ tag }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <button class="share-button" onclick="copyLink()">
-                        share <img src="/assets/icons8-share-24.png" alt=""/>
-                    </button>
-                </article>
+                {% include "partials/_article.html" %}
             {% endfor %}
         </main>
         {% include "partials/_pagination.html" %}

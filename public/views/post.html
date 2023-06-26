@@ -20,7 +20,6 @@ permalink: "blog/{{ post.post_id | slugify }}.html"
     </head>
     <body>
         {% include "partials/_smallheader.html" %}
-        {% include "partials/_navmenu.html" %}
         <main>
             <article>
                 <h2 class="title">{{ post.title }}</h2>
@@ -36,7 +35,7 @@ permalink: "blog/{{ post.post_id | slugify }}.html"
                     <ul class="commas">
                         {% for tag in post.tags %}
                             <li>
-                                <a href="/search/?tag={{ tag }}">{{ tag }}</a>
+                                <a href="/tags/{{ tag | slugify }}.html">{{ tag }}</a>
                             </li>
                         {% endfor %}
                     </ul>

@@ -13,14 +13,6 @@ body {
     position: relative;
     z-index: 0;
 
-    // prevents transitions firing on page load.
-    // className removed after body onload in
-    // mvc/views/scripts.js
-    // TODO: review this approach
-    &.preload * {
-        transition: none !important;
-    }
-
     .date-posted {
         color: #999;
     }
@@ -148,9 +140,9 @@ body {
     a,
     button.button-link {
         color: rgb(105, 138, 199);
-        transition: color 0.5s, opacity 0.5s;
 
         &:hover {
+            transition: color 0.5s, opacity 0.5s;
             opacity: 0.6;
         }
     }

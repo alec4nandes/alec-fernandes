@@ -72,8 +72,7 @@ body {
         top: 0;
 
         &,
-        h1,
-        #header-forms {
+        h1 {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,72 +83,6 @@ body {
             flex: 1;
             font-size: 4.5vw;
             text-align: center;
-        }
-
-        #header-forms {
-            width: 100%;
-            background-color: rgb(128, 147, 177, 0.85);
-            box-sizing: border-box;
-            flex-direction: column;
-            gap: 10px;
-            padding: 15px 0;
-            text-align: center;
-
-            #contact-link {
-                width: 100%;
-                background-color: rgb(105, 138, 199);
-                box-sizing: border-box;
-                color: #edf6ff;
-                font-weight: bold;
-                padding: 5px;
-                position: relative;
-                top: 3px;
-                transition: background-color 1s, color 1s;
-
-                &:hover {
-                    background-color: #edf6ff;
-                    color: rgb(105, 138, 199);
-                    opacity: 1;
-                }
-            }
-
-            form,
-            p {
-                margin: 0;
-            }
-
-            form {
-                button,
-                input {
-                    appearance: none;
-                    background-color: #eee;
-                    border: 0;
-                    border-radius: 5px;
-                    box-sizing: border-box;
-                    font-size: 0.9rem;
-                    line-height: 1.1rem;
-                    padding: 3px 5px;
-                }
-
-                button {
-                    width: 80px;
-                    background-color: #e0efff;
-                    color: rgb(105, 138, 199);
-
-                    &:hover {
-                        background-color: #edf6ff;
-                        cursor: pointer;
-                    }
-                }
-
-                input {
-                    width: 160px;
-                }
-            }
-
-            p {
-                color: #fff;
-            }
         }
     }
 
