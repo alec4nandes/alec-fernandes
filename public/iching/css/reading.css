@@ -1,0 +1,200 @@
+@charset "UTF-8";
+body {
+  background-image: url(../../iching/assets/yin-yang-bg-min.png) !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+body header,
+body main {
+  text-align: center;
+}
+body #reading {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: auto;
+}
+body #reading #casting-buttons {
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: 10px;
+  box-shadow: 0 0 4px 4px rgba(100, 100, 100, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: auto;
+  padding: 20px;
+}
+body #reading #casting-buttons h1 {
+  height: 40px;
+  background-color: #333;
+  border: 2px solid white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0;
+  text-align: center;
+}
+body #reading #casting-buttons button {
+  height: 40px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #69b7ba;
+  border: 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 0 15px;
+  text-decoration: none;
+}
+body #reading #casting-buttons button:hover {
+  background-color: #fff;
+  color: #69b7ba;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 0.65;
+}
+body #reading .hexagrams,
+body #reading .texts {
+  display: flex;
+  gap: 40px;
+}
+body #reading .hexagrams > *,
+body #reading .texts > * {
+  flex: 1;
+}
+@media only screen and (max-width: 500px) {
+  body #reading {
+    gap: 15px;
+  }
+  body #reading .hexagrams,
+  body #reading .texts {
+    gap: 10px;
+  }
+}
+body #reading .hexagrams,
+body #reading .reading-type,
+body #reading .texts {
+  border-radius: 20px;
+}
+body #reading .texts table {
+  text-align: center;
+}
+body #reading .texts table thead tr:first-child th:first-child {
+  border-top-left-radius: 18px;
+}
+body #reading .texts table thead tr:first-child th:last-child {
+  border-top-right-radius: 18px;
+}
+body #reading .texts table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 18px;
+}
+body #reading .texts table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 18px;
+}
+body #reading .hexagrams {
+  align-items: flex-end;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  padding: 10px;
+}
+body #reading .hexagrams a {
+  font-weight: bold;
+}
+body #reading .hexagrams .hexagram .title {
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+body #reading .hexagrams .hexagram .title p {
+  margin: 0;
+}
+body #reading .reading-type,
+body #reading .texts {
+  background-color: rgba(50, 50, 50, 0.75);
+}
+body #reading .reading-type {
+  padding: 10px;
+}
+body #reading .texts {
+  align-items: stretch;
+}
+body #reading .texts table {
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+body #reading .texts table th,
+body #reading .texts table td {
+  min-width: 30px;
+  background-color: #000;
+  padding: 5px;
+  vertical-align: top;
+}
+body #reading .flipping {
+  height: 100vh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+body #reading .flipping .coins-container {
+  height: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: auto;
+}
+body #reading .flipping .coins-container .coin {
+  height: 100px;
+  width: 100px;
+  position: relative;
+  bottom: -100px;
+  transform-style: preserve-3d;
+}
+body #reading .flipping .coins-container .coin .side {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  border-radius: 50%;
+  position: absolute;
+}
+body #reading .flipping .coins-container .coin .side.back {
+  background-image: url(../../iching/assets/coin-back-min.png);
+  transform: rotateZ(20deg) translateZ(0.1px);
+}
+body #reading .flipping .coins-container .coin .side.front {
+  background-image: url(../../iching/assets/coin-front-min.png);
+  transform: rotateZ(20deg) translateZ(-0.1px);
+}
+@keyframes spin {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateХ(360deg);
+  }
+}
+@keyframes toss {
+  0% {
+    bottom: -100px;
+  }
+  90% {
+    bottom: 50%;
+  }
+  100% {
+    bottom: 50%;
+  }
+}/*# sourceMappingURL=reading.css.map */

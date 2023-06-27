@@ -1,0 +1,204 @@
+@import "https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap";
+@import "https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap";
+body {
+  background-color: #d9d9d9;
+  color: #222;
+  font-family: "General Sans", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding-bottom: 120px;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+body:not(#home) {
+  background-image: url(../assets/sketches-bg-min.png);
+  background-position: top 45px center;
+  background-repeat: no-repeat;
+  background-size: clamp(400px, 95vw, 900px);
+}
+body #heading {
+  text-align: center;
+}
+body #heading #intro {
+  margin: 35px auto 45px;
+  max-width: 600px;
+}
+body a {
+  color: #884474;
+}
+body a:hover {
+  color: #222;
+}
+body button,
+body input[type=checkbox],
+body input[type=radio] {
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+}
+body button {
+  height: 40px;
+  width: 130px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #be9cb4;
+  border: 0.5px solid #884474;
+  color: #222;
+  font-family: "Cinzel Decorative", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+body button:hover {
+  background-color: #884474;
+  color: #fff;
+  cursor: pointer;
+}
+body button[type=submit] {
+  font-weight: 400;
+}
+body h1,
+body h2,
+body h3 {
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: "Cinzel Decorative", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  margin: 0 auto;
+}
+body h2,
+body h3 {
+  color: #a07493;
+}
+body h1 {
+  color: #884474;
+  font-size: 41px;
+  line-height: 45px;
+  margin-bottom: 5px;
+}
+body h2 {
+  font-size: 21.5px;
+}
+body h3 {
+  font-size: 16px;
+}
+body hr {
+  min-height: 0.5px;
+  max-width: 600px;
+  width: 100%;
+  background-color: #884474;
+  border: 0;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+body label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+body label:hover,
+body label input[type=checkbox]:hover,
+body label input[type=radio]:hover,
+body label select:hover {
+  cursor: pointer;
+}
+body label input[type=checkbox], body label input[type=radio] {
+  height: 15px;
+  width: 15px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid #a07493;
+  margin: 0;
+  padding: 0;
+}
+body label input[type=checkbox]:checked, body label input[type=radio]:checked {
+  background-color: #a07493;
+}
+body label input[type=radio] {
+  border-radius: 50%;
+}
+body #navbar {
+  background-color: #be9cb4;
+  margin-bottom: 40px;
+}
+@media only screen and (max-width: 500px) {
+  body #navbar .nav-links-container a {
+    font-size: 14px !important;
+  }
+}
+body #navbar .nav-links-container {
+  height: 45px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+body #navbar .nav-links-container a {
+  color: #222;
+  font-family: "Cinzel Decorative", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+}
+body #navbar .nav-links-container a:hover {
+  color: #fff;
+}
+body main,
+body .nav-links-container {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+}
+body main {
+  box-sizing: border-box;
+  padding: 15px;
+}
+body .info-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .info-row > div {
+  box-sizing: border-box;
+  flex: 1;
+  padding: 10px;
+}
+body .info-row > div.images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+}
+body .info-row > div.images a {
+  display: flex;
+}
+body .info-row > div.images a img {
+  height: 100px;
+}
+body .info-row > div:not(.images) {
+  text-align: left;
+}
+body footer {
+  width: 100%;
+  background-image: linear-gradient(to right, rgba(204, 204, 204, 0.8), rgba(190, 156, 180, 0.8));
+  box-sizing: border-box;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 7px;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+}
+body footer a {
+  font-weight: bold;
+}
+body footer hr {
+  width: 200px;
+}
+body footer p {
+  margin: 0;
+  text-align: center;
+}/*# sourceMappingURL=style.css.map */

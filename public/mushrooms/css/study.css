@@ -1,0 +1,90 @@
+@media only screen and (max-width: 500px) {
+  body main #card-side-forms {
+    gap: 25px !important;
+  }
+}
+body main #card-side-forms {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  margin-top: 20px;
+}
+body main #card-side-forms form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+body main #card-side-forms form h3,
+body main #card-side-forms form label {
+  line-height: 16px;
+}
+body main #card-side-forms form u {
+  color: #777;
+  font-family: "Cinzel Decorative", Arial, Helvetica, sans-serif;
+  line-height: 20px;
+  text-align: center;
+}
+body main #card-side-forms hr {
+  height: initial;
+  width: 0.5px;
+  margin: 0;
+}
+body main #view-study-guide {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin: 30px;
+}
+body main #view-study-guide #study-radio-buttons {
+  display: flex;
+  gap: 15px;
+}
+body main #view-study-guide button[type=submit] {
+  margin-top: 8px;
+}
+body main #make-deck-button {
+  display: inherit;
+  margin: 30px auto;
+}
+body main #card-buttons {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 30px auto 0;
+}
+body main #card-count {
+  margin: 30px 0 0;
+  text-align: center;
+}
+body main #card {
+  height: 350px;
+  max-width: 575px;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  margin: 30px auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 15px;
+}
+body main #study-guide h2 {
+  margin-bottom: 25px;
+}
+body main #study-guide h3 {
+  width: 100%;
+  background-color: #884474;
+  box-sizing: border-box;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}/*# sourceMappingURL=study.css.map */

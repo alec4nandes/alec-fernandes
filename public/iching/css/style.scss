@@ -1,0 +1,246 @@
+@import "./colors.scss";
+@import "https://api.fontshare.com/v2/css?f[]=sharpie@800&f[]=switzer@400&display=swap";
+// font-family: 'Sharpie', sans-serif;
+// font-family: 'Switzer', sans-serif;
+
+body {
+    min-height: 100vh;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-family: "Switzer", Arial, Helvetica, sans-serif;
+    margin: 0;
+
+    h1,
+    h2,
+    h3 {
+        font-family: "Sharpie", Arial, Helvetica, sans-serif;
+    }
+
+    a,
+    span.anchor-jump,
+    button.button-link {
+        color: #69b7ba;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.65;
+        }
+    }
+
+    button.button-link {
+        appearance: none;
+        background-color: transparent;
+        border: 0;
+        font-size: 1rem;
+        padding: 0;
+        text-decoration: underline;
+    }
+
+    span.anchor-jump {
+        text-decoration: underline;
+    }
+
+    details {
+        border-bottom: 1px solid white;
+        padding: 20px;
+
+        h3 {
+            font-family: "Switzer", Arial, Helvetica, sans-serif;
+        }
+
+        summary,
+        .subsection {
+            font-weight: bold;
+        }
+
+        summary {
+            &:hover {
+                cursor: pointer;
+            }
+
+            &::marker {
+                color: #69b7ba;
+            }
+
+            h3 {
+                display: inline-block;
+                padding-left: 12px;
+            }
+        }
+
+        .subsection,
+        p {
+            margin-left: 28px;
+        }
+    }
+
+    header,
+    main {
+        & > * {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    header {
+        background-color: #222;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 25px;
+        padding: 30px 20px 20px;
+        position: relative;
+        z-index: 0;
+
+        & > * {
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            line-height: 1.5rem;
+        }
+
+        h2 {
+            line-height: 1rem;
+        }
+
+        #header-links {
+            position: relative;
+            top: -4px;
+        }
+    }
+
+    main {
+        flex: 1;
+        padding: 50px 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    footer {
+        background-color: rgba(0, 0, 0, 0.65);
+        padding: 4px;
+        text-align: center;
+
+        a {
+            font-weight: bold;
+        }
+    }
+
+    // lines
+
+    .line {
+        &,
+        .line-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line-number {
+            height: 25px;
+            width: 25px;
+        }
+
+        .line-symbol {
+            $border-color: #aaa;
+            $border-width: 1px;
+
+            height: 15px;
+            width: 120px;
+            display: inline-block;
+
+            &.changing {
+                opacity: 0.5;
+            }
+
+            &.yang {
+                background-color: $heaven;
+                border: $border-width solid $border-color;
+
+                &.heaven {
+                    background-color: $heaven;
+                }
+                &.earth {
+                    background-color: $earth;
+                }
+                &.fire {
+                    background-color: $fire;
+                }
+                &.water {
+                    background-color: $water;
+                }
+                &.lake {
+                    background-color: $lake;
+                }
+                &.mountain {
+                    background-color: $mountain;
+                }
+                &.thunder {
+                    background-color: $thunder;
+                }
+                &.wind {
+                    background-color: $wind;
+                }
+            }
+
+            &.yin {
+                @mixin bg-image($color) {
+                    background-image: linear-gradient(
+                        to right,
+                        $color 40%,
+                        $border-color 40%,
+                        $border-color calc(40% + $border-width),
+                        transparent calc(40% + $border-width),
+                        transparent calc(60% - $border-width),
+                        $border-color calc(60% - $border-width),
+                        $border-color 60%,
+                        $color 60%
+                    );
+                }
+
+                @include bg-image($earth);
+                border-image: linear-gradient(
+                        to left,
+                        $border-color 40%,
+                        transparent 40%,
+                        transparent 60%,
+                        $border-color 60%
+                    )
+                    1;
+                border-width: $border-width;
+                border-style: solid;
+
+                &.heaven {
+                    @include bg-image($heaven);
+                }
+                &.earth {
+                    @include bg-image($earth);
+                }
+                &.fire {
+                    @include bg-image($fire);
+                }
+                &.water {
+                    @include bg-image($water);
+                }
+                &.lake {
+                    @include bg-image($lake);
+                }
+                &.mountain {
+                    @include bg-image($mountain);
+                }
+                &.thunder {
+                    @include bg-image($thunder);
+                }
+                &.wind {
+                    @include bg-image($wind);
+                }
+            }
+        }
+    }
+}
