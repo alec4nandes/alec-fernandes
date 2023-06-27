@@ -12,7 +12,24 @@ permalink: "iching/bagua/{{ bagua | slugify }}.html"
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>I-Ching: Bagua — {{ bagua }}</title>
         <!-- meta tags -->
+        <meta name="type" property="og:type" content="website"/>
+        <meta name="title" property="og:title" content="I-Ching: Bagua — {{ bagua }}"/>
+        <meta name="url" property="og:url" content="https://fern.haus/iching/bagua/{{ bagua }}.html"/>
+        <meta
+            name="description"
+            property="og:description"
+            content="Learn all about the bagua {{ bagua }} and its trigram!"/>
+        <meta name="image" property="og:image" content="https://fern.haus/images/fern-haus-site-logo.png"/>
+        <!-- twitter meta tags -->
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@alec4nandes"/>
+        <meta name="twitter:title" content="I-Ching: Bagua — {{ bagua }}"/>
+        <meta name="twitter:description" content="Learn all about the bagua {{ bagua }} and its trigram!"/>
+        <meta name="twitter:image" content="https://fern.haus/images/fern-haus-site-logo.png"/>
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <!-- end meta tags -->
         <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
         <link rel="stylesheet" href="/iching/css/bagua.css"/>
         <link rel="stylesheet" href="/iching/css/style.css"/>
@@ -23,7 +40,9 @@ permalink: "iching/bagua/{{ bagua | slugify }}.html"
             <h2>Bagua</h2>
             <div class="bagua-links">
                 {% for info in ichingBagua %}
-                    <a href="/iching/bagua/{{ info[0] }}.html">
+                    <a
+                        href="/iching/bagua/{{ info[0] }}.html"
+                        class="{% if bagua == info[0] %} current {% endif %}">
                         {{ info[0] }}
                     </a>
                 {% endfor %}

@@ -2,6 +2,7 @@ const { definitions } = require("./iching-definitions.js");
 
 module.exports = function () {
     return {
+        orig: definitions,
         definitions: convertKeysToLinks(definitions),
         table_data: getHexagramTableData(),
     };

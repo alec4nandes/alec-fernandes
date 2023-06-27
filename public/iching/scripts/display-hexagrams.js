@@ -1,4 +1,3 @@
-import definitions from "./definitions.js";
 import { getLineNumber } from "./hexagram-info.js";
 
 const lineSymbols = (baguaClass) => ({
@@ -12,7 +11,7 @@ const lineSymbols = (baguaClass) => ({
     3: `<div class="${baguaClass} line-symbol yang changing"></div>`,
 });
 
-function hexagramHtml(name, lines) {
+function hexagramHtml(name, lines, definitions) {
     const { number, title } = definitions[name];
 
     return `
@@ -26,7 +25,7 @@ function hexagramHtml(name, lines) {
                         .split("/")
                         .map(
                             (bagua) =>
-                                `<a href="/iching/bagua/?bagua=${bagua}">${bagua}</a>`
+                                `<a href="/iching/bagua/${bagua}.html">${bagua}</a>`
                         )
                         .join(" / ")}
                 </p>
@@ -55,11 +54,15 @@ function makeLineInnerHTML(lineNumber, line, hexagramName) {
     }`;
 }
 
-function displayHexagrams(hexagramInfo) {
+function displayHexagrams(hexagramInfo, definitions) {
     document.querySelector("#reading").innerHTML = `<div class="hexagrams">
         ${hexagramInfo.hexNames
             .map((name, i) =>
-                hexagramHtml(name, hexagramInfo[i ? "changingLines" : "lines"])
+                hexagramHtml(
+                    name,
+                    hexagramInfo[i ? "changingLines" : "lines"],
+                    definitions
+                )
             )
             .join("")}
         </div>`;

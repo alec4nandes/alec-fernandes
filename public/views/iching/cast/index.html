@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>I-Ching: Get a Reading</title>
+        <!-- meta_tags -->
+        <meta name="type" property="og:type" content="website"/>
+        <meta name="title" property="og:title" content="I-Ching: Get a Reading"/>
+        <meta name="url" property="og:url" content="https://fern.haus/iching/cast"/>
+        <meta
+            name="description"
+            property="og:description"
+            content="Get a reading from the ancient Chinese oracle, the I-Ching!"/>
+        <meta name="image" property="og:image" content="https://fern.haus/images/fern-haus-site-logo.png"/>
+        <!-- twitter meta tags -->
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@alec4nandes"/>
+        <meta name="twitter:title" content="I-Ching: Get a Reading"/>
+        <meta name="twitter:description" content="Get a reading from the ancient Chinese oracle, the I-Ching!"/>
+        <meta name="twitter:image" content="https://fern.haus/images/fern-haus-site-logo.png"/>
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <!-- end meta tags -->
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <link rel="stylesheet" href="/iching/css/style.css"/>
+        <link rel="stylesheet" href="/iching/css/reading.css"/>
+        <style>
+            #flip-lines td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>I-Ching</h1>
+            <h2>Cast Lines</h2>
+            <div id="header-links">
+                <a href="/iching">home</a>
+                <span id="visible-reading" style="display: none;">
+                    &nbsp;&mdash;&nbsp;
+                    <button id="share" class="button-link">share reading</button>
+                    &nbsp;&mdash;&nbsp;
+                    <a href="/iching/cast">get another reading</a>
+                </span>
+            </div>
+        </header>
+        <main>
+            <div id="reading">
+                <div id="casting-buttons">
+                    <button id="flip-button" onclick="flipHandler()">
+                        flip coins (6 lines left)
+                    </button>
+                    <button
+                        id="flip-all-button"
+                        onclick="flipHandler(true)">
+                        flip coins all at once
+                    </button>
+                    <button id="flip-none-button" onclick="noFlipHandler()">
+                        go straight to reading
+                    </button>
+                </div>
+            </div>
+        </main>
+        <footer>&copy; <a href="/">Alec Fernandes</a> 2023</footer>
+        <script type="module">
+            import {display, addCastHandlers} from "../scripts/display.js";
+            const definitions = {{ ichingDefs.orig | json }};
+            display(definitions);
+            addCastHandlers(definitions);
+        </script>
+    </body>
+</html>

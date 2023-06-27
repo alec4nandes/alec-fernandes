@@ -1,5 +1,3 @@
-import definitions from "./definitions.js";
-
 const situation1 = {
         message: "Consider the hexagram text (judgment) of the hexagram.",
         getReading: ({ def1 }) => [
@@ -47,7 +45,7 @@ const situation1 = {
         6: situation4,
     };
 
-function textHtml(hexagramInfo) {
+function textHtml(hexagramInfo, definitions) {
     const { changingLineNumbers, hexNames, lines } = hexagramInfo,
         def1 = definitions[hexNames[0]],
         def2 = definitions[hexNames[1]],
@@ -84,7 +82,7 @@ function hexInfoTableHtml(hexInfo, hexName, lines) {
                         .split("/")
                         .map(
                             (name) =>
-                                `<a href="/iching/bagua/?bagua=${name}">${name}</a>`
+                                `<a href="/iching/bagua/${name}.html">${name}</a>`
                         )
                         .join(" / ")})
                 </th>
@@ -122,8 +120,11 @@ function getChangingYinOrYang(lines, changingLineNum) {
     return [...lines].reverse()[changingLineNum - 1] % 2 ? "yang" : "yin";
 }
 
-function displayText(hexagramInfo) {
-    document.querySelector("#reading").innerHTML += textHtml(hexagramInfo);
+function displayText(hexagramInfo, definitions) {
+    document.querySelector("#reading").innerHTML += textHtml(
+        hexagramInfo,
+        definitions
+    );
 }
 
 export default displayText;

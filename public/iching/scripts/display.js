@@ -4,24 +4,21 @@ import getHexagramInfo from "./hexagram-info.js";
 
 const getLineInt = () => ~~(Math.random() * 4);
 
-display();
-
-addCastHandlers();
-
-function addCastHandlers() {
+function addCastHandlers(definitions) {
     const flipButton = document.getElementById("flip-button"),
         flipAllButton = document.getElementById("flip-all-button"),
         noFlipButton = document.getElementById("flip-none-button");
-    flipButton && (flipButton.onclick = () => flipHandler());
-    flipAllButton && (flipAllButton.onclick = () => flipHandler(true));
-    noFlipButton && (noFlipButton.onclick = () => noFlipHandler());
+    flipButton && (flipButton.onclick = () => flipHandler(false, definitions));
+    flipAllButton &&
+        (flipAllButton.onclick = () => flipHandler(true, definitions));
+    noFlipButton && (noFlipButton.onclick = () => noFlipHandler(definitions));
 }
 
-function display() {
+function display(definitions) {
     const urlParams = new URLSearchParams(window.location.search),
         linesParam = urlParams?.get("lines"),
         info = getHexagramInfo(linesParam);
-    info && display_helper(info);
+    info && display_helper(info, definitions);
     // otherwise leave original display for coin flips
 }
 
@@ -32,9 +29,9 @@ function copyCurrentReading(info) {
     alert("Link copied!");
 }
 
-function display_helper(info) {
-    displayHexagrams(info);
-    displayText(info);
+function display_helper(info, definitions) {
+    displayHexagrams(info, definitions);
+    displayText(info, definitions);
     document.querySelector("#share").onclick = () => copyCurrentReading(info);
     document.querySelector("#visible-reading").style.display = "inline-block";
 }
@@ -60,7 +57,7 @@ function addLines(alreadExists) {
     }
 }
 
-function flipHandler(flipAllAtOnce) {
+function flipHandler(flipAllAtOnce, definitions) {
     const flipButton = document.querySelector("#flip-button"),
         flipAllButton = document.querySelector("#flip-all-button"),
         noFlipButton = document.querySelector("#flip-none-button"),
@@ -117,23 +114,23 @@ function flipHandler(flipAllAtOnce) {
                 ? html.slice(0, html.indexOf("(")) +
                   `(${index} line${index === 1 ? "" : "s"} left)`
                 : "read lines";
-            flipAllAtOnce && index && flipHandler(flipAllAtOnce);
+            flipAllAtOnce && index && flipHandler(flipAllAtOnce, definitions);
         }, flipDuration + maxDelay);
     } else {
         const result = [...document.querySelectorAll(".line")]
             .map((elem) => elem.getAttribute("data-value"))
             .join("");
-        display_helper(getHexagramInfo(result));
+        display_helper(getHexagramInfo(result), definitions);
         index = 6;
     }
 }
 
-function noFlipHandler() {
+function noFlipHandler(definitions) {
     const result = new Array(6)
         .fill(0)
         .map((_) => getLineInt())
         .join("");
-    display_helper(getHexagramInfo(result));
+    display_helper(getHexagramInfo(result), definitions);
 }
 
 function getCoinAnimationStyle(flipDuration, maxDelay) {
@@ -141,3 +138,5 @@ function getCoinAnimationStyle(flipDuration, maxDelay) {
     return `animation: 0.25s spin ${delay}s infinite,
         ${flipDuration / 2000}s toss ${delay}s 2 ease-out alternate;`;
 }
+
+export { display, addCastHandlers };
