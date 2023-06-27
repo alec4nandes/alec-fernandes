@@ -1,0 +1,62 @@
+---
+pagination:
+    data: ichingBagua
+    size: 1
+    alias: bagua
+permalink: "iching/bagua/{{ bagua | slugify }}.html"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- meta tags -->
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <link rel="stylesheet" href="/iching/css/bagua.css"/>
+        <link rel="stylesheet" href="/iching/css/style.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>I-Ching</h1>
+            <h2>Bagua</h2>
+            <div class="bagua-links">
+                {% for info in ichingBagua %}
+                    <a href="/iching/bagua/{{ info[0] }}.html">
+                        {{ info[0] }}
+                    </a>
+                {% endfor %}
+            </div>
+            <div id="header-links">
+                <a href="/iching">home</a>
+            </div>
+        </header>
+        <main class="{{ bagua }}">
+            <table class="bagua-table">
+                <thead>
+                    <tr>
+                        <th colSpan="2">{{ bagua }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for info in ichingBagua[bagua] %}
+                        <tr>
+                            <td>{{ info[0] }}</td>
+                            <td>
+                                {% if info[1].length > 1 and info[1].first %}
+                                    {% for item in info[1] %}
+                                        <li>{{ item }}</li>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ info[1] }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+        <footer>&copy; <a href="/">Alec Fernandes</a> 2023</footer>
+    </body>
+</html>

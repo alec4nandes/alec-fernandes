@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>I-Ching: Read the Text</title>
+        <meta name="type" property="og:type" content="website"/>
+        <meta
+            name="title"
+            property="og:title"
+            content="I-Ching: Read the Text"/>
+        <meta
+            name="url"
+            property="og:url"
+            content="https://fern.haus/iching/text"/>
+        <meta
+            name="description"
+            property="og:description"
+            content="Read the text of the ancient Chinese oracle, the I-Ching!"/>
+        <meta
+            name="image"
+            property="og:image"
+            content="https://fern.haus/images/fern-haus-site-logo.png"/>
+
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@alec4nandes"/>
+        <meta name="twitter:title" content="I-Ching: Read the Text"/>
+        <meta
+            name="twitter:description"
+            content="Read the text of the ancient Chinese oracle, the I-Ching!"/>
+        <meta
+            name="twitter:image"
+            content="https://fern.haus/images/fern-haus-site-logo.png"/>
+
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <link rel="stylesheet" href="/iching/css/text.css"/>
+        <link rel="stylesheet" href="/iching/css/style.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>I-Ching</h1>
+            <h2>The Text</h2>
+            <em>PLEASE NOTE: This text does not accurately represent the
+                original I-Ching. It is a modern interpretation of this ancient
+                method of divination. For the original text, please see
+                <a
+                    href="https://www.biroco.com/yijing/Legge1899.pdf"
+                    target="_blank"
+                    rel="noopener"
+                >this PDF</a>.</em>
+            <nav class="text-nav">
+                <table class="bagua-index-table">
+                    {% for row in ichingDefs.table_data %}
+                        <tr>
+                            {% for col in row %}
+                                <td>{{ col }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </nav>
+            <div id="header-links">
+                <a href="/iching">home</a>
+            </div>
+        </header>
+        <main>
+            <div class="text">
+                {% for def in ichingDefs.definitions %}
+                    <div class="hexagram-info" id="{{ def[1].number }}">
+                        <h3>{{ def[1].number }}. {{ def[0] }}</h3>
+                        <h4>{{ def[1].title }}</h4>
+                        <p>{{ def[1].definition }}</p>
+                        <em>line texts:</em>
+                        <ol>
+                            <li>{{ def[1][1] }}</li>
+                            <li>{{ def[1][2] }}</li>
+                            <li>{{ def[1][3] }}</li>
+                            <li>{{ def[1][4] }}</li>
+                            <li>{{ def[1][5] }}</li>
+                            <li>{{ def[1][6] }}</li>
+                        </ol>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+        <footer>&copy; <a href="/">Alec Fernandes</a> 2023</footer>
+    </body>
+</html>
