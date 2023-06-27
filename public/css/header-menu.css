@@ -70,6 +70,10 @@
   display: flex;
   align-items: center;
 }
+.subscribe-container .subscribe .sticky-contact-link {
+  color: #fff;
+  text-decoration: none;
+}
 .subscribe-container .subscribe .close-nav,
 .subscribe-container .subscribe .open-nav {
   height: 30px;

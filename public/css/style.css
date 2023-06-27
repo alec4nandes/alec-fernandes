@@ -175,18 +175,29 @@ body input::placeholder {
   color: #aaa;
 }
 body .pagination {
-  height: 30px;
+  min-height: 30px;
   align-items: center;
   background-color: #eee;
+  box-sizing: border-box;
   color: #999;
   display: flex;
   justify-content: center;
   gap: 25px;
   font-style: italic;
   font-weight: 300;
+  padding: 0 5px;
 }
 body .pagination a {
   text-decoration: none;
+}
+body .pagination p {
+  margin: 0;
+}
+body .pagination span {
+  line-height: 1.3rem;
+}
+body .pagination span:last-child {
+  text-align: right;
 }
 body .search-form input,
 body .subscribe-container input {

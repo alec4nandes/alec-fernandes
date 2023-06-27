@@ -8,8 +8,11 @@ module.exports = async function () {
         all_posts: allPosts,
         latest_post: allPosts[0],
         projects: getProjects(allPosts),
+        all_tags: getAllTags(allPosts),
         tag_data: tagData,
-        all_tags: Object.keys(tagData).sort(),
+        // for generating tag pages
+        // (tags are case-insensitive)
+        tag_data_keys: Object.keys(tagData),
     };
 };
 
@@ -75,9 +78,17 @@ function getProjects(posts) {
         }));
 }
 
+function getAllTags(posts) {
+    const tags = posts.map(({ tags }) => tags).flat(Infinity);
+    return [...new Set(tags)].sort();
+}
+
 function groupTags(posts) {
     return posts.reduce((acc, post) => {
-        post.tags.forEach((tag) => acc[tag]?.push(post) || (acc[tag] = [post]));
+        post.tags.forEach((tag) => {
+            const low = tag.toLowerCase();
+            acc[low]?.push(post) || (acc[low] = [post]);
+        });
         return acc;
     }, {});
 }

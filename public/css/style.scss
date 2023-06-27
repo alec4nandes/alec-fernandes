@@ -202,18 +202,32 @@ body {
     }
 
     .pagination {
-        height: 30px;
+        min-height: 30px;
         align-items: center;
         background-color: #eee;
+        box-sizing: border-box;
         color: #999;
         display: flex;
         justify-content: center;
         gap: 25px;
         font-style: italic;
         font-weight: 300;
+        padding: 0 5px;
 
         a {
             text-decoration: none;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        span {
+            line-height: 1.3rem;
+
+            &:last-child {
+                text-align: right;
+            }
         }
     }
 

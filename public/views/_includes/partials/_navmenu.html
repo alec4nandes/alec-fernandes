@@ -47,31 +47,30 @@
             <ul>
                 {% for tag in posts.all_tags %}
                     <li>
-                        <a href="/search/?tag={{ tag }}">{{ tag }}</a>
+                        <a href="/tags/{{ tag | slugify }}.html">{{ tag }}</a>
                     </li>
                 {% endfor %}
             </ul>
         </nav>
         <div class="social-icons">
+            <a class="sticky-contact-link" href="/contact">
+                contact me&nbsp;
+            </a>
             <a
                 href="https://twitter.com/alec4nandes"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 <img
                     src="/assets/icons8-twitter-32.png"
-                    alt="Twitter icon of little bird"
-/>
+                    alt="Twitter icon of little bird"/>
             </a>
             <a
                 href="https://instagram.com/alec4nandes"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 <img
                     src="/assets/icons8-instagram-32.png"
-                    alt="Instagram icon of polaroid camera"
-/>
+                    alt="Instagram icon of polaroid camera"/>
             </a>
         </div>
     </div>

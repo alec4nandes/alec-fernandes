@@ -80,9 +80,16 @@ body {
 
         h1 {
             color: #fff;
-            flex: 1;
             font-size: 4.5vw;
             text-align: center;
+        }
+
+        #home-contact-button {
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
     }
 

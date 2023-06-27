@@ -20,6 +20,7 @@ permalink: "blog/{{ post.post_id | slugify }}.html"
     </head>
     <body>
         {% include "partials/_smallheader.html" %}
+        {% include "partials/_pagination_single_post.html" %}
         <main>
             <article>
                 <h2 class="title">{{ post.title }}</h2>
@@ -46,6 +47,7 @@ permalink: "blog/{{ post.post_id | slugify }}.html"
             </article>
         </main>
         {% include "partials/_stickycontact.html" %}
+        {% include "partials/_pagination_single_post.html" %}
         {% include "partials/_footer.html" %}
     </body>
 </html>
