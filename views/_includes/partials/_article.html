@@ -1,6 +1,6 @@
 <article>
     <h2 class="title">
-        <a href="/blog/{{ post.post_id }}.html">{{ post.title }}</a>
+        <a href="/blog/{{ post.post_id | slugify }}.html">{{ post.title }}</a>
     </h2>
     <h3 class="subtitle">{{ post.subtitle }}</h3>
     <p class="date-posted">{{ post.formatted_date }}</p>
