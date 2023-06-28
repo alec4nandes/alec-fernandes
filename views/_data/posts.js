@@ -2,7 +2,7 @@ const { collection, getDocs, setDoc, doc } = require("firebase/firestore");
 const { app, db } = require("./database.js");
 // const { initializeApp, deleteApp } = require("firebase/app");
 // const { getFirestore } = require("firebase/firestore");
-// const { firebaseConfig } = require("./firebase-config");
+// const { firebaseConfig } = require("./firebase-config.js");
 
 module.exports = async function () {
     const allPosts = await getPostsData("posts"),
