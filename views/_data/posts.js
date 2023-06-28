@@ -1,24 +1,24 @@
 const { collection, getDocs, setDoc, doc } = require("firebase/firestore");
 const { app, db } = require("./database.js");
-const { initializeApp, deleteApp } = require("firebase/app");
-const { getFirestore } = require("firebase/firestore");
-const { firebaseConfig } = require("./firebase-config");
+// const { initializeApp, deleteApp } = require("firebase/app");
+// const { getFirestore } = require("firebase/firestore");
+// const { firebaseConfig } = require("./firebase-config");
 
 module.exports = async function () {
     const allPosts = await getPostsData("posts"),
         tagData = groupTags(allPosts);
 
-    // transfer data
-    await deleteApp(app);
-    const app2 = initializeApp(firebaseConfig),
-        db2 = getFirestore(app2);
-    allPosts.forEach(async (post) => {
-        const copy = { ...post },
-            id = copy.post_id;
-        delete copy.post_id;
-        delete copy.formatted_date;
-        await setDoc(doc(db2, "posts", id), copy);
-    });
+    /* transfer data */
+    // await deleteApp(app);
+    // const app2 = initializeApp(firebaseConfig),
+    //     db2 = getFirestore(app2);
+    // allPosts.forEach(async (post) => {
+    //     const copy = { ...post },
+    //         id = copy.post_id;
+    //     delete copy.post_id;
+    //     delete copy.formatted_date;
+    //     await setDoc(doc(db2, "posts", id), copy);
+    // });
 
     return {
         all_posts: allPosts,
