@@ -44,7 +44,7 @@ const sendMailOverHTTP = functions.https.onRequest((req, res) => {
         to: process.env.DB_USER,
         subject: "WEBSITE REQUEST",
         html: `
-            <strong>${email} needs:</strong>
+            <strong>${email} status:</strong>
             <ul>
             ${Object.entries(data)
                 .map(([key, value]) => `<li><b>${key}:</b> ${value}</li>`)
