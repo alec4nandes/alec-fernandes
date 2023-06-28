@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <title>Moon-Sun-Tides API &mdash; Alec Fernandes</title>
 
-        <meta name="type" property="og:type" content="website" />
+        <meta name="type" property="og:type" content="website"/>
         <meta
             name="title"
             property="og:title"
             content="Moon-Sun-Tides API &mdash; Alec Fernandes"
-        />
+/>
         <meta
             name="url"
             property="og:url"
             content="https://fern.haus/moon-sun-tides"
-        />
+/>
         <meta
             name="description"
             property="og:description"
             content="Fetch data about the moon, sun and tides in the US, all in one place!"
-        />
+/>
         <meta
             name="image"
             property="og:image"
             content="https://fern.haus/moon-sun-tides/assets/moons-min.png"
-        />
+/>
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@alec4nandes" />
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@alec4nandes"/>
         <meta
             name="twitter:title"
             content="Moon-Sun-Tides API &mdash; Alec Fernandes"
-        />
+/>
         <meta
             name="twitter:description"
             content="Fetch data about the moon, sun and tides in the US, all in one place!"
-        />
+/>
         <meta
             name="twitter:image"
             content="https://fern.haus/moon-sun-tides/assets/moons-min.png"
-        />
+/>
 
-        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
 
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style.css"/>
     </head>
     <body>
         <header>
@@ -122,9 +122,9 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        https://fern.haus/moon-sun-tides-api/
-                        <br />?<strong>latitude</strong>=34.0488&<strong>longitude</strong>=-118.2518
-                        <br />&<strong>date</strong>=2022-11-30&<strong>time</strong>=16:32:09
+                        https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api
+                        <br/>?<strong>latitude</strong>=34.0488&<strong>longitude</strong>=-118.2518
+                        <br/>&<strong>date</strong>=2022-11-30&<strong>time</strong>=16:32:09
                     </td>
                 </tr>
                 <tr>
@@ -132,15 +132,18 @@
                 </tr>
                 <tr>
                     <th>latitude</th>
-                    <td>The latitude coordinate. <em>(required)</em></td>
+                    <td>The latitude coordinate. <em>(required)</em>
+                    </td>
                 </tr>
                 <tr>
                     <th>longitude</th>
-                    <td>The longitude coordinate. <em>(required)</em></td>
+                    <td>The longitude coordinate. <em>(required)</em>
+                    </td>
                 </tr>
                 <tr>
                     <th>
-                        date<br /><em style="font-weight: 400">yyyy-mm-dd</em>
+                        date<br/>
+                        <em style="font-weight: 400">yyyy-mm-dd</em>
                     </th>
                     <td>
                         A specific date in <u>UTC timezone</u> to search
@@ -150,7 +153,8 @@
                 </tr>
                 <tr>
                     <th>
-                        time<br /><em style="font-weight: 400">hh:mm:ss</em>
+                        time<br/>
+                        <em style="font-weight: 400">hh:mm:ss</em>
                     </th>
                     <td>
                         A specific time in <u>UTC timezone</u> to search
@@ -194,7 +198,7 @@
                     <th colspan="2">
                         Play around with the interface below to better
                         understand how the data is structured.
-                        <br />
+                        <br/>
                         <em>
                             * <u>note</u>: all returned times are in the UTC
                             timezone.
@@ -209,7 +213,7 @@
                 <table>
                     <tr>
                         <th>set time (local):</th>
-                        <td><input type="datetime-local" /></td>
+                        <td><input type="datetime-local"/></td>
                     </tr>
                     <tr>
                         <th>UTC time:</th>
@@ -250,7 +254,7 @@
                 <a href="/" target="_blank" rel="noopener">Alec Fernandes</a>
                 2023
             </p>
-            <hr class="line" />
+            <hr class="line"/>
             <p>
                 header photo by
                 <a
@@ -272,64 +276,66 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNOo4f2HeGYjzA3zF9yu3Orx_Vc-YBLE"></script>
 
         <script type="module">
-            import makeMap, { initialPos, setLatLngElems } from "./map.js";
+            import makeMap, {initialPos, setLatLngElems} from "./map.js";
 
             const latElem = document.getElementById("latitude"),
                 lngElem = document.getElementById("longitude"),
                 dateElem = document.getElementById("datetime"),
-                dateInput = document.querySelector(
-                    "input[type='datetime-local']"
-                ),
+                dateInput = document.querySelector("input[type='datetime-local']"),
                 rawTextElem = document.getElementById("raw-text"),
                 map = makeMap(latElem, lngElem);
 
             setLatLngElems(latElem, lngElem, initialPos.lat, initialPos.lng);
 
-            document.querySelector("form").onsubmit = async (event) => {
-                event.preventDefault();
-                initialRawTextLoad();
-                try {
-                    const lat = latElem.innerHTML,
-                        lng = lngElem.innerHTML,
-                        [date, time] = dateElem.innerHTML.split("T"),
-                        url = `/moon-sun-tides-api/?latitude=${lat}&longitude=${lng}&date=${date}&time=${time}`,
-                        resp = await fetch(url),
-                        data = await resp.json();
-                    displayRawText(data);
-                } catch (error) {
-                    rawTextElem.innerHTML = `ERROR: ${error.message}`;
-                }
-            };
+            document
+                .querySelector("form")
+                .onsubmit = async (event) => {
+                    event.preventDefault();
+                    initialRawTextLoad();
+                    try {
+                        const lat = latElem.innerHTML,
+                            lng = lngElem.innerHTML,
+                            [date, time] = dateElem
+                                .innerHTML
+                                .split("T"),
+                            url = `https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api?latitude=${lat}&longitude=${lng}&date=${date}&time=${time}`,
+                            resp = await fetch(url),
+                            data = await resp.json();
+                        displayRawText(data);
+                    } catch (error) {
+                        rawTextElem.innerHTML = `ERROR: ${error.message}`;
+                    }
+                };
 
             function initialRawTextLoad() {
                 rawTextElem.innerHTML = "Compiling data...";
                 rawTextElem.style.display = "block";
-                rawTextElem.scrollIntoView({ behavior: "smooth" });
+                rawTextElem.scrollIntoView({behavior: "smooth"});
             }
 
             function displayRawText(data) {
                 rawTextElem.innerHTML = JSON.stringify(data, null, 4);
-                rawTextElem.scrollIntoView({ behavior: "smooth" });
+                rawTextElem.scrollIntoView({behavior: "smooth"});
             }
 
-            document.getElementById("local-info-button").onclick = () => {
-                initialRawTextLoad();
-                navigator.geolocation.getCurrentPosition(
-                    async (pos) => {
-                        const { latitude: lat, longitude: lng } = pos.coords;
-                        setLatLngElems(latElem, lngElem, lat, lng);
-                        dateElem.innerHTML = formatUTCDateTime(new Date());
-                        dateInput.value = formatDateTime(new Date());
-                        map.setCenter({ lat, lng });
-                        const url = `/moon-sun-tides-api/?latitude=${lat}&longitude=${lng}`,
-                            resp = await fetch(url),
-                            data = await resp.json();
-                        displayRawText(data);
-                    },
-                    (error) =>
-                        (rawTextElem.innerHTML = `ERROR: ${error.message}`)
-                );
-            };
+            document
+                .getElementById("local-info-button")
+                .onclick = () => {
+                    initialRawTextLoad();
+                    navigator
+                        .geolocation
+                        .getCurrentPosition(async (pos) => {
+                            const {latitude: lat, longitude: lng} = pos.coords;
+                            setLatLngElems(latElem, lngElem, lat, lng);
+                            dateElem.innerHTML = formatUTCDateTime(new Date());
+                            dateInput.value = formatDateTime(new Date());
+                            map.setCenter({lat, lng});
+                            const url = `https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api?latitude=${lat}&longitude=${lng}`,
+                                resp = await fetch(url),
+                                data = await resp.json();
+                            displayRawText(data);
+                        }, (error) => (rawTextElem.innerHTML = `ERROR: ${error.message}`));
+                };
 
             // DATE:
 
@@ -356,10 +362,7 @@
             dateElem.innerHTML = formatUTCDateTime(new Date());
             dateInput.value = formatDateTime(new Date());
 
-            dateInput.onchange = (event) =>
-                (dateElem.innerHTML = formatUTCDateTime(
-                    new Date(event.target.value)
-                ));
+            dateInput.onchange = (event) => (dateElem.innerHTML = formatUTCDateTime(new Date(event.target.value)));
         </script>
     </body>
 </html>
