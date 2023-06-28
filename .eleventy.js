@@ -1,7 +1,7 @@
 module.exports = function (eleventyConfig) {
     return {
         dir: {
-            input: "public/views",
+            input: "views",
             output: "public",
         },
     };
