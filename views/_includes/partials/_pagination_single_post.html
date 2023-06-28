@@ -3,7 +3,7 @@
 <div class="pagination">
     {% if page_num > 1 %}
         <span>
-            << previous:
+            &lt;&lt; previous:
             <a href="{{ pagination.href.previous }}">
                 {{ pagination.page.previous.title }}
             </a>
@@ -15,7 +15,7 @@
             <a href="{{ pagination.href.next }}">
                 {{ pagination.page.next.title }}
             </a>
-            >>
+            &gt;&gt;
         </span>
     {% endif %}
 </div>

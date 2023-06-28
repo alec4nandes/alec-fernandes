@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Moon-Sun-Tides API &mdash; Alec Fernandes</title>
+        <meta name="type" property="og:type" content="website"/>
+        <meta
+            name="title"
+            property="og:title"
+            content="Moon-Sun-Tides API &mdash; Alec Fernandes"/>
+        <meta
+            name="url"
+            property="og:url"
+            content="https://fern.haus/moon-sun-tides"/>
+        <meta
+            name="description"
+            property="og:description"
+            content="Fetch data about the moon, sun and tides in the US, all in one place!"/>
+        <meta
+            name="image"
+            property="og:image"
+            content="https://fern.haus/moon-sun-tides/assets/moons-min.png"/>
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@alec4nandes"/>
+        <meta
+            name="twitter:title"
+            content="Moon-Sun-Tides API &mdash; Alec Fernandes"/>
+        <meta
+            name="twitter:description"
+            content="Fetch data about the moon, sun and tides in the US, all in one place!"/>
+        <meta
+            name="twitter:image"
+            content="https://fern.haus/moon-sun-tides/assets/moons-min.png"/>
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <link rel="stylesheet" href="css/style.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>Moon-Sun-Tides API</h1>
+            <div id="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </header>
+        <main>
+            <p>
+                A while ago I needed an API for an astronomical dashboard I
+                designed as a fun bonus feature of my
+                <a href="/arcade" target="_blank" rel="noopener"
+                    >Kings Corner</a
+                >
+                game. This widget showed the dates of the next full and new
+                moons, sunrise and sunset times, and even data on local tides
+                for those in the US living near the coast. However, I was
+                surprised how much digging I had to do to find all this data.
+            </p>
+            <p>
+                Eventually I found three different API endpoints to build the
+                single data object I needed for that project. These sources of
+                data are:
+            </p>
+            <ul>
+                <li>
+                    <a
+                        href="https://sunrise-sunset.org/api"
+                        target="_blank"
+                        rel="noopener"
+                        >sunrise-sunset.org/api</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="https://www.npmjs.com/package/lune"
+                        target="_blank"
+                        rel="noopener"
+                        >lune (npm)</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="https://tidesandcurrents.noaa.gov"
+                        target="_blank"
+                        rel="noopener"
+                        >tidesandcurrents.noaa.gov</a
+                    >
+                </li>
+            </ul>
+            <p>
+                All of these yielded excellent results. After much parsing and
+                standardizing the data
+                <em>(i.e. all timestamps are now in the UTC timezone)</em>, I
+                decided to share it as my own custom API!
+            </p>
+            <p>
+                Below is a sample endpoint and an explanation of its parameters,
+                as well as what it returns. There is also a map interface for
+                testing at the bottom of this page. For any questions about this
+                <a href="/" target="_blank" rel="noopener"
+                    >or any of my other projects</a
+                >, please send me an email at
+                <a href="mailto:al@fern.haus">al@fern.haus</a>.
+            </p>
+
+            <table>
+                <tr>
+                    <th colspan="2">sample endpoint</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api
+                        <br/>?<strong>latitude</strong>=34.0488&<strong>longitude</strong>=-118.2518
+                        <br/>&<strong>date</strong>=2022-11-30&<strong>time</strong>=16:32:09
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">parameters</th>
+                </tr>
+                <tr>
+                    <th>latitude</th>
+                    <td>The latitude coordinate. <em>(required)</em>
+                    </td>
+                </tr>
+                <tr>
+                    <th>longitude</th>
+                    <td>The longitude coordinate. <em>(required)</em>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        date<br/>
+                        <em style="font-weight: 400">yyyy-mm-dd</em>
+                    </th>
+                    <td>
+                        A specific date in <u>UTC timezone</u> to search
+                        <em>(optional)</em>. If left blank, will default to the
+                        current date and time.
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        time<br/>
+                        <em style="font-weight: 400">hh:mm:ss</em>
+                    </th>
+                    <td>
+                        A specific time in <u>UTC timezone</u> to search
+                        <em>(optional)</em>. If left blank, will default to 12am
+                        on the date provided, if any.
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">response data</th>
+                </tr>
+                <tr>
+                    <th>meta data</th>
+                    <td>
+                        A timestamp* of the declared or default date and time
+                        parameters and the declared coordinates.
+                    </td>
+                </tr>
+                <tr>
+                    <th>moon</th>
+                    <td>
+                        Times* of the next full and new moons, the percentage of
+                        the moon's illumination, and the status of the moon
+                        (either "waxing" or "waning").
+                    </td>
+                </tr>
+                <tr>
+                    <th>sun</th>
+                    <td>
+                        Sunrise, sunset, and solar noon times* along with the
+                        day's length in seconds.
+                    </td>
+                </tr>
+                <tr>
+                    <th>tides</th>
+                    <td>
+                        Details about the nearest NOAA station and the times* of
+                        the next high and low tides.
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        Play around with the interface below to better
+                        understand how the data is structured.
+                        <br/>
+                        <em>
+                            * <u>note</u>: all returned times are in the UTC
+                            timezone.
+                        </em>
+                    </th>
+                </tr>
+            </table>
+
+            <h2>Test & Play</h2>
+
+            <form>
+                <table>
+                    <tr>
+                        <th>set time (local):</th>
+                        <td><input type="datetime-local"/></td>
+                    </tr>
+                    <tr>
+                        <th>UTC time:</th>
+                        <td id="datetime"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div
+                                id="map"
+                                style="height: 300px; width: 100%"
+                            ></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>latitude</th>
+                        <td id="latitude"></td>
+                    </tr>
+                    <tr>
+                        <th>longitude</th>
+                        <td id="longitude"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <button type="submit">lookup</button>
+                        </th>
+                    </tr>
+                </table>
+            </form>
+
+            <button id="local-info-button">or get your local info</button>
+
+            <pre id="raw-text"></pre>
+        </main>
+
+        <footer>
+            <p>
+                &copy;
+                <a href="/" target="_blank" rel="noopener">Alec Fernandes</a>
+                2023
+            </p>
+            <hr class="line"/>
+            <p>
+                header photo by
+                <a
+                    href="https://unsplash.com/@tegethoff?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                    target="_blank"
+                    rel="noopener"
+                    >Mark Tegethoff</a
+                >
+                on
+                <a
+                    href="https://unsplash.com/s/photos/moon-over-ocean?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                    target="_blank"
+                    rel="noopener"
+                    >Unsplash</a
+                >
+            </p>
+        </footer>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNOo4f2HeGYjzA3zF9yu3Orx_Vc-YBLE"></script>
+
+        <script type="module">
+            import makeMap, {initialPos, setLatLngElems} from "./map.js";
+
+            const latElem = document.getElementById("latitude"),
+                lngElem = document.getElementById("longitude"),
+                dateElem = document.getElementById("datetime"),
+                dateInput = document.querySelector("input[type='datetime-local']"),
+                rawTextElem = document.getElementById("raw-text"),
+                map = makeMap(latElem, lngElem);
+
+            setLatLngElems(latElem, lngElem, initialPos.lat, initialPos.lng);
+
+            document
+                .querySelector("form")
+                .onsubmit = async (event) => {
+                    event.preventDefault();
+                    initialRawTextLoad();
+                    try {
+                        const lat = latElem.innerHTML,
+                            lng = lngElem.innerHTML,
+                            [date, time] = dateElem
+                                .innerHTML
+                                .split("T"),
+                            url = `https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api?latitude=${lat}&longitude=${lng}&date=${date}&time=${time}`,
+                            resp = await fetch(url),
+                            data = await resp.json();
+                        displayRawText(data);
+                    } catch (error) {
+                        rawTextElem.innerHTML = `ERROR: ${error.message}`;
+                    }
+                };
+
+            function initialRawTextLoad() {
+                rawTextElem.innerHTML = "Compiling data...";
+                rawTextElem.style.display = "block";
+                rawTextElem.scrollIntoView({behavior: "smooth"});
+            }
+
+            function displayRawText(data) {
+                rawTextElem.innerHTML = JSON.stringify(data, null, 4);
+                rawTextElem.scrollIntoView({behavior: "smooth"});
+            }
+
+            document
+                .getElementById("local-info-button")
+                .onclick = () => {
+                    initialRawTextLoad();
+                    navigator
+                        .geolocation
+                        .getCurrentPosition(async (pos) => {
+                            const {latitude: lat, longitude: lng} = pos.coords;
+                            setLatLngElems(latElem, lngElem, lat, lng);
+                            dateElem.innerHTML = formatUTCDateTime(new Date());
+                            dateInput.value = formatDateTime(new Date());
+                            map.setCenter({lat, lng});
+                            const url = `https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api?latitude=${lat}&longitude=${lng}`,
+                                resp = await fetch(url),
+                                data = await resp.json();
+                            displayRawText(data);
+                        }, (error) => (rawTextElem.innerHTML = `ERROR: ${error.message}`));
+                };
+
+            // DATE:
+
+            function formatUTCDateTime(date) {
+                const pad = (num) => ("" + num).padStart(2, "0"),
+                    year = date.getUTCFullYear(),
+                    month = pad(date.getUTCMonth() + 1),
+                    day = pad(date.getUTCDate()),
+                    hours = pad(date.getUTCHours()),
+                    minutes = pad(date.getMinutes());
+                return `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+
+            function formatDateTime(date) {
+                const pad = (num) => ("" + num).padStart(2, "0"),
+                    year = date.getFullYear(),
+                    month = pad(date.getMonth() + 1),
+                    day = pad(date.getDate()),
+                    hours = pad(date.getHours()),
+                    minutes = pad(date.getMinutes());
+                return `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+
+            dateElem.innerHTML = formatUTCDateTime(new Date());
+            dateInput.value = formatDateTime(new Date());
+
+            dateInput.onchange = (event) => (dateElem.innerHTML = formatUTCDateTime(new Date(event.target.value)));
+        </script>
+    </body>
+</html>
