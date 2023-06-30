@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Post</title>
+
+        <style>
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="../edit/update" method="post">
+            <label>
+                post id:
+                <input
+                    name="post_id"
+                    value="{{ post.post_id | escape }}"
+                    required />
+            </label>
+            <label>
+                title:
+                <input
+                    name="title"
+                    value="{{ post.title | escape  }}"
+                    required />
+            </label>
+            <label>
+                subtitle:
+                <input name="subtitle" value="{{ post.subtitle | escape }}" />
+            </label>
+            <label>
+                feature image path:
+                <input name="feature_image" value="{{ post.feature_image }}" />
+            </label>
+            <label>
+                feature image caption:
+                <input name="feature_image_caption" value="{{ post.feature_image_caption | escape }}" />
+            </label>
+            <label>
+                content:
+                <textarea name="content" required>{{ post.content | escape }}</textarea>
+            </label>
+            <label>
+                tags:
+                <input name="tags" value="{{ post.tags | escape }}" />
+            </label>
+            <button type="submit">update</button>
+        </form>
+        <button onclick="deletePost('{{ post.post_id | escape }}')">delete</button>
+        |
+        <a href="../edit">back to all posts</a>
+
+        <script>
+            function deletePost(id) {
+                if (confirm("Delete post?")) {
+                    window.location.href = `../edit/delete?id=${id}`;
+                }
+            }
+        </script>
+    </body>
+</html>

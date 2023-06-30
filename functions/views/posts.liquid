@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>All Posts</title>
+    </head>
+    <body>
+        <a href="./edit/post">*write new post*</a>
+        <br/>
+        <button onclick="handleSignOut()">
+            sign out
+        </button>
+        <ul>
+            {% for post in allPosts %}
+                <li>
+                    <a href="./edit/post?id={{ post.post_id }}">{{ post.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <script>
+            function handleSignOut() {
+                document.cookie = "auth=; expires=0; path=/";
+                window.location.reload();
+            }
+        </script>
+    </body>
+</html>

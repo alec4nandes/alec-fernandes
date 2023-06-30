@@ -1,15 +1,103 @@
 const express = require("express");
-const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const nodemailer = require("nodemailer");
+const functions = require("firebase-functions");
+const { auth } = require("./data/database.js");
+const { signInWithEmailAndPassword } = require("firebase/auth");
 const { getMoonSunTidesData } = require("./moon-sun-tides.js");
+const nodemailer = require("nodemailer");
+const cookieParser = require("cookie-parser");
+const { getPostsData } = require("./data/get-posts.js");
+// for POST requests
+const bodyParser = require("body-parser");
+
+const { Liquid } = require("liquidjs");
+const engine = new Liquid();
+
+admin.initializeApp();
+
+// BACKEND SIGN IN
+
+const signInServer = express();
+// signInServer.use(bodyParser.json());
+signInServer.use(bodyParser.urlencoded({ extended: true }));
+signInServer.use(cookieParser());
+// register liquid engine
+signInServer.engine("liquid", engine.express());
+signInServer.set("views", "./views"); // specify the views directory
+signInServer.set("view engine", "liquid"); // set liquid to default
+
+signInServer.get("/", async function (req, res) {
+    const token = req.cookies.auth,
+        isVerified = token && (await admin.auth().verifyIdToken(token));
+    if (isVerified) {
+        const allPosts = await getPostsData("posts");
+        res.render("posts", { allPosts });
+        return;
+    }
+    res.render("sign-in");
+});
+
+signInServer.post("/", async function (req, res) {
+    try {
+        const { email, password } = req.body,
+            { user } = await signInWithEmailAndPassword(auth, email, password);
+        // Signed in
+        // Make cookie
+        const token = (await user.getIdToken()) || "",
+            maxAge = token ? 432000 : 0;
+        res.cookie("auth", token, { maxAge });
+        res.redirect("./edit");
+    } catch (error) {
+        res.render("sign-in", { error });
+    }
+});
+
+signInServer.get("/post", async function (req, res) {
+    const allPosts = await getPostsData("posts"),
+        { id } = req.query,
+        post = allPosts.find(({ post_id }) => post_id === id);
+    res.render("post", {
+        post: post ? { ...post, tags: post.tags.join(", ") } : {},
+    });
+});
+
+signInServer.post("/update", async function (req, res) {
+    const data = {
+        ...req.body,
+        tags: req.body.tags.split(", "),
+        date: new Date(),
+    };
+    const id = data.post_id;
+    delete data.post_id;
+    await admin.firestore().collection("posts").doc(id).set(data);
+    res.send(`
+        <p>Post updated!</p>
+        <p>
+            <a href="../edit">back to admin</a>
+        </p>
+    `);
+});
+
+signInServer.get("/delete", async function (req, res) {
+    const { id } = req.query;
+    await admin.firestore().collection("posts").doc(id).delete();
+    res.send(`
+        <p>Post deleted!</p>
+        <p>
+            <a href="../edit">back to admin</a>
+        </p>
+    `);
+});
+
+const edit = functions.https.onRequest(signInServer);
+
+// END BACKEND SIGN IN
 
 // CUSTOM APIs
 
-const mst = express();
-
 // Moon-Sun-Tides API route, sample:
 // http://localhost:5001/alec-fernandes/us-central1/moon_sun_tides_api?latitude=32.8400896&longitude=-117.2078592&date=2022-11-30
+const mst = express();
 mst.get("/", function (req, res) {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Methods", "GET, POST");
@@ -21,7 +109,6 @@ const moon_sun_tides_api = functions.https.onRequest(mst);
 
 // CONTACT FORM
 
-admin.initializeApp();
 /* gmail  credentials */
 const transporter = nodemailer.createTransport({
     host: process.env.DB_HOST,
@@ -99,4 +186,4 @@ const sendMailOverHTTP = functions.https.onRequest((req, res) => {
 
 // END CONTACT FORM
 
-module.exports = { moon_sun_tides_api, sendMailOverHTTP };
+module.exports = { edit, moon_sun_tides_api, sendMailOverHTTP };

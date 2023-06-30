@@ -1,8 +1,9 @@
-const { collection, getDocs, setDoc, doc } = require("firebase/firestore");
-const { app, db } = require("./database.js");
+// const { setDoc, doc } = require("firebase/firestore");
+// const { app } = require("./database.js");
 // const { initializeApp, deleteApp } = require("firebase/app");
 // const { getFirestore } = require("firebase/firestore");
 // const { firebaseConfig } = require("./firebase-config.js");
+const { getPostsData } = require("./data/get-posts.js");
 
 module.exports = async function () {
     const allPosts = await getPostsData("posts"),
@@ -33,56 +34,6 @@ module.exports = async function () {
 };
 
 /* READ POSTS FROM DB */
-
-// type is "posts" or "drafts"
-async function getPostsData(type) {
-    const querySnapshot = await getDocs(collection(db, type)),
-        result = [];
-    querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        result.push({
-            ...data,
-            formatted_date: formatDate(data.date),
-            post_id: doc.id,
-        });
-    });
-    result.sort(sortDateDescending);
-    return result;
-
-    function sortDateDescending(postA, postB) {
-        return postB.date.seconds - postA.date.seconds;
-    }
-}
-
-function formatDate(timestamp) {
-    const utcDate = new Date(timestamp.seconds * 1000),
-        localDateString = utcDate.toLocaleString("en-US", {
-            timeZone: "America/Los_Angeles",
-        }),
-        d = new Date(localDateString),
-        months = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ],
-        month = months[d.getMonth()],
-        day = d.getDate(),
-        year = d.getFullYear(),
-        hours = d.getHours(),
-        hour = hours % 12 || 12,
-        minutes = ("" + d.getMinutes()).padStart(2, "0"),
-        amPm = hours < 12 ? "am" : "pm";
-    return `${month} ${day}, ${year} at ${hour}:${minutes} ${amPm} PST`;
-}
 
 function getProjects(posts) {
     return posts
