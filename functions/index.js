@@ -1,12 +1,11 @@
 const express = require("express");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
-const { auth } = require("./data/database.js");
+const { auth } = require("./db/database.js");
 const { signInWithEmailAndPassword } = require("firebase/auth");
 const { getMoonSunTidesData } = require("./moon-sun-tides.js");
 const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
-const { getPostsData } = require("./data/get-posts.js");
 // for POST requests
 const bodyParser = require("body-parser");
 
@@ -30,7 +29,11 @@ signInServer.get("/", async function (req, res) {
     const token = req.cookies.auth,
         isVerified = token && (await admin.auth().verifyIdToken(token));
     if (isVerified) {
-        const allPosts = await getPostsData("posts");
+        const snapshot = await admin.firestore().collection("posts").get(),
+            allPosts = [];
+        snapshot.forEach((doc) =>
+            allPosts.push({ post_id: doc.id, ...doc.data() })
+        );
         res.render("posts", { allPosts });
         return;
     }
@@ -53,11 +56,12 @@ signInServer.post("/", async function (req, res) {
 });
 
 signInServer.get("/post", async function (req, res) {
-    const allPosts = await getPostsData("posts"),
-        { id } = req.query,
-        post = allPosts.find(({ post_id }) => post_id === id);
+    const { id } = req.query,
+        post =
+            id &&
+            (await admin.firestore().collection("posts").doc(id).get()).data();
     res.render("post", {
-        post: post ? { ...post, tags: post.tags.join(", ") } : {},
+        post: post ? { ...post, tags: post.tags.join(", "), post_id: id } : {},
     });
 });
 
