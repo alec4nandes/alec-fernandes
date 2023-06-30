@@ -26,7 +26,7 @@ permalink: "blog/{{ post.post_id | slugify }}.html"
             <article>
                 <h2 class="title">{{ post.title }}</h2>
                 <h3 class="subtitle">{{ post.subtitle }}</h3>
-                <p class="date-posted">{{ post.formatted_date }}</p>
+                <p class="date-posted">{{ post.date }}</p>
                 <figure>
                     <img src="{{ post.feature_image }}"/>
                     <figcaption>{{ post.feature_image_caption }}</figcaption>

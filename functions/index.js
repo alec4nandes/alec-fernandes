@@ -32,7 +32,14 @@ signInServer.get("/", async function (req, res) {
         const snapshot = await admin.firestore().collection("posts").get(),
             allPosts = [];
         snapshot.forEach((doc) =>
-            allPosts.push({ post_id: doc.id, ...doc.data() })
+            allPosts.push({
+                ...doc.data(),
+                post_id: doc.id,
+            })
+        );
+        allPosts.sort(
+            (postA, postB) =>
+                new Date(postB.date).getTime() - new Date(postA.date).getTime()
         );
         res.render("posts", { allPosts });
         return;
@@ -61,7 +68,13 @@ signInServer.get("/post", async function (req, res) {
             id &&
             (await admin.firestore().collection("posts").doc(id).get()).data();
     res.render("post", {
-        post: post ? { ...post, tags: post.tags.join(", "), post_id: id } : {},
+        post: post
+            ? {
+                  ...post,
+                  tags: post.tags.join(", "),
+                  post_id: id,
+              }
+            : {},
     });
 });
 
@@ -69,7 +82,6 @@ signInServer.post("/update", async function (req, res) {
     const data = {
         ...req.body,
         tags: req.body.tags.split(", "),
-        date: new Date(),
     };
     const id = data.post_id;
     delete data.post_id;

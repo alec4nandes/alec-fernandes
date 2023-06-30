@@ -48,6 +48,19 @@
                 tags:
                 <input name="tags" value="{{ post.tags | escape }}" />
             </label>
+            <input
+                name="date"
+                id="date"
+                type="text"
+                value="{{ post.date }}"
+                hidden />
+            <label>
+                date:
+                <input
+                    type="datetime-local"
+                    id="change-date"
+                    onchange="setDateValue(this.value)" />
+            </label>
             <button type="submit">update</button>
         </form>
         <button onclick="deletePost('{{ post.post_id | escape }}')">delete</button>
@@ -55,9 +68,41 @@
         <a href="../edit">back to all posts</a>
 
         <script>
+            // sync the datetime-local input with the timestamp in the database
+            const origDate = document.querySelector("#date").value,
+                localDate = origDate
+                    ? new Date(origDate)
+                    : new Date(),
+                pad = num => ("" + num).padStart(2, "0"),
+                mm = pad(localDate.getMonth() + 1),
+                dd = pad(localDate.getDate()),
+                yyyy = pad(localDate.getFullYear()),
+                hh = pad(localDate.getHours()),
+                mi = pad(localDate.getMinutes()),
+                parsed = `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+            document.querySelector("#change-date").value = parsed;
+
             function deletePost(id) {
                 if (confirm("Delete post?")) {
                     window.location.href = `../edit/delete?id=${id}`;
+                }
+            }
+
+            function setDateValue(localTime) {
+                document.querySelector('#date').value = localTime + getTZOffset(localTime);
+
+                function getTZOffset(timestamp) {
+                    const minutesOffset = new Date(timestamp).getTimezoneOffset(),
+                        hours = minutesOffset / 60,
+
+// minutesOffset reflects how far ahead GMT is,
+// therefore invert it to get your timezone relative to GMT
+                        num = hours * -1,
+                        prefix = num >= 0
+                            ? "+"
+                            : "-",
+                        offset = ("" + Math.abs(num)).padStart(2, "0");
+                    return prefix + offset + ":00";
                 }
             }
         </script>

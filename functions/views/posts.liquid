@@ -15,6 +15,7 @@
             {% for post in allPosts %}
                 <li>
                     <a href="./edit/post?id={{ post.post_id }}">{{ post.title }}</a>
+                    <small class="date">{{ post.date }}</small>
                 </li>
             {% endfor %}
         </ul>
@@ -24,6 +25,19 @@
                 document.cookie = "auth=; expires=0; path=/";
                 window.location.reload();
             }
+
+            document.querySelectorAll(".date").forEach((elem) => {
+                const date = new Date(elem.textContent),
+                    formatted = date.toLocaleDateString("en-us", {
+                        weekday: "short",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit"
+                    });
+                elem.innerText = `(${formatted})`;
+            });
         </script>
     </body>
 </html>

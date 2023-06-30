@@ -17,7 +17,6 @@ module.exports = async function () {
     //     const copy = { ...post },
     //         id = copy.post_id;
     //     delete copy.post_id;
-    //     delete copy.formatted_date;
     //     await setDoc(doc(db2, "posts", id), copy);
     // });
 
