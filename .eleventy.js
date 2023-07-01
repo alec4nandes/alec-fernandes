@@ -10,7 +10,11 @@ module.exports = function (eleventyConfig) {
                     useShortDoctype: true,
                     // ignore minifying <pre> tags.
                     // remember that < and > are now &lt; and &gt;
-                    ignoreCustomFragments: [/&lt;pre[.\s\S]*?\/pre&gt;/],
+                    ignoreCustomFragments: [
+                        /&lt;pre[.\s\S]*?\/pre&gt;/,
+                        // condensing embedded JS with comments gets messy
+                        /&lt;script[.\s\S]*?\/script&gt;/,
+                    ],
                 }),
                 switchBack: true,
             });

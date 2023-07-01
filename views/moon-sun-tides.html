@@ -282,8 +282,8 @@
                     event.preventDefault();
                     initialRawTextLoad();
                     try {
-                        const lat = latElem.innerHTML,
-                            lng = lngElem.innerHTML,
+                        const lat = latElem.textContent,
+                            lng = lngElem.textContent,
                             [date, time] = dateElem
                                 .innerHTML
                                 .split("T"),
