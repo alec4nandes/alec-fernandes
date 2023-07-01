@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "elev": "npx @11ty/eleventy",
-        "deploy": "firebase deploy"
+        "deploy": "firebase deploy",
+        "serve": "firebase serve --only functions,hosting"
     },
     "repository": {
         "type": "git",

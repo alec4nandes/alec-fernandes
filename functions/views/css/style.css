@@ -1,0 +1,81 @@
+body {
+  background-color: #222;
+  color: #bbb;
+  font-family: "Courier New", Courier, monospace;
+  margin: 40px 15px;
+}
+body a {
+  color: lightblue;
+}
+body a:hover {
+  color: #eee;
+}
+body button,
+body .button-link {
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #222;
+  border: 1px solid #ccc;
+  color: #eee;
+  font-size: 1rem;
+  margin: 10px auto;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+body button:hover,
+body .button-link:hover {
+  background-color: #ccc;
+  color: #222;
+  cursor: pointer;
+}
+body button,
+body input,
+body textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.2rem;
+}
+body footer,
+body header {
+  text-align: center;
+}
+body form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+body form input,
+body form textarea {
+  background-color: #444;
+  color: #eee;
+  border: 0;
+  font-size: 1rem;
+}
+body form input[type=datetime-local] {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+body form textarea {
+  height: 600px;
+}
+body h1 {
+  margin-bottom: 10px;
+}
+body main {
+  max-width: 700px;
+  margin: auto;
+}
+body ul {
+  max-width: 550px;
+  color: #888;
+  margin: 10px auto;
+}
+body ul li {
+  padding-bottom: 10px;
+}
+body ul li small.date {
+  font-style: italic;
+}/*# sourceMappingURL=style.css.map */

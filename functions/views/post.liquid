@@ -4,68 +4,94 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Post</title>
-
         <style>
-            form {
-                display: flex;
-                flex-direction: column;
+            input,
+            textarea {
+                width: 100%;
             }
+            {% include 'css/style.css' %}
         </style>
     </head>
     <body>
-        <form action="../edit/update" method="post">
-            <label>
-                post id:
+        <header>
+            <h1>Edit Post</h1>
+        </header>
+        <main>
+            <form action="../edit/update" method="post">
+                <label for="post-id">
+                    post id:
+                </label>
                 <input
+                    id="post-id"
                     name="post_id"
                     value="{{ post.post_id | escape }}"
                     required />
-            </label>
-            <label>
-                title:
+                <label for="title">
+                    title:
+                </label>
                 <input
+                    id="title"
                     name="title"
                     value="{{ post.title | escape  }}"
                     required />
-            </label>
-            <label>
-                subtitle:
-                <input name="subtitle" value="{{ post.subtitle | escape }}" />
-            </label>
-            <label>
-                feature image path:
-                <input name="feature_image" value="{{ post.feature_image }}" />
-            </label>
-            <label>
-                feature image caption:
-                <input name="feature_image_caption" value="{{ post.feature_image_caption | escape }}" />
-            </label>
-            <label>
-                content:
-                <textarea name="content" required>{{ post.content | escape }}</textarea>
-            </label>
-            <label>
-                tags:
-                <input name="tags" value="{{ post.tags | escape }}" />
-            </label>
-            <input
-                name="date"
-                id="date"
-                type="text"
-                value="{{ post.date }}"
-                hidden />
-            <label>
-                date:
+                <label for="subtitle">
+                    subtitle:
+                </label>
                 <input
-                    type="datetime-local"
+                    id="subtitle"
+                    name="subtitle"
+                    value="{{ post.subtitle | escape }}" />
+                <label for="feature-image-path">
+                    feature image path:
+                </label>
+                <input
+                    id="feature-image-path"
+                    name="feature_image"
+                    value="{{ post.feature_image }}" />
+                <label for="feature-image-caption">
+                    feature image caption:
+                </label>
+                <input
+                    id="feature-image-caption"
+                    name="feature_image_caption"
+                    value="{{ post.feature_image_caption | escape }}" />
+                <label for="content">
+                    content:
+                </label>
+                <textarea
+                    id="content"
+                    name="content"
+                    required>{{ post.content | escape }}</textarea>
+                <label for="tags">
+                    tags:
+                </label>
+                <input
+                    id="tags"
+                    name="tags"
+                    value="{{ post.tags | escape }}" />
+                <input
+                    id="date"
+                    name="date"
+                    type="text"
+                    value="{{ post.date }}"
+                    hidden />
+                <label for="change-date">
+                    date:
+                </label>
+                <input
                     id="change-date"
+                    type="datetime-local"
                     onchange="setDateValue(this.value)" />
-            </label>
-            <button type="submit">update</button>
-        </form>
-        <button onclick="deletePost('{{ post.post_id | escape }}')">delete</button>
-        |
-        <a href="../edit">back to all posts</a>
+                <button type="submit">update</button>
+            </form>
+        </main>
+        <footer>
+            <button onclick="deletePost('{{ post.post_id | escape }}')">
+                delete
+            </button>
+            |
+            <a href="../edit" class="button-link">back to all posts</a>
+        </footer>
 
         <script>
             // sync the datetime-local input with the timestamp in the database

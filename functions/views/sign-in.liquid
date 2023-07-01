@@ -4,34 +4,39 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign In</title>
-
         <style>
-            form {
-                display: flex;
-                flex-direction: column;
+            input {
+                text-align: center;
             }
-
-            .warning {
-                color: maroon;
-            }
+            {% include 'css/style.css' %}
         </style>
     </head>
     <body>
-        <form action="./edit" method="post">
-            <p class="warning">
+        <header>
+            <h1>Sign In</h1>
+        </header>
+        <main>
+            <form action="./edit" method="post">
                 {% if error %}
-                    {{ error.message }}
+                    <p class="warning">
+                        {{ error.message }}
+                    </p>
                 {% endif %}
-            </p>
-            <label>
-                email:
-                <input type="email" name="email" />
-            </label>
-            <label>
-                password:
-                <input type="password" name="password" />
-            </label>
-            <button type="submit">sign in</button>
-        </form>
+                <label for="email">
+                    email:</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email" />
+                <label for="password">
+                    password:
+                </label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password" />
+                <button type="submit">sign in</button>
+            </form>
+        </main>
     </body>
 </html>

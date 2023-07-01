@@ -4,21 +4,31 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>All Posts</title>
+        <style>
+            {% include 'css/style.css' %}
+        </style>
     </head>
     <body>
-        <a href="./edit/post">*write new post*</a>
-        <br/>
-        <button onclick="handleSignOut()">
-            sign out
-        </button>
-        <ul>
-            {% for post in allPosts %}
-                <li>
-                    <a href="./edit/post?id={{ post.post_id }}">{{ post.title }}</a>
-                    <small class="date">{{ post.date }}</small>
-                </li>
-            {% endfor %}
-        </ul>
+        <header>
+            <h1>All Posts</h1>
+            <a href="./edit/post" class="button-link">write new post</a>
+            <button onclick="handleSignOut()">
+                sign out
+            </button>
+        </header>
+        <main>
+            <ul>
+                {% for post in allPosts %}
+                    <li>
+                        <small class="date">{{ post.date }}</small>
+                        <br/>
+                        <a href="./edit/post?id={{ post.post_id }}">
+                            {{ post.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </main>
 
         <script>
             function handleSignOut() {
@@ -36,7 +46,7 @@
                         hour: "numeric",
                         minute: "2-digit"
                     });
-                elem.innerText = `(${formatted})`;
+                elem.innerText = `${formatted}`;
             });
         </script>
     </body>
