@@ -19,3 +19,9 @@ ul.commas {
         }
     }
 }
+
+.tags {
+    .commas {
+        justify-content: flex-start;
+    }
+}

@@ -15,4 +15,8 @@ ul.commas li:last-child::after {
 }
 ul.commas li::after {
   content: ", ";
+}
+
+.tags .commas {
+  justify-content: flex-start;
 }/*# sourceMappingURL=comma-list.css.map */
