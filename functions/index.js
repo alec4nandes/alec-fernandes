@@ -86,23 +86,13 @@ signInServer.post("/update", async function (req, res) {
     const id = data.post_id;
     delete data.post_id;
     await admin.firestore().collection("posts").doc(id).set(data);
-    res.send(`
-        <p>Post updated!</p>
-        <p>
-            <a href="../edit">back to admin</a>
-        </p>
-    `);
+    res.render("confirm", { type: "updated" });
 });
 
 signInServer.get("/delete", async function (req, res) {
     const { id } = req.query;
     await admin.firestore().collection("posts").doc(id).delete();
-    res.send(`
-        <p>Post deleted!</p>
-        <p>
-            <a href="../edit">back to admin</a>
-        </p>
-    `);
+    res.render("confirm", { type: "deleted" });
 });
 
 const edit = functions.https.onRequest(signInServer);
@@ -160,43 +150,7 @@ const sendMailOverHTTP = functions.https.onRequest((req, res) => {
             return res.send(error.toString());
         }
         // var data = JSON.stringify(data);
-        return res.send(`
-            <!DOCTYPE html>
-            <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Thank you!</title>
-                    <style>
-                        body, html {
-                            height: 100%;
-                        }
-
-                        body {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            flex-direction: column;
-                            font-family: Arial, sans-serif;
-                        }
-
-                        h1, p {
-                            text-align: center;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <h1>Thanks for reaching out!</h1>
-                    <p>I'll be in touch with you shortly.</p>
-                    <p>
-                        Best,
-                        <br/>
-                        <em>Alec Fernandes</em>
-                    </p>
-                    <a href="https://fern.haus">home</a>
-                </body>
-            </html>
-        `);
+        return res.redirect("https://fern.haus/thanks");
     });
 });
 

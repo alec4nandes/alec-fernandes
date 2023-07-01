@@ -78,4 +78,7 @@ body ul li {
 }
 body ul li small.date {
   font-style: italic;
+}
+body .warning {
+  color: red;
 }/*# sourceMappingURL=style.css.map */

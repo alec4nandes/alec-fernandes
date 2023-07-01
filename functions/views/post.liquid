@@ -17,7 +17,7 @@
             <h1>Edit Post</h1>
         </header>
         <main>
-            <form action="../edit/update" method="post">
+            <form action="../edit/update" method="POST">
                 <label for="post-id">
                     post id:
                 </label>
@@ -107,6 +107,7 @@
                 mi = pad(localDate.getMinutes()),
                 parsed = `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
             document.querySelector("#change-date").value = parsed;
+            setDateValue(parsed);
 
             function deletePost(id) {
                 if (confirm("Delete post?")) {

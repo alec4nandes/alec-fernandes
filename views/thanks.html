@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "partials/_analytics.html" %}
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        {% include "partials/_metatags.html" %}
+        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
+        <link rel="stylesheet" href="/css/style.css"/>
+        <link rel="stylesheet" href="/css/header-menu.css"/>
+        <style>
+            h2 {
+                margin-top: 60px;
+            }
+
+            main {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        {% include "partials/_smallheader.html" %}
+        <main>
+            <h2>Thanks for reaching out!</h2>
+            <p>I'll be in touch with you shortly.</p>
+            <p>
+                Best,
+                <br/>
+                <em>Alec Fernandes</em>
+            </p>
+            <a href="/">home</a>
+        </main>
+        {% include "partials/_stickycontact.html" %}
+        {% include "partials/_footer.html" %}
+    </body>
+</html>
