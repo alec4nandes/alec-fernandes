@@ -83,13 +83,23 @@ body main {
   padding-left: 44.2vw;
 }
 body main section {
+  --projects_gap: clamp(15px, 2.5vw, 2.5vw);
   padding: 35px 0;
+}
+body main section:first-child h2 {
+  margin-bottom: 0;
 }
 body main section h2 {
   font-size: 30px;
   line-height: 30px;
   margin-bottom: 30px;
   margin-top: 0;
+}
+body main section .read-all-link {
+  width: 100%;
+  display: block;
+  margin: 10px auto 30px;
+  text-align: center;
 }
 body main section .content-bubble {
   background-color: #fff;
@@ -98,7 +108,7 @@ body main section .content-bubble {
   display: flex;
 }
 body main section .content-bubble.post .feature-image {
-  min-height: 15.5333333333vw;
+  min-height: calc((60vw - 2 * clamp(15px, 2.5vw, 2.5vw) - 8.4vw) / 3);
   border-radius: 15px 0 0 15px;
 }
 body main section .content-bubble.gallery .content {
@@ -108,7 +118,7 @@ body main section .content-bubble.gallery .content {
   margin: 0;
 }
 body main section .content-bubble.gallery .feature-image {
-  height: 15.5333333333vw;
+  height: calc((60vw - 2 * clamp(15px, 2.5vw, 2.5vw) - 8.4vw) / 3);
   max-height: 200px;
   border-radius: 0 15px 15px 0;
 }
@@ -129,30 +139,35 @@ body main section .content-bubble .feature-image {
   background-position: center;
   background-size: cover;
 }
+body main section #recent-posts,
 body main section #projects {
   display: flex;
   flex-wrap: wrap;
-  gap: 2.5vw;
+  gap: clamp(15px, 2.5vw, 2.5vw);
   justify-content: center;
 }
+body main section #recent-posts > a,
 body main section #projects > a {
+  height: calc((60vw - 2 * clamp(15px, 2.5vw, 2.5vw) - 8.4vw) / 3);
   color: #fff;
+  display: inline-block;
   text-decoration: none;
 }
+body main section #recent-posts > a:hover,
 body main section #projects > a:hover {
   opacity: 0.5;
 }
+body main section #recent-posts > a > div,
 body main section #projects > a > div {
-  height: 15.5333333333vw;
-  max-height: 200px;
-  max-width: 200px;
-  width: 15.5333333333vw;
+  height: 100%;
+  width: 100%;
   background-color: #111;
   border-radius: 10px;
   box-shadow: 5px 5px 5px rgba(50, 50, 50, 0.5);
   display: flex;
   flex-direction: column;
 }
+body main section #recent-posts > a > div .project-image,
 body main section #projects > a > div .project-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -160,6 +175,7 @@ body main section #projects > a > div .project-image {
   border-radius: 10px 10px 0 0;
   flex: 1;
 }
+body main section #recent-posts > a > div span,
 body main section #projects > a > div span {
   width: 100%;
   background-color: #626e79;
@@ -168,6 +184,17 @@ body main section #projects > a > div span {
   line-height: 1rem;
   padding: 2px;
   text-align: center;
+}
+body main section #recent-posts {
+  margin-top: clamp(15px, 2.5vw, 2.5vw);
+}
+body main section #recent-posts > a {
+  min-height: 175px;
+  width: calc(50% - var(--projects_gap) / 2);
+}
+body main section #projects > a {
+  min-height: 125px;
+  width: calc(33.333% - var(--projects_gap) / 1.5);
 }
 
 @media only screen and (max-width: 725px) {
@@ -195,9 +222,5 @@ body main section #projects > a > div span {
   }
   body main section .content-bubble.gallery .feature-image {
     height: 28.8666666667vw;
-  }
-  body main section #projects > a > div {
-    height: 28.8666666667vw;
-    width: 28.8666666667vw;
   }
 }/*# sourceMappingURL=home.css.map */

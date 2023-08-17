@@ -22,7 +22,7 @@ module.exports = async function () {
 
     return {
         all_posts: allPosts,
-        latest_post: allPosts[0],
+        latest_posts: allPosts.slice(0, 5),
         projects: getProjects(allPosts),
         all_tags: getAllTags(allPosts),
         tag_data: tagData,

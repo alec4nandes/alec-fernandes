@@ -99,16 +99,30 @@ body {
         padding-left: 40vw + $padding;
 
         section {
-            $projects_gap: 2.5vw;
+            --projects_gap: clamp(15px, 2.5vw, 2.5vw);
+            $projects_gap: clamp(15px, 2.5vw, 2.5vw);
             $dim: calc((60vw - (2 * $projects_gap) - (2 * $padding)) / 3);
 
             padding: 35px 0;
+
+            &:first-child {
+                h2 {
+                    margin-bottom: 0;
+                }
+            }
 
             h2 {
                 font-size: 30px;
                 line-height: 30px;
                 margin-bottom: 30px;
                 margin-top: 0;
+            }
+
+            .read-all-link {
+                width: 100%;
+                display: block;
+                margin: 10px auto 30px;
+                text-align: center;
             }
 
             .content-bubble {
@@ -158,6 +172,7 @@ body {
                 }
             }
 
+            #recent-posts,
             #projects {
                 display: flex;
                 flex-wrap: wrap;
@@ -165,7 +180,9 @@ body {
                 justify-content: center;
 
                 & > a {
+                    height: $dim;
                     color: #fff;
+                    display: inline-block;
                     text-decoration: none;
 
                     &:hover {
@@ -173,10 +190,8 @@ body {
                     }
 
                     & > div {
-                        height: $dim;
-                        max-height: 200px;
-                        max-width: 200px;
-                        width: $dim;
+                        height: 100%;
+                        width: 100%;
                         background-color: #111;
                         border-radius: 10px;
                         box-shadow: 5px 5px 5px rgba(50, 50, 50, 0.5);
@@ -201,6 +216,22 @@ body {
                             text-align: center;
                         }
                     }
+                }
+            }
+
+            #recent-posts {
+                margin-top: $projects_gap;
+
+                & > a {
+                    min-height: 175px;
+                    width: calc(50% - var(--projects_gap) / 2);
+                }
+            }
+
+            #projects {
+                & > a {
+                    min-height: 125px;
+                    width: calc(33.333% - (var(--projects_gap) / 1.5));
                 }
             }
         }
@@ -240,15 +271,6 @@ body {
 
                     &.gallery .feature-image {
                         height: $dim;
-                    }
-                }
-
-                #projects {
-                    & > a {
-                        & > div {
-                            height: $dim;
-                            width: $dim;
-                        }
                     }
                 }
             }
