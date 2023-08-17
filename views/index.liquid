@@ -53,12 +53,12 @@
                         {% if forloop.index == 1 %}
                             <div id="newest-post" class="content-bubble post">
                                 <a
-                                    href="/blog"
+                                    href="/blog/{{ post.post_id | slugify }}.html"
                                     class="feature-image"
                                     style="background-image: url('{{ post.feature_image }}');"></a>
                                 <div class="content">
                                     <h3>
-                                        <a href="./blog">
+                                        <a href="/blog/{{ post.post_id | slugify }}.html">
                                             {{ post.title }}
                                         </a>
                                     </h3>
@@ -67,7 +67,7 @@
                                         {{ post.date }}
                                     </p>
                                     <p>
-                                        <a href="./blog">(read more)</a>
+                                        <a href="/blog/{{ post.post_id | slugify }}.html">(read more)</a>
                                     </p>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                             {% if forloop.index == 2 %}
                                 {{ "<div id='recent-posts'>" }}
                             {% endif %}
-                            <a href="/blog/{{ post.post_id }}.html">
+                            <a href="/blog/{{ post.post_id | slugify }}.html">
                                 <div>
                                     <div class="project-image" style="background-image: url('{{ post.feature_image }}');"></div>
                                     <span>{{ post.title }}</span>
@@ -92,7 +92,7 @@
                 <h2>Projects</h2>
                 <div id="projects">
                     {% for project in posts.projects %}
-                        <a href="/blog/{{ project.post_id }}.html">
+                        <a href="/blog/{{ project.post_id | slugify }}.html">
                             <div>
                                 <div class="project-image" style="background-image: url('{{ project.feature_image }}');"></div>
                                 <span>{{ project.name }}</span>

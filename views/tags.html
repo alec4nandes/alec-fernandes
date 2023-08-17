@@ -22,7 +22,7 @@ permalink: "tags/{{ tag | slugify }}.html"
         {% include "partials/_smallheader.html" %}
         <main>
             {% for post in posts.tag_data[tag] %}
-                {% include "partials/_article.html" %}
+                {% include "partials/_article.liquid" %}
             {% endfor %}
         </main>
         {% include "partials/_stickycontact.html" %}

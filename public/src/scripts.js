@@ -4,8 +4,10 @@ function toggleNavMenu(isOpening) {
     elem.classList.add(isOpening ? "open" : "closed");
 }
 
-function copyLink() {
-    navigator.clipboard.writeText(window.location.href);
+function copyLink(e) {
+    const { id } = e.target.dataset,
+        url = `https://fern.haus/blog/${id}.html`;
+    navigator.clipboard.writeText(url);
     alert("Link copied!");
 }
 

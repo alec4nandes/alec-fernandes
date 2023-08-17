@@ -41,7 +41,7 @@ pagination:
         {% include "partials/_pagination.html" %}
         <main>
             {% for post in pagination.items %}
-                {% include "partials/_article.html" %}
+                {% include "partials/_article.liquid" %}
             {% endfor %}
         </main>
         {% include "partials/_pagination.html" %}

@@ -5,7 +5,7 @@
     <h3 class="subtitle">{{ post.subtitle }}</h3>
     <p class="date-posted">{{ post.date }}</p>
     <figure>
-        <img src="{{ post.feature_image}}"/>
+        <img src="{{ post.feature_image}}" />
         <figcaption>{{ post.feature_image_caption }}</figcaption>
     </figure>
     <div>{{ post.content }}</div>
@@ -19,7 +19,10 @@
             {% endfor %}
         </ul>
     </div>
-    <button class="share-button" onclick="copyLink()">
-        share <img src="/assets/icons8-share-24.png" alt=""/>
+    <button
+        class="share-button"
+        data-id="{{ post.post_id | slugify }}"
+        onclick="copyLink(event)">
+        share <img src="/assets/icons8-share-24.png" alt="" />
     </button>
 </article>
