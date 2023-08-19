@@ -46,7 +46,11 @@ function getProjects(posts) {
 
 function getAllTags(posts) {
     const tags = posts.map(({ tags }) => tags).flat(Infinity);
-    return [...new Set(tags)].sort();
+    return [...new Set(tags)].sort((a, b) => {
+        const aLower = a.toLowerCase(),
+            bLower = b.toLowerCase();
+        return aLower.localeCompare(bLower);
+    });
 }
 
 function groupTags(posts) {
