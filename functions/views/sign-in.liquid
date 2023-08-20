@@ -16,7 +16,7 @@
             <h1>Sign In</h1>
         </header>
         <main>
-            <form action="./edit" method="post">
+            <form action="./{{ dirNameSignIn }}" method="post">
                 {% if error %}
                     <p class="warning">
                         {{ error.message }}

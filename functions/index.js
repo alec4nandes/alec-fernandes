@@ -1,14 +1,25 @@
 const express = require("express");
-const admin = require("firebase-admin");
 const functions = require("firebase-functions");
-const { auth } = require("./db/database.js");
-const { signInWithEmailAndPassword } = require("firebase/auth");
+const admin = require("firebase-admin");
+const {
+    dirNameHome,
+    dirNameSignIn,
+    dirNamePost,
+    dirNameUpdate,
+    dirNameDelete,
+    checkAuth,
+    showAllPosts,
+    signInUser,
+    loadPostData,
+    updatePost,
+    deletePost,
+} = require("./edit.js");
 const { getMoonSunTidesData } = require("./moon-sun-tides.js");
 const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
 // for POST requests
 const bodyParser = require("body-parser");
-
+// liquid templates
 const { Liquid } = require("liquidjs");
 const engine = new Liquid();
 
@@ -25,74 +36,24 @@ signInServer.engine("liquid", engine.express());
 signInServer.set("views", "./views"); // specify the views directory
 signInServer.set("view engine", "liquid"); // set liquid to default
 
-signInServer.get("/", async function (req, res) {
-    const token = req.cookies.auth,
-        isVerified = token && (await admin.auth().verifyIdToken(token));
-    if (isVerified) {
-        const snapshot = await admin.firestore().collection("posts").get(),
-            allPosts = [];
-        snapshot.forEach((doc) =>
-            allPosts.push({
-                ...doc.data(),
-                post_id: doc.id,
-            })
-        );
-        allPosts.sort(
-            (postA, postB) =>
-                new Date(postB.date).getTime() - new Date(postA.date).getTime()
-        );
-        res.render("posts", { allPosts });
-        return;
-    }
-    res.render("sign-in");
+signInServer.get(`/${dirNameHome}`, async function (req, res) {
+    await checkAuth(req, res, () => showAllPosts(res), true);
 });
 
-signInServer.post("/", async function (req, res) {
-    try {
-        const { email, password } = req.body,
-            { user } = await signInWithEmailAndPassword(auth, email, password);
-        // Signed in
-        // Make cookie
-        const token = (await user.getIdToken()) || "",
-            maxAge = token ? 432000 : 0;
-        res.cookie("auth", token, { maxAge });
-        res.redirect("./edit");
-    } catch (error) {
-        res.render("sign-in", { error });
-    }
+signInServer.post(`/${dirNameSignIn}`, async function (req, res) {
+    await signInUser(req, res);
 });
 
-signInServer.get("/post", async function (req, res) {
-    const { id } = req.query,
-        post =
-            id &&
-            (await admin.firestore().collection("posts").doc(id).get()).data();
-    res.render("post", {
-        post: post
-            ? {
-                  ...post,
-                  tags: post.tags.join(", "),
-                  post_id: id,
-              }
-            : {},
-    });
+signInServer.get(`/${dirNamePost}`, async function (req, res) {
+    await checkAuth(req, res, () => loadPostData(req, res));
 });
 
-signInServer.post("/update", async function (req, res) {
-    const data = {
-        ...req.body,
-        tags: req.body.tags.split(", "),
-    };
-    const id = data.post_id;
-    delete data.post_id;
-    await admin.firestore().collection("posts").doc(id).set(data);
-    res.render("confirm", { type: "updated" });
+signInServer.post(`/${dirNameUpdate}`, async function (req, res) {
+    await updatePost(req, res);
 });
 
-signInServer.get("/delete", async function (req, res) {
-    const { id } = req.query;
-    await admin.firestore().collection("posts").doc(id).delete();
-    res.render("confirm", { type: "deleted" });
+signInServer.get(`/${dirNameDelete}`, async function (req, res) {
+    await checkAuth(req, res, () => deletePost(req, res));
 });
 
 const edit = functions.https.onRequest(signInServer);

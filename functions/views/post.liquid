@@ -17,7 +17,7 @@
             <h1>Edit Post</h1>
         </header>
         <main>
-            <form action="../edit/update" method="POST">
+            <form action="./{{ dirNameUpdate }}" method="POST">
                 <label for="post-id">
                     post id:
                 </label>
@@ -90,7 +90,7 @@
                 delete
             </button>
             |
-            <a href="../edit" class="button-link">back to all posts</a>
+            <a href="./{{ dirNameHome }}" class="button-link">back to all posts</a>
         </footer>
 
         <script>
@@ -111,7 +111,7 @@
 
             function deletePost(id) {
                 if (confirm("Delete post?")) {
-                    window.location.href = `../edit/delete?id=${id}`;
+                    window.location.href = `./{{ dirNameDelete }}?id=${id}`;
                 }
             }
 

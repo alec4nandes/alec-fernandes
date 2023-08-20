@@ -11,7 +11,7 @@
     <body>
         <header>
             <h1>All Posts</h1>
-            <a href="./edit/post" class="button-link">write new post</a>
+            <a href="./{{ dirNamePost }}" class="button-link">write new post</a>
             <button onclick="handleSignOut()">
                 sign out
             </button>
@@ -22,7 +22,7 @@
                     <li>
                         <small class="date">{{ post.date }}</small>
                         <br/>
-                        <a href="./edit/post?id={{ post.post_id }}">
+                        <a href="./{{ dirNamePost }}?id={{ post.post_id }}">
                             {{ post.title }}
                         </a>
                     </li>
