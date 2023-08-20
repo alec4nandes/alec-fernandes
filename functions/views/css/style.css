@@ -47,11 +47,14 @@ body form {
   flex-direction: column;
   gap: 10px;
 }
+body form button[type=submit] {
+  font-weight: bold;
+}
 body form input,
 body form textarea {
   background-color: #444;
-  color: #eee;
   border: 0;
+  color: #eee;
   font-size: 1rem;
 }
 body form input[type=datetime-local] {
