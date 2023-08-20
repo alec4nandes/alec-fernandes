@@ -131,6 +131,14 @@ body {
                 box-shadow: 5px 5px 5px rgba(50, 50, 50, 0.5);
                 display: flex;
 
+                &#newest-post {
+                    h3 {
+                        a {
+                            line-height: 1.45rem;
+                        }
+                    }
+                }
+
                 &.post .feature-image {
                     min-height: $dim;
                     border-radius: 15px 0 0 15px;

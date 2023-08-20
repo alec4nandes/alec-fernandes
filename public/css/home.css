@@ -107,6 +107,9 @@ body main section .content-bubble {
   box-shadow: 5px 5px 5px rgba(50, 50, 50, 0.5);
   display: flex;
 }
+body main section .content-bubble#newest-post h3 a {
+  line-height: 1.45rem;
+}
 body main section .content-bubble.post .feature-image {
   min-height: calc((60vw - 2 * clamp(15px, 2.5vw, 2.5vw) - 8.4vw) / 3);
   border-radius: 15px 0 0 15px;
