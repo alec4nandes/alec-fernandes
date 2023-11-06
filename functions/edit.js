@@ -52,8 +52,8 @@ async function signInUser(req, res) {
         // Make cookie
         const token = (await user.getIdToken()) || "",
             maxAge = token ? 432000 : 0;
-        // HttpOnly cookies are stored on the server
-        // and not visible client-side.
+        // HttpOnly cookies cannot be read with JS,
+        // and secure cookies can only be read over HTTPS (encrypted)
         res.cookie("auth", token, { maxAge, httpOnly: true, secure: true });
         goHome(res);
     } catch (error) {
