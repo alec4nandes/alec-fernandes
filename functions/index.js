@@ -7,10 +7,10 @@ const {
     dirNamePost,
     dirNameUpdate,
     dirNameDelete,
-    checkAuth,
-    showAllPosts,
+    getHomePage,
     signInUser,
-    loadPostData,
+    signOutUser,
+    getPost,
     updatePost,
     deletePost,
 } = require("./edit.js");
@@ -22,6 +22,16 @@ const bodyParser = require("body-parser");
 // liquid templates
 const { Liquid } = require("liquidjs");
 const engine = new Liquid();
+// for session login instead of cookies
+const session = require("express-session");
+// express-session needs a "store" other than memory-leaky MemoryStore (default).
+// MemoryStore is only good for small-scale development stage.
+const { Firestore } = require("@google-cloud/firestore");
+const { FirestoreStore } = require("@google-cloud/connect-firestore");
+// TODO: create cleanup endpoint for express-session data in Firestore
+// It should loop through all the sessions, parse the .data into JSON,
+// and then parse the expiration date to see if it has passed.
+// If so, delete record.
 
 admin.initializeApp();
 
@@ -31,35 +41,29 @@ const signInServer = express();
 // signInServer.use(bodyParser.json());
 signInServer.use(bodyParser.urlencoded({ extended: true }));
 signInServer.use(cookieParser());
+signInServer.use(
+    session({
+        store: new FirestoreStore({
+            dataset: new Firestore(),
+            kind: "express-sessions",
+        }),
+        secret: "thisismysecretkeylolz1010", // TODO: make env var
+        saveUninitialized: true,
+        cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // one week
+        resave: false,
+    })
+);
 // register liquid engine
 signInServer.engine("liquid", engine.express());
 signInServer.set("views", "./views"); // specify the views directory
 signInServer.set("view engine", "liquid"); // set liquid to default
 
-signInServer.get(`/${dirNameHome}`, async function (req, res) {
-    await checkAuth(req, res, () => showAllPosts(res), true);
-});
-
-signInServer.post(`/${dirNameSignIn}`, async function (req, res) {
-    await signInUser(req, res);
-});
-
-signInServer.post(`/signout`, function (req, res) {
-    res.clearCookie("auth");
-    res.send("GOODBYE");
-});
-
-signInServer.get(`/${dirNamePost}`, async function (req, res) {
-    await checkAuth(req, res, () => loadPostData(req, res));
-});
-
-signInServer.post(`/${dirNameUpdate}`, async function (req, res) {
-    await updatePost(req, res);
-});
-
-signInServer.get(`/${dirNameDelete}`, async function (req, res) {
-    await checkAuth(req, res, () => deletePost(req, res));
-});
+signInServer.get(`/${dirNameHome}`, getHomePage);
+signInServer.post(`/${dirNameSignIn}`, signInUser);
+signInServer.get(`/signout`, signOutUser);
+signInServer.get(`/${dirNamePost}`, getPost);
+signInServer.post(`/${dirNameUpdate}`, updatePost);
+signInServer.get(`/${dirNameDelete}`, deletePost);
 
 const edit = functions.https.onRequest(signInServer);
 

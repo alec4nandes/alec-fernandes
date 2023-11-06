@@ -12,9 +12,7 @@
         <header>
             <h1>All Posts</h1>
             <a href="./{{ dirNamePost }}" class="button-link">write new post</a>
-            <button onclick="handleSignOut()">
-                sign out
-            </button>
+            <a href="./signout" class="button-link">sign out</a>
         </header>
         <main>
             <ul>
@@ -31,16 +29,6 @@
         </main>
 
         <script>
-            async function handleSignOut() {
-                await fetch("./signout", {method: "post"})
-                    .then((res) => res.text())
-                    .then((text) => {
-                        console.log(text);
-                        window.location.reload();
-                    })
-                    .catch((err) => console.error(err));
-            }
-
             document.querySelectorAll(".date").forEach((elem) => {
                 const date = new Date(elem.textContent),
                     formatted = date.toLocaleDateString("en-us", {

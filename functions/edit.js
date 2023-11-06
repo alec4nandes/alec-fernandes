@@ -9,22 +9,19 @@ const dirNameHome = "home",
     dirNameDelete = "delete",
     goHome = (res) => res.redirect(`./${dirNameHome}`);
 
-async function checkAuth(req, res, func, isSignIn) {
-    const userLoggedIn = await isUserLoggedIn(req);
+async function checkAuth(req, res, func) {
+    const userLoggedIn = req.session.authenticated;
     if (userLoggedIn) {
         return await func();
     }
-    if (isSignIn) {
-        res.render("sign-in", { dirNameSignIn });
-        return;
-    }
-    goHome(res);
+    res.render("sign-in", { dirNameSignIn });
 }
 
-async function isUserLoggedIn(req) {
-    const token = req.cookies.auth,
-        isVerified = token && (await admin.auth().verifyIdToken(token));
-    return !!isVerified;
+function getHomePage(req, res) {
+    req.session.save(function (err) {
+        err && console.log(err);
+        checkAuth(req, res, () => showAllPosts(res));
+    });
 }
 
 async function showAllPosts(res) {
@@ -48,17 +45,26 @@ async function signInUser(req, res) {
     try {
         const { email, password } = req.body,
             { user } = await signInWithEmailAndPassword(auth, email, password);
-        // Signed in
-        // Make cookie
-        const token = (await user.getIdToken()) || "",
-            maxAge = token ? 432000 : 0;
-        // HttpOnly cookies cannot be read with JS,
-        // and secure cookies can only be read over HTTPS (encrypted)
-        res.cookie("auth", token, { maxAge, httpOnly: true, secure: true });
-        goHome(res);
+        // will throw error if wrong pw or no user
+        req.session.authenticated = true;
+        req.session.save(function (err) {
+            err && console.log(err);
+            goHome(res);
+        });
     } catch (error) {
         res.render("sign-in", { dirNameSignIn, error });
     }
+}
+
+function signOutUser(req, res) {
+    req.session.destroy(function (err) {
+        err && console.log(err);
+        goHome(res);
+    });
+}
+
+function getPost(req, res) {
+    checkAuth(req, res, () => loadPostData(req, res));
 }
 
 async function loadPostData(req, res) {
@@ -92,7 +98,11 @@ async function updatePost(req, res) {
     res.render("confirm", { dirNameHome, type: "updated" });
 }
 
-async function deletePost(req, res) {
+function deletePost(req, res) {
+    checkAuth(req, res, () => deletePostHelper(req, res));
+}
+
+async function deletePostHelper(req, res) {
     const { id } = req.query;
     await admin.firestore().collection("posts").doc(id).delete();
     res.render("confirm", { dirNameHome, type: "deleted" });
@@ -105,10 +115,10 @@ module.exports = {
     dirNamePost,
     dirNameUpdate,
     dirNameDelete,
-    checkAuth,
-    showAllPosts,
+    getHomePage,
     signInUser,
-    loadPostData,
+    signOutUser,
+    getPost,
     updatePost,
     deletePost,
 };
