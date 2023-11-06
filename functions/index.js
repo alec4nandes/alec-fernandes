@@ -47,7 +47,7 @@ signInServer.use(
             dataset: new Firestore(),
             kind: "express-sessions",
         }),
-        secret: "thisismysecretkeylolz1010", // TODO: make env var
+        secret: process.env.SESSION_SECRET,
         saveUninitialized: true,
         cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // one week
         resave: false,
