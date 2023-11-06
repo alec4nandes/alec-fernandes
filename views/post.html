@@ -42,7 +42,11 @@ permalink: "blog/{{ post.post_id | slugify }}.html"
                         {% endfor %}
                     </ul>
                 </div>
-                <button class="share-button" onclick="copyLink()">
+                <button
+                    class="share-button"
+                    onclick="copyLink(event)"
+                    data-id="{{ post.post_id | slugify }}"
+                >
                     share <img src="/assets/icons8-share-24.png" alt=""/>
                 </button>
             </article>
