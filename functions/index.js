@@ -44,6 +44,11 @@ signInServer.post(`/${dirNameSignIn}`, async function (req, res) {
     await signInUser(req, res);
 });
 
+signInServer.post(`/signout`, function (req, res) {
+    res.clearCookie("auth");
+    res.send("GOODBYE");
+});
+
 signInServer.get(`/${dirNamePost}`, async function (req, res) {
     await checkAuth(req, res, () => loadPostData(req, res));
 });

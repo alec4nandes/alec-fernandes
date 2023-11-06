@@ -31,9 +31,14 @@
         </main>
 
         <script>
-            function handleSignOut() {
-                document.cookie = "auth=; expires=0; path=/";
-                window.location.reload();
+            async function handleSignOut() {
+                await fetch("./signout", {method: "post"})
+                    .then((res) => res.text())
+                    .then((text) => {
+                        console.log(text);
+                        window.location.reload();
+                    })
+                    .catch((err) => console.error(err));
             }
 
             document.querySelectorAll(".date").forEach((elem) => {

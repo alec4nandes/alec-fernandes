@@ -52,7 +52,9 @@ async function signInUser(req, res) {
         // Make cookie
         const token = (await user.getIdToken()) || "",
             maxAge = token ? 432000 : 0;
-        res.cookie("auth", token, { maxAge });
+        // HttpOnly cookies are stored on the server
+        // and not visible client-side.
+        res.cookie("auth", token, { maxAge, httpOnly: true, secure: true });
         goHome(res);
     } catch (error) {
         res.render("sign-in", { dirNameSignIn, error });
