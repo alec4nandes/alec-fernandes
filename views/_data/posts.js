@@ -1,24 +1,8 @@
-// const { setDoc, doc } = require("firebase/firestore");
-// const { app } = require("./database.js");
-// const { initializeApp, deleteApp } = require("firebase/app");
-// const { getFirestore } = require("firebase/firestore");
-// const { firebaseConfig } = require("./firebase-config.js");
 const { getPostsData } = require("./db/get-posts.js");
 
 module.exports = async function () {
     const allPosts = await getPostsData("posts"),
-        tagData = groupTags(allPosts);
-
-    /* transfer data */
-    // await deleteApp(app);
-    // const app2 = initializeApp(firebaseConfig),
-    //     db2 = getFirestore(app2);
-    // allPosts.forEach(async (post) => {
-    //     const copy = { ...post },
-    //         id = copy.post_id;
-    //     delete copy.post_id;
-    //     await setDoc(doc(db2, "posts", id), copy);
-    // });
+        tagData = getTagPageList(groupTags(allPosts));
 
     return {
         all_posts: allPosts,
@@ -26,9 +10,6 @@ module.exports = async function () {
         projects: getProjects(allPosts),
         all_tags: getAllTags(allPosts),
         tag_data: tagData,
-        // for generating tag pages
-        // (tags are case-insensitive)
-        tag_data_keys: Object.keys(tagData),
     };
 };
 
@@ -51,6 +32,33 @@ function getAllTags(posts) {
             bLower = b.toLowerCase();
         return aLower.localeCompare(bLower);
     });
+}
+
+function getTagPageList(groupedTags) {
+    const POSTS_PER_PAGE = 5,
+        result = [];
+    for (const [tag, posts] of Object.entries(groupedTags)) {
+        let pageNum = 0,
+            postsSegment = [];
+        for (let i = 0; i < posts.length; i++) {
+            postsSegment.push(posts[i]);
+            if (i === posts.length - 1 || (i && !((i + 1) % POSTS_PER_PAGE))) {
+                result.push({
+                    name: tag,
+                    posts: [...postsSegment],
+                    pagination: {
+                        page: ++pageNum,
+                        previous: pageNum > 1 && pageNum - 1,
+                        next: i < posts.length - 1 && pageNum + 1,
+                        max_pages: Math.ceil(posts.length / POSTS_PER_PAGE),
+                    },
+                });
+                postsSegment = [];
+            }
+        }
+    }
+    console.log(result);
+    return result;
 }
 
 function groupTags(posts) {
