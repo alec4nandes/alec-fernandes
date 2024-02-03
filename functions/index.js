@@ -1,73 +1,7 @@
 const express = require("express");
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const {
-    dirNameHome,
-    dirNameSignIn,
-    dirNamePost,
-    dirNameUpdate,
-    dirNameDelete,
-    getHomePage,
-    signInUser,
-    signOutUser,
-    getPost,
-    updatePost,
-    deletePost,
-} = require("./edit.js");
 const { getMoonSunTidesData } = require("./moon-sun-tides.js");
 const nodemailer = require("nodemailer");
-const cookieParser = require("cookie-parser");
-// for POST requests
-const bodyParser = require("body-parser");
-// liquid templates
-const { Liquid } = require("liquidjs");
-const engine = new Liquid();
-// for session login instead of cookies
-const session = require("express-session");
-// express-session needs a "store" other than memory-leaky MemoryStore (default).
-// MemoryStore is only good for small-scale development stage.
-const { Firestore } = require("@google-cloud/firestore");
-const { FirestoreStore } = require("@google-cloud/connect-firestore");
-// TODO: create cleanup endpoint for express-session data in Firestore
-// It should loop through all the sessions, parse the .data into JSON,
-// and then parse the expiration date to see if it has passed.
-// If so, delete record.
-
-admin.initializeApp();
-
-// BACKEND SIGN IN
-
-const signInServer = express();
-// signInServer.use(bodyParser.json());
-signInServer.use(bodyParser.urlencoded({ extended: true }));
-signInServer.use(cookieParser());
-signInServer.use(
-    session({
-        store: new FirestoreStore({
-            dataset: new Firestore(),
-            kind: "express-sessions",
-        }),
-        secret: process.env.SESSION_SECRET,
-        saveUninitialized: true,
-        cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // one week
-        resave: false,
-    })
-);
-// register liquid engine
-signInServer.engine("liquid", engine.express());
-signInServer.set("views", "./views"); // specify the views directory
-signInServer.set("view engine", "liquid"); // set liquid to default
-
-signInServer.get(`/${dirNameHome}`, getHomePage);
-signInServer.post(`/${dirNameSignIn}`, signInUser);
-signInServer.get(`/signout`, signOutUser);
-signInServer.get(`/${dirNamePost}`, getPost);
-signInServer.post(`/${dirNameUpdate}`, updatePost);
-signInServer.get(`/${dirNameDelete}`, deletePost);
-
-const edit = functions.https.onRequest(signInServer);
-
-// END BACKEND SIGN IN
 
 // CUSTOM APIs
 
@@ -126,4 +60,4 @@ const sendMailOverHTTP = functions.https.onRequest((req, res) => {
 
 // END CONTACT FORM
 
-module.exports = { edit, moon_sun_tides_api, sendMailOverHTTP };
+module.exports = { moon_sun_tides_api, sendMailOverHTTP };
