@@ -20,4 +20,20 @@ async function getPostsData(type) {
     }
 }
 
-module.exports = { getPostsData };
+async function getCategoriesAndTags() {
+    const querySnapshot = await getDocs(collection(db, "posts")),
+        c = [],
+        t = [];
+    querySnapshot.forEach((doc) => {
+        const { categories, tags } = doc.data();
+        c.push(...categories);
+        t.push(...tags);
+    });
+    const format = (arr) =>
+        [...new Set(arr)].sort((a, b) =>
+            a.toLowerCase().localeCompare(b.toLowerCase())
+        );
+    return { categories: format(c), tags: format(t) };
+}
+
+module.exports = { getPostsData, getCategoriesAndTags };
