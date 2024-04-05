@@ -5,23 +5,24 @@ module.exports = async function () {
             ...post,
             blurb: getBlurb(post),
         })),
-        tagData = getTagPageList(groupTags(allPosts)),
-        allCategories = [
-            ...new Set(
-                allPosts
-                    .map(({ categories }) => categories)
-                    .flat(Infinity)
-                    .filter(Boolean)
-            ),
-        ].sort();
+        getAll = (key) =>
+            [
+                ...new Set(
+                    allPosts
+                        .map((post) => post[key])
+                        .flat(Infinity)
+                        .filter(Boolean)
+                ),
+            ].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
+        allCategories = getAll("categories"),
+        allTags = getAll("tags");
 
     return {
         all_posts: allPosts,
-        latest_posts: allPosts.slice(0, 7),
-        projects: getProjects(allPosts),
-        all_tags: getAllTags(allPosts),
-        tag_data: tagData,
         all_categories: allCategories,
+        category_data: getData(allPosts, "categories"),
+        all_tags: allTags,
+        tag_data: getData(allPosts, "tags"),
     };
 };
 
@@ -44,60 +45,28 @@ function getBlurb(post) {
     return result?.join(" ");
 }
 
-/* READ POSTS FROM DB */
-
-function getProjects(posts) {
-    return posts
-        .filter((post) => post.tags.includes("projects"))
-        .map((post) => ({
-            post_id: post.post_id,
-            name: post.post_id.replaceAll("-", " "),
-            feature_image: post.feature_image,
-        }));
-}
-
-function getAllTags(posts) {
-    const tags = posts.map(({ tags }) => tags).flat(Infinity);
-    return [...new Set(tags)].sort((a, b) => {
-        const aLower = a.toLowerCase(),
-            bLower = b.toLowerCase();
-        return aLower.localeCompare(bLower);
-    });
-}
-
-function getTagPageList(groupedTags) {
-    const POSTS_PER_PAGE = 5,
-        result = [];
-    for (const [tag, posts] of Object.entries(groupedTags)) {
-        let pageNum = 0,
-            postsSegment = [];
-        for (let i = 0; i < posts.length; i++) {
-            postsSegment.push(posts[i]);
-            if (i === posts.length - 1 || (i && !((i + 1) % POSTS_PER_PAGE))) {
-                result.push({
-                    name: tag,
-                    posts: [...postsSegment],
-                    pagination: {
-                        page: ++pageNum,
-                        previous: pageNum > 1 && pageNum - 1,
-                        next: i < posts.length - 1 && pageNum + 1,
-                        max_pages: Math.ceil(posts.length / POSTS_PER_PAGE),
-                    },
-                });
-                postsSegment = [];
-            }
+function getData(allPosts, postsKey) {
+    const result = {};
+    for (const post of allPosts) {
+        const arr = post[postsKey];
+        for (const item of arr) {
+            const key = item.replaceAll(" ", "");
+            result[key] = {
+                posts: [...(result[key]?.posts || []), post],
+                ...(postsKey === "categories"
+                    ? {
+                          tags: [
+                              ...new Set([
+                                  ...(result[key]?.tags || []),
+                                  ...post.tags,
+                              ]),
+                          ].sort((a, b) =>
+                              a.toLowerCase().localeCompare(b.toLowerCase())
+                          ),
+                      }
+                    : {}),
+            };
         }
     }
-    console.log(result);
     return result;
-}
-
-function groupTags(posts) {
-    return posts.reduce((acc, post) => {
-        post.tags.forEach((tag) => {
-            const low = tag.toLowerCase();
-            acc[low]?.push(post) || (acc[low] = [post]);
-        });
-        return acc;
-    }, {});
 }

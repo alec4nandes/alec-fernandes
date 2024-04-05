@@ -1,5 +1,4 @@
 @import url("https://api.fontshare.com/v2/css?f[]=switzer@300,500,700&display=swap");
-@import "comma-list.css";
 
 body {
     min-height: 100vh;
@@ -281,26 +280,6 @@ body {
 
             100% {
                 opacity: 1;
-            }
-        }
-    }
-
-    footer {
-        background-color: rgb(128, 147, 177);
-        position: relative;
-
-        #footer-container {
-            height: 100px;
-            max-width: 800px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: auto;
-            padding: 20px;
-
-            a {
-                color: #fff;
             }
         }
     }

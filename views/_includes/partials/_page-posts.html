@@ -1,0 +1,21 @@
+<section id="page-posts">
+    {% include "partials/_pagination.html" %}
+    {% for post in pagination.items %}
+        {% if page_num == 1 and forloop.index == 1 %}
+            <div id="latest-post">
+                {% include "partials/_post-preview.html" %}
+            </div>
+        {% endif %}
+        {% if page_num == 1 and forloop.index == 2 %}
+            {{ "<div id='recent-posts'>" }}
+        {% endif %}
+        {% if page_num != 1 and forloop.index == 1 %}
+            {{ "<div id='recent-posts'>" }}
+        {% endif %}
+        {% include "partials/_post-preview.html" %}
+        {% if forloop.last == true %}
+            {{ "</div>" }}
+        {% endif %}
+    {% endfor %}
+    {% include "partials/_pagination.html" %}
+</section>

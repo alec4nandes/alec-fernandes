@@ -1,0 +1,10 @@
+Tags
+<ul>
+    {% for tag in tags %}
+        <li>
+            <a class="tag-link" href="/tags/{{ tag | slugify }}">
+                {{ tag }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

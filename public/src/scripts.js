@@ -1,9 +1,3 @@
-function toggleNavMenu(isOpening) {
-    const elem = document.querySelector(".subscribe nav");
-    elem.classList.remove("closed", "open");
-    elem.classList.add(isOpening ? "open" : "closed");
-}
-
 function copyLink(e) {
     const { id } = e.target.dataset,
         url = `https://fern.haus/blog/${id}.html`;

@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "elev": "npx @11ty/eleventy",
+        "elev": "node build-views/node-script.js && npx @11ty/eleventy",
         "deploy": "firebase deploy",
         "serve": "firebase serve --only functions,hosting"
     },
@@ -19,12 +19,12 @@
         "url": "https://github.com/alec4nandes/alec-fernandes/issues"
     },
     "homepage": "https://alec-fernandes.web.app",
-    "devDependencies": {
-        "@11ty/eleventy": "^2.0.1"
-    },
     "dependencies": {
         "firebase": "^9.23.0",
         "firebase-admin": "^11.9.0",
         "html-minifier": "^4.0.0"
+    },
+    "devDependencies": {
+        "@11ty/eleventy": "^2.0.1"
     }
 }

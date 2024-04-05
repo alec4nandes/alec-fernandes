@@ -1,20 +1,21 @@
-<!DOCTYPE html>
+---
+pagination:
+    data: posts.all_posts
+    size: 7
+---
+
+{% assign page_num = pagination.pageNumber | plus : 1 %}
 {% assign title = "FERN HAUS" %}
 {% assign description = "Follow @alec4nandes on TikTok, Instagram, and X." %}
 {% assign url = "https://fern.haus" %}
 <!-- TODO: update social image -->
 {% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
+{% assign tags = posts.all_tags %}
 
+<!DOCTYPE html>
 <html lang="en">
     <head>
-        {% include "partials/_analytics.html" %}
-        <meta charset="UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>FERN HAUS</title>
         {% include "partials/_meta-tags.html" %}
-        <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico"/>
-        <link rel="stylesheet" href="/css/home.css"/>
     </head>
     <body>
         <header>
@@ -22,31 +23,18 @@
             <h1>Fern Haus</h1>
         </header>
         <main>
-            <section id="front-page-posts">
-                {% for post in posts.latest_posts %}
-                    {% if forloop.index == 1 %}
-                        {{ "<div id='latest-post'>" }}
-                    {% endif %}
-                    {% if forloop.index == 2 %}
-                        {{ "</div>" }}
-                        {{ "<div id='recent-posts'>" }}
-                    {% endif %}
-                    {% include "partials/_post-preview.html" %}
-                    {% if forloop.last == true %}
-                        {{ "</div>" }}
-                    {% endif %}
-                {% endfor %}
-            </section>
-            <section id="categories">
+            {% include "partials/_page-posts.html" %}
+            <section id="categories-and-tags">
+                Categories
                 {% for category in posts.all_categories %}
                     <a class="category-link" href="/categories/{{ category | slugify }}">
                         {{ category }}
                     </a>
                 {% endfor %}
+                {% include "partials/_all-tags.html" %}
             </section>
         </main>
         <footer>
-            [[ blog info ]]
             &copy; Alec Fernandes 2024
         </footer>
     </body>

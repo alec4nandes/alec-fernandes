@@ -40,7 +40,11 @@ header {
 }
 
 main {
-    & #front-page-posts {
+    & h2 {
+        width: 100%;
+    }
+
+    & #page-posts {
         width: 80%;
 
         & .post-preview {
@@ -81,7 +85,7 @@ main {
         }
     }
 
-    & #categories {
+    & #categories-and-tags {
         width: 20%;
         display: flex;
         flex-direction: column;

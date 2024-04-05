@@ -1,9 +1,0 @@
-<div class="pagination">
-    {% if tag.pagination.previous %}
-        <a href="./{{ tag.pagination.previous }}.html">&lt;&lt; newer</a>
-    {% endif %}
-    <p>page {{ tag.pagination.page }} of {{ tag.pagination.max_pages }}</p>
-    {% if tag.pagination.next %}
-        <a href="./{{ tag.pagination.next }}.html">older &gt;&gt;</a>
-    {% endif %}
-</div>

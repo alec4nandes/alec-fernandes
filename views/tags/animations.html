@@ -1,0 +1,39 @@
+---
+pagination:
+    data: posts.tag_data.animations.posts
+    size: 7
+---
+
+{% assign tag = "animations" %}
+{% assign title = "FERN HAUS Tag &mdash; " | append: tag %}
+{% assign description = "Posts with the tag " | append: tag %}
+{% assign url = "https://fern.haus/tags/" | append: tag | slugify %}
+<!-- TODO: update social image -->
+{% assign social_image = "" %}
+{% assign tags = posts.all_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "partials/_meta-tags.html" %}
+    </head>
+    <body>
+        <header>
+            <img id="header-logo" src="/assets/logo/fern-haus-site-logo.png" alt="Fern Haus logo: a house wrapped with two fern branches.">
+            <h1>Fern Haus</h1>
+        </header>
+        <main>
+            <h2>Tag: {{ tag }}</h2>
+            {% include "partials/_page-posts.html" %}
+            <section id="categories-and-tags">
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                {% include "partials/_all-tags.html" %}
+            </section>
+        </main>
+        <footer>
+            &copy; Alec Fernandes 2024
+        </footer>
+    </body>
+</html>
