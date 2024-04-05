@@ -19,21 +19,18 @@ pagination:
     </head>
     <body>
         <header>
-            <img id="header-logo" src="/assets/logo/fern-haus-site-logo.png" alt="Fern Haus logo: a house wrapped with two fern branches.">
-            <h1>Fern Haus</h1>
+            {% include "partials/_header-name.html" %}
+            <h2>Tag: {{ tag }}</h2>
         </header>
         <main>
-            <h2>Tag: {{ tag }}</h2>
             {% include "partials/_page-posts.html" %}
-            <section id="categories-and-tags">
-                <div>
-                    <a href="/">Home</a>
+            <section id="sidebar">
+                <div id="categories-and-tags">
+                    {% include "partials/_home-link.html" %}
+                    {% include "partials/_all-tags.html" %}
                 </div>
-                {% include "partials/_all-tags.html" %}
             </section>
         </main>
-        <footer>
-            &copy; Alec Fernandes 2024
-        </footer>
+        {% include "partials/_footer.html" %}
     </body>
 </html>

@@ -1,10 +1,12 @@
-Tags
-<ul>
-    {% for tag in tags %}
-        <li>
-            <a class="tag-link" href="/tags/{{ tag | slugify }}">
-                {{ tag }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+<div id="tags">
+    <h2>Tags</h2>
+    <ul class="tags-list">
+        {% for tag in tags %}
+            <li>
+                <a class="tag-link" href="/tags/{{ tag | slugify }}">
+                    {{ tag }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

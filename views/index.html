@@ -19,23 +19,21 @@ pagination:
     </head>
     <body>
         <header>
-            <img id="header-logo" src="/assets/logo/fern-haus-site-logo.png" alt="Fern Haus logo: a house wrapped with two fern branches.">
-            <h1>Fern Haus</h1>
+            {% include "partials/_header-name.html" %}
+            <nav id="mobile-nav">
+                {% include "partials/_all-categories.html" %}
+            </nav>
         </header>
         <main>
             {% include "partials/_page-posts.html" %}
-            <section id="categories-and-tags">
-                Categories
-                {% for category in posts.all_categories %}
-                    <a class="category-link" href="/categories/{{ category | slugify }}">
-                        {{ category }}
-                    </a>
-                {% endfor %}
-                {% include "partials/_all-tags.html" %}
+            <section id="sidebar">
+                <div id="categories-and-tags">
+                    <a id="home-link" href="/about">About Fern Haus</a>
+                    {% include "partials/_all-categories.html" %}
+                    {% include "partials/_all-tags.html" %}
+                </div>
             </section>
         </main>
-        <footer>
-            &copy; Alec Fernandes 2024
-        </footer>
+        {% include "partials/_footer.html" %}
     </body>
 </html>
