@@ -1,0 +1,18 @@
+<div class="post-preview">
+    <a class="image-and-title" href="/blog/{{ post.post_id | slugify }}.html">
+        <div class="feature-image" style="background-image: url('{{ post.feature_image }}');"></div>
+        <span>{{ post.title }}</span>
+    </a>
+    <div class="subtitle">
+        {{ post.subtitle }}
+    </div>
+    <p class="date-posted">
+        {{ post.date }}
+    </p>
+    {% if post.blurb %}
+        <p class="blurb">
+            {{ post.blurb }}...
+            <a href="/blog/{{ post.post_id | slugify }}.html">(read more)</a>
+        </p>
+    {% endif %}
+</div>

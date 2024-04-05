@@ -1,17 +1,48 @@
 const { getPostsData } = require("./db/get-posts.js");
 
 module.exports = async function () {
-    const allPosts = await getPostsData("posts"),
-        tagData = getTagPageList(groupTags(allPosts));
+    const allPosts = (await getPostsData("posts")).map((post) => ({
+            ...post,
+            blurb: getBlurb(post),
+        })),
+        tagData = getTagPageList(groupTags(allPosts)),
+        allCategories = [
+            ...new Set(
+                allPosts
+                    .map(({ categories }) => categories)
+                    .flat(Infinity)
+                    .filter(Boolean)
+            ),
+        ].sort();
 
     return {
         all_posts: allPosts,
-        latest_posts: allPosts.slice(0, 5),
+        latest_posts: allPosts.slice(0, 7),
         projects: getProjects(allPosts),
         all_tags: getAllTags(allPosts),
         tag_data: tagData,
+        all_categories: allCategories,
     };
 };
+
+function getBlurb(post) {
+    const words = post.content.split(`<p class="blurb">`)[1]?.split("</p>")[0],
+        regex = /<a [^>]+>(.+?)<\/a>/g,
+        matches = {};
+    let m;
+    while ((m = regex.exec(words))) {
+        matches[m[0]] = m[1];
+    }
+    console.log(matches);
+    let result = words;
+    for (const [m1, m2] of Object.entries(matches)) {
+        result = result?.replaceAll(m1, m2);
+    }
+    result = result?.slice(0, 200).split(" ");
+    // remove last incomplete word
+    result?.pop();
+    return result?.join(" ");
+}
 
 /* READ POSTS FROM DB */
 
