@@ -50,7 +50,7 @@ function getData(allPosts, postsKey) {
     for (const post of allPosts) {
         const arr = post[postsKey];
         for (const item of arr) {
-            const key = item.replaceAll(" ", "");
+            const key = item.replaceAll("&", "and").replaceAll(" ", "");
             result[key] = {
                 posts: [...(result[key]?.posts || []), post],
                 ...(postsKey === "categories"

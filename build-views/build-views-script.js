@@ -17,8 +17,9 @@ function buildView(isCat, arr) {
         caps = isCat ? "CATEGORY" : "TAG",
         file = fs.readFileSync(`build-views/templates/${plural}.html`, "utf8");
     for (const item of arr) {
-        const id = item.replaceAll(" ", ""),
-            slug = item.replaceAll(" ", "-").toLowerCase(),
+        const noAmp = item.replaceAll("&", "and"),
+            id = noAmp.replaceAll(" ", ""),
+            slug = noAmp.replaceAll(" ", "-").toLowerCase(),
             parsed = file
                 .replaceAll(`__${caps}_ID__`, id)
                 .replaceAll(`__${caps}__`, item);
