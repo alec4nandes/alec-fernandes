@@ -90,6 +90,11 @@ body {
                         }
                     }
 
+                    & .caption {
+                        font-size: 0.9rem;
+                        color: var(--color-4);
+                    }
+
                     & .subtitle {
                         font-weight: bold;
                     }
@@ -312,6 +317,31 @@ main {
 
             & #latest-post {
                 & .single-post {
+                    &.whole-post {
+                        & .whole-post-image-container {
+                            max-height: 500px;
+                            width: 100%;
+                            background-color: var(--color-accent-1);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            & img {
+                                height: 100%;
+                                width: 100%;
+                                display: flex;
+                            }
+                        }
+                    }
+
+                    & .caption {
+                        margin-top: 5px;
+
+                        &:empty {
+                            display: none;
+                        }
+                    }
+
                     & .image-and-title {
                         & .feature-image {
                             height: 400px;
@@ -440,8 +470,12 @@ footer {
 
         & #sidebar {
             &:not(.whole-post-sidebar) {
+                /*
+                    hides sidebar categories when category
+                    tabs show up under header (mobile)
+                */
                 & #categories {
-                    display: none;
+                    /* display: none; */
                 }
             }
 
