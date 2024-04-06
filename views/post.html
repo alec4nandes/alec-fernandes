@@ -6,12 +6,14 @@ pagination:
 permalink: "posts/{{ post.post_id | slugify }}.html"
 ---
 
-{% assign page_num = pagination.pageNumber | plus : 1 %}
-{% assign title = "FERN HAUS" %}
-{% assign description = "Follow @alec4nandes on TikTok, Instagram, and X." %}
-{% assign url = "https://fern.haus" %}
+{% assign suffix = " &mdash; FERN HAUS" %}
+{% assign title = post.title | append: suffix %}
+{% assign description = post.subtitle %}
+{% assign url_prefix = "https://fern.haus/posts/" %}
+{% assign url_middle = url_prefix | append: post.post_id %}
+{% assign url = url_middle | append : ".html" | slugify %}
 <!-- TODO: update social image -->
-{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
+{% assign social_image = post.feature_image %}
 {% assign categories = post.categories %}
 {% assign tags = post.tags %}
 

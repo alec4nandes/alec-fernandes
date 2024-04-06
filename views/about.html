@@ -1,0 +1,50 @@
+---
+permalink: "about/index.html"
+---
+
+{% assign title = "About Fern Haus" %}
+{% assign description = "Learn more about the blog of Alec Fernandes." %}
+{% assign url = "https://fern.haus/about" %}
+<!-- TODO: update social image -->
+{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
+{% assign categories = posts.all_categories %}
+{% assign tags = posts.all_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "partials/_meta-tags.html" %}
+    </head>
+    <body>
+        <header>
+            {% include "partials/_header-name.html" %}
+            <nav id="mobile-nav">
+                {% include "partials/_all-categories.html" %}
+            </nav>
+        </header>
+        <main>
+            <div id="posts-page">
+                <div id="posts-container">
+                    <div class="single-post whole-post">
+                        <h2>About Fern Haus</h2>
+                        <p>
+                            Fern Haus is a blog run by Alec Fernandes that covers culture, politics, and tech.
+                        </p>
+                        <p>
+                            Got a hot lead? Email Alec at <a href="mailto:al@fern.haus">al@fern.haus</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="sidebar">
+            <div id="categories-and-tags">
+                {% include "partials/_home-link.html" %}
+                {% include "partials/_all-categories.html" %}
+                {% include "partials/_all-tags.html" %}
+            </div>
+        </section>
+    </main>
+    {% include "partials/_footer.html" %}
+</body>
+</html>

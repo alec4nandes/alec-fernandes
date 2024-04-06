@@ -5,11 +5,11 @@ pagination:
 ---
 
 {% assign tag = "AI" %}
-{% assign title = "FERN HAUS Tag &mdash; " | append: tag %}
-{% assign description = "Posts with the tag " | append: tag %}
+{% assign title = "Tag: AI &mdash; FERN HAUS" %}
+{% assign description = 'All posts at Fern Haus with the tag &quot;AI&quot;' %}
 {% assign url = "https://fern.haus/tags/" | append: tag | slugify %}
 <!-- TODO: update social image -->
-{% assign social_image = "" %}
+{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
 {% assign tags = posts.all_tags %}
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ pagination:
             <h2>Tag: {{ tag }}</h2>
         </header>
         <main>
-            {% include "partials/_page-posts.html" %}
+            {% include "partials/_posts-page.html" %}
             <section id="sidebar">
                 <div id="categories-and-tags">
                     {% include "partials/_home-link.html" %}

@@ -1,10 +1,3 @@
-function copyLink(e) {
-    const { id } = e.target.dataset,
-        url = `https://fern.haus/blog/${id}.html`;
-    navigator.clipboard.writeText(url);
-    alert("Link copied!");
-}
-
 // parse all dates to local device timezone
 document.querySelectorAll(".date-posted").forEach(
     (elem) =>
