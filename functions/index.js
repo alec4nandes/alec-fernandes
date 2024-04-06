@@ -1,7 +1,6 @@
 const express = require("express");
 const functions = require("firebase-functions");
 const { getMoonSunTidesData } = require("./moon-sun-tides.js");
-const nodemailer = require("nodemailer");
 
 // CUSTOM APIs
 
@@ -17,47 +16,4 @@ const moon_sun_tides_api = functions.https.onRequest(mst);
 
 // END CUSTOM APIs
 
-// CONTACT FORM
-
-/* gmail  credentials */
-const transporter = nodemailer.createTransport({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    secure: true,
-    auth: {
-        user: process.env.DB_USER,
-        pass: process.env.DB_PASS,
-    },
-});
-const sendMailOverHTTP = functions.https.onRequest((req, res) => {
-    const data = { ...req.body },
-        email = data.email;
-    delete data.email;
-    Object.entries(data).forEach(
-        ([key, value]) => !value.trim() && delete data[key]
-    );
-    const mailOptions = {
-        from: email,
-        to: process.env.DB_USER,
-        subject: "WEBSITE REQUEST",
-        html: `
-            <strong>${email} status:</strong>
-            <ul>
-            ${Object.entries(data)
-                .map(([key, value]) => `<li><b>${key}:</b> ${value}</li>`)
-                .join("")}
-            </ul>
-        `,
-    };
-    return transporter.sendMail(mailOptions, (error, data) => {
-        if (error) {
-            return res.send(error.toString());
-        }
-        // var data = JSON.stringify(data);
-        return res.redirect("https://fern.haus/thanks");
-    });
-});
-
-// END CONTACT FORM
-
-module.exports = { moon_sun_tides_api, sendMailOverHTTP };
+module.exports = { moon_sun_tides_api };

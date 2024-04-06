@@ -8,11 +8,13 @@ permalink: "posts/{{ post.post_id | slugify }}.html"
 
 {% assign suffix = " &mdash; FERN HAUS" %}
 {% assign title = post.title | append: suffix %}
-{% assign description = post.subtitle %}
+{% assign dash = " &mdash; " %}
+{% assign cat_words = post.categories | join : ", " %}
+{% assign tag_words = post.tags | join : ", " %}
+{% assign description = post.subtitle | append: dash | append: cat_words | append: dash | append: tag_words %}
 {% assign url_prefix = "https://fern.haus/posts/" %}
 {% assign url_middle = url_prefix | append: post.post_id %}
 {% assign url = url_middle | append : ".html" | slugify %}
-<!-- TODO: update social image -->
 {% assign social_image = post.feature_image %}
 {% assign categories = post.categories %}
 {% assign tags = post.tags %}
