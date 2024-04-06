@@ -1,4 +1,4 @@
-@import url("https://api.fontshare.com/v2/css?f[]=switzer@300,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=switzer@300,500,700&family=DM+Serif+Display:ital@0;1&display=swap");
 
 :root {
     --color-text: #222;
@@ -17,7 +17,13 @@
 body {
     background-color: var(--color-4);
     color: var(--color-text);
-    font-family: "Switzer", Arial, Helvetica, sans-serif;
+    font-family: "Switzer", Helvetica, Arial, sans-serif;
+
+    & h1,
+    & h2 {
+        font-family: "DM Serif Display", Georgia, "Times New Roman", Times,
+            serif;
+    }
 
     & xmp {
         background-color: var(--color-2);
@@ -33,7 +39,7 @@ body {
             color: var(--color-5);
             font-size: 1.25rem;
             font-weight: bold;
-            text-transform: uppercase;
+            line-height: 1.25rem;
         }
     }
 
@@ -154,6 +160,7 @@ body {
                 & #categories {
                     & a {
                         font-size: 0.8rem;
+                        line-height: 0.8rem;
                     }
                 }
             }
@@ -175,20 +182,23 @@ a {
     }
 }
 
-& #categories {
+#categories {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
 
     & .category-link {
-        height: 100px;
+        height: 80px;
         width: 100%;
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 5px;
         text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
     }
 }
 
@@ -401,7 +411,7 @@ main {
                 & .tags-list {
                     list-style: none;
                     margin: 0;
-                    padding: 0 8px 8px;
+                    padding: 5px 8px 8px;
                     text-align: left;
 
                     & li {
@@ -444,7 +454,7 @@ footer {
                     display: none;
                 }
 
-                & a {
+                & .category-link {
                     height: auto;
                     flex: 1;
                     padding: 10px 15px;
@@ -488,23 +498,18 @@ footer {
                 position: relative;
 
                 & #tags {
-                    & .tags-list {
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 5px;
-
-                        & li {
-                            padding-bottom: 0;
-                        }
-                    }
-                }
-
-                & #tags {
                     padding-bottom: 30px;
 
                     & .tags-list {
                         width: fit-content;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 5px;
                         margin: auto;
+
+                        & li {
+                            padding-bottom: 0;
+                        }
                     }
                 }
             }
