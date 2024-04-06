@@ -319,16 +319,21 @@ main {
                 & .single-post {
                     &.whole-post {
                         & .whole-post-image-container {
-                            max-height: 500px;
-                            width: 100%;
                             background-color: var(--color-accent-1);
                             display: flex;
                             align-items: center;
                             justify-content: center;
 
+                            &,
+                            & img {
+                                border-radius: 5px;
+                            }
+
                             & img {
                                 height: 100%;
-                                width: 100%;
+                                max-height: 500px;
+                                max-width: 100%;
+                                width: auto;
                                 display: flex;
                             }
                         }
