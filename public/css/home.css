@@ -18,6 +18,12 @@ a {
     padding: 20px 10px;
 }
 
+xmp {
+    background-color: aliceblue;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
 header,
 main,
 footer {
@@ -34,18 +40,23 @@ main {
 header {
     box-sizing: border-box;
     flex-direction: column;
-    padding: 20px 10px;
     text-align: center;
 
-    & h1,
+    & h1 {
+        margin: 0 0 0 10px;
+    }
+
     & h2 {
+        background-color: #eee;
         margin: 0;
+        padding: 20px 10px;
     }
 
     & #name-and-logo {
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 20px 10px;
 
         & #header-logo {
             height: auto;
@@ -82,15 +93,19 @@ main {
         & #posts-container {
             flex: 1;
 
-            & .post-preview {
-                border-bottom: 1px solid #ccc;
+            & .single-post {
                 box-sizing: border-box;
                 padding: 10px 10px 25px;
+                text-wrap: pretty;
+
+                &:not(.whole-post) {
+                    border-bottom: 1px solid #ccc;
+                }
 
                 & h2,
-                & p {
+                & .subtitle,
+                & .date-posted {
                     margin: 5px 0;
-                    text-wrap: pretty;
                 }
 
                 & .subtitle {
@@ -102,7 +117,7 @@ main {
                     font-size: 0.9rem;
                 }
 
-                & .blurb {
+                & p {
                     margin: 20px 0;
                 }
 
@@ -115,14 +130,23 @@ main {
                     }
 
                     & .feature-image {
+                        background-color: #ccc;
                         background-position: center;
-                        background-size: cover;
+                        background-repeat: no-repeat;
+
+                        &.full {
+                            background-size: contain;
+                        }
+
+                        &:not(.full) {
+                            background-size: cover;
+                        }
                     }
                 }
             }
 
             & #latest-post {
-                & .post-preview {
+                & .single-post {
                     & .image-and-title {
                         & .feature-image {
                             height: 400px;
@@ -135,7 +159,7 @@ main {
                 display: flex;
                 flex-wrap: wrap;
 
-                & .post-preview {
+                & .single-post {
                     width: 50%;
 
                     &:nth-child(odd) {
@@ -254,8 +278,10 @@ footer {
                 }
 
                 & a {
-                    background-color: #aaa;
+                    background-color: #000;
+                    color: #fff;
                     flex: 1;
+                    font-weight: bold;
                     padding: 10px 15px;
                     text-align: center;
                 }
@@ -269,24 +295,28 @@ footer {
         & #page-posts {
             max-width: 100%;
 
-            & #recent-posts {
-                & .post-preview {
-                    width: 100%;
+            & #posts-container {
+                & #recent-posts {
+                    & .single-post {
+                        width: 100%;
 
-                    &:nth-child(odd) {
-                        border-right: none;
+                        &:nth-child(odd) {
+                            border-right: none;
+                        }
                     }
                 }
             }
         }
 
         & #sidebar {
-            & #categories-and-tags {
-                position: relative;
-
+            &:not(.whole-post-sidebar) {
                 & #categories {
                     display: none;
                 }
+            }
+
+            & #categories-and-tags {
+                position: relative;
 
                 & #tags {
                     & .tags-list {

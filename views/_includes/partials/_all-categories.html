@@ -1,6 +1,6 @@
 <div id="categories">
     <h2>Categories</h2>
-    {% for category in posts.all_categories %}
+    {% for category in categories %}
         <a class="category-link" href="/categories/{{ category | slugify }}">
             {{ category }}
         </a>

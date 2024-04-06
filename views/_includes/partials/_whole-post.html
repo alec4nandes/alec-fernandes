@@ -1,0 +1,20 @@
+<section id="page-posts">
+    <div id="posts-container">
+        <div id="latest-post">
+            <div class="single-post whole-post">
+                <div class="image-and-title">
+                    <div class="feature-image full" style="background-image: url('{{ post.feature_image }}');"></div>
+                    <h2>{{ post.title }}</h2>
+                </div>
+                <p class="subtitle">
+                    {{ post.subtitle }}
+                </p>
+                <p class="date-posted">
+                    {{ post.date }}
+                </p>
+                {{ post.content }}
+                <br/>
+            </div>
+        </div>
+    </div>
+</section>
