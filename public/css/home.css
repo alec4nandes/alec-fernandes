@@ -1,9 +1,166 @@
 @import url("https://api.fontshare.com/v2/css?f[]=switzer@300,500,700&display=swap");
 
+:root {
+    --color-text: #222;
+    --color-1: #f1f2f6;
+    --color-2: #d6e3f8;
+    --color-3: #5c80bc;
+    --color-4: #4d5061;
+    --color-5: #30323d;
+    --color-accent-1: #eed1b7;
+    --color-accent-2: #e4bb97;
+    --color-accent-3: #584d3d;
+}
+
+/* COLORS & FONTS */
+
+body {
+    background-color: var(--color-4);
+    color: var(--color-text);
+    font-family: "Switzer", Arial, Helvetica, sans-serif;
+
+    & xmp {
+        background-color: var(--color-2);
+    }
+
+    & #categories {
+        & .category-link {
+            background: linear-gradient(
+                to bottom,
+                var(--color-2),
+                var(--color-3)
+            );
+            color: var(--color-5);
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+
+    & header {
+        & a:has(h1) {
+            color: var(--color-1);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        & h2 {
+            background-color: var(--color-5);
+            color: var(--color-1);
+        }
+
+        & #name-and-logo {
+            & #header-logo {
+                background-color: var(--color-1);
+            }
+        }
+    }
+
+    & main {
+        & #main-content {
+            background-color: var(--color-1);
+
+            & a {
+                color: var(--color-3);
+            }
+
+            & .pagination {
+                background-color: var(--color-2);
+
+                & a {
+                    font-weight: bold;
+                }
+            }
+
+            & #posts-container {
+                flex: 1;
+
+                & .single-post {
+                    box-sizing: border-box;
+                    padding: 10px 10px 25px;
+                    text-wrap: pretty;
+
+                    &:not(.whole-post) {
+                        border-bottom-color: var(--color-2);
+                    }
+
+                    & .image-and-title {
+                        & .feature-image {
+                            background-color: var(--color-accent-1);
+                        }
+                    }
+
+                    & .subtitle {
+                        font-weight: bold;
+                    }
+
+                    & .date-posted {
+                        color: var(--color-4);
+                        font-size: 0.9rem;
+                    }
+                }
+
+                & #recent-posts {
+                    & .single-post {
+                        &:nth-child(odd) {
+                            border-right-color: var(--color-2);
+                        }
+                    }
+                }
+            }
+        }
+
+        & #sidebar {
+            background-color: var(--color-5);
+            color: var(--color-1);
+
+            & a {
+                color: var(--color-2);
+            }
+
+            & #categories-and-tags {
+                & #home-link {
+                    background-color: var(--color-3);
+                    color: var(--color-1);
+                    font-weight: bold;
+                }
+
+                & #tags {
+                    & .tags-list {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        background-color: var(--color-5);
+        color: var(--color-1);
+
+        & a {
+            color: var(--color-2);
+        }
+    }
+
+    @media only screen and (max-width: 550px) {
+        header {
+            & #mobile-nav {
+                & #categories {
+                    & a {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* END COLORS & FONTS */
+
 body {
     display: flex;
     flex-direction: column;
-    font-family: "Switzer", Arial, Helvetica, sans-serif;
     margin: 0;
 }
 
@@ -13,13 +170,29 @@ a {
     }
 }
 
+& #categories {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    & .category-link {
+        height: 100px;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
 #home-link,
 .pagination {
     padding: 20px 10px;
 }
 
 xmp {
-    background-color: aliceblue;
     white-space: pre-wrap;
     word-break: break-word;
 }
@@ -47,7 +220,6 @@ header {
     }
 
     & h2 {
-        background-color: #eee;
         margin: 0;
         padding: 20px 10px;
     }
@@ -61,6 +233,7 @@ header {
         & #header-logo {
             height: auto;
             width: 60px;
+            border-radius: 50%;
         }
     }
 
@@ -71,20 +244,19 @@ header {
 
 main {
     min-height: 700px;
-    background-color: #eee;
 
-    & #posts-page {
+    & #main-content {
         max-width: 80%;
         width: 100%;
         display: flex;
         flex-direction: column;
 
         & .pagination {
-            background-color: #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
+            text-align: center;
 
             & p {
                 margin: 0;
@@ -100,22 +272,14 @@ main {
                 text-wrap: pretty;
 
                 &:not(.whole-post) {
-                    border-bottom: 1px solid #ccc;
+                    border-bottom-width: 1px;
+                    border-bottom-style: solid;
                 }
 
                 & h2,
                 & .subtitle,
                 & .date-posted {
                     margin: 5px 0;
-                }
-
-                & .subtitle {
-                    font-weight: bold;
-                }
-
-                & .date-posted {
-                    color: #777;
-                    font-size: 0.9rem;
                 }
 
                 & p {
@@ -131,9 +295,9 @@ main {
                     }
 
                     & .feature-image {
-                        background-color: #ccc;
                         background-position: center;
                         background-repeat: no-repeat;
+                        border-radius: 5px;
 
                         &.full {
                             background-size: contain;
@@ -164,7 +328,8 @@ main {
                     width: 50%;
 
                     &:nth-child(odd) {
-                        border-right: 1px solid #ccc;
+                        border-right-width: 1px;
+                        border-right-style: solid;
                     }
 
                     & .image-and-title {
@@ -185,51 +350,20 @@ main {
         & #categories-and-tags {
             height: 100%;
             width: 100%;
-            background-color: #ddd;
             display: flex;
             flex-direction: column;
             gap: 20px;
             position: absolute;
             text-align: center;
 
-            & #home-link {
-                background-color: #777;
-                color: #fff;
-                font-weight: bold;
-            }
-
             & h2 {
                 margin: 8px 0;
-            }
-
-            & #categories {
-                & .category-link {
-                    height: 100px;
-                    width: 100%;
-                    box-sizing: border-box;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-weight: bold;
-                    text-align: center;
-
-                    &:nth-child(even) {
-                        background-color: #000;
-                        color: #fff;
-                    }
-
-                    &:nth-child(odd) {
-                        background-color: #444;
-                        color: #fff;
-                    }
-                }
             }
 
             & #tags {
                 overflow: auto;
 
                 & .tags-list {
-                    font-size: 0.9rem;
                     list-style: none;
                     margin: 0;
                     padding: 0 8px 8px;
@@ -256,7 +390,6 @@ main {
 }
 
 footer {
-    background-color: #ddd;
     box-sizing: border-box;
     margin-top: 20px;
     padding: 20px 10px;
@@ -270,19 +403,15 @@ footer {
             display: block;
 
             & #categories {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
+                flex-direction: row;
 
                 & h2 {
                     display: none;
                 }
 
                 & a {
-                    background-color: #000;
-                    color: #fff;
+                    height: auto;
                     flex: 1;
-                    font-weight: bold;
                     padding: 10px 15px;
                     text-align: center;
                 }
@@ -293,7 +422,7 @@ footer {
     main {
         flex-direction: column;
 
-        & #posts-page {
+        & #main-content {
             max-width: 100%;
 
             & #posts-container {
@@ -328,6 +457,15 @@ footer {
                         & li {
                             padding-bottom: 0;
                         }
+                    }
+                }
+
+                & #tags {
+                    padding-bottom: 30px;
+
+                    & .tags-list {
+                        width: fit-content;
+                        margin: auto;
                     }
                 }
             }
