@@ -24,6 +24,7 @@ module.exports = async function () {
         all_tags: allTags,
         recent_tags: getRecentTags(allPosts, 40),
         tag_data: getData(allPosts, "tags"),
+        tags_by_letter: getTagsByLetter(allTags),
     };
 };
 
@@ -81,4 +82,23 @@ function getRecentTags(allPosts, max) {
         }
     }
     return [...result].slice(0, max);
+}
+
+function getTagsByLetter(allTags) {
+    let result = allTags.reduce((acc, tag) => {
+        let letter = tag.charAt(0).toUpperCase();
+        if (!isNaN(letter)) {
+            letter = "#";
+        }
+        if (!acc[letter]) {
+            acc[letter] = [];
+        }
+        acc[letter].push(tag);
+        return acc;
+    }, {});
+    result = Object.entries(result).map(([letter, tags]) => ({
+        letter,
+        tags,
+    }));
+    return result;
 }
