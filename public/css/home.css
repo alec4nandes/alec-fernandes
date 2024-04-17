@@ -401,10 +401,6 @@ main {
                     width: 100%;
                     display: block;
 
-                    & h2 {
-                        line-height: 1.3em;
-                    }
-
                     & .feature-image {
                         background-position: center;
                         background-repeat: no-repeat;
