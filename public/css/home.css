@@ -91,6 +91,12 @@ body {
                 font-size: 1.1rem;
                 line-height: 1.65rem;
 
+                & h2,
+                & h3,
+                & h4 {
+                    line-height: initial;
+                }
+
                 & .single-post {
                     &:not(.whole-post) {
                         border-bottom-color: var(--color-2);
