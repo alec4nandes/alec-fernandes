@@ -22,6 +22,7 @@ module.exports = async function () {
         all_categories: allCategories,
         category_data: getData(allPosts, "categories"),
         all_tags: allTags,
+        recent_tags: getRecentTags(allPosts, 40),
         tag_data: getData(allPosts, "tags"),
     };
 };
@@ -69,4 +70,15 @@ function getData(allPosts, postsKey) {
         }
     }
     return result;
+}
+
+function getRecentTags(allPosts, max) {
+    const result = new Set();
+    for (const post of allPosts) {
+        post.tags.forEach((tag) => result.add(tag));
+        if (result.size >= max) {
+            break;
+        }
+    }
+    return [...result].slice(0, max);
 }

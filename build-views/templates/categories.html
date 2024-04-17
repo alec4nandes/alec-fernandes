@@ -11,6 +11,7 @@ pagination:
 <!-- TODO: update social image -->
 {% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
 {% assign tags = posts.category_data.__CATEGORY_ID__.tags %}
+{% assign tags_heading = "Category Tags" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,14 @@ pagination:
     <body>
         <header>
             {% include "partials/_header-name.html" %}
-            <h2>Category: {{ category }}</h2>
+            <nav>
+                <h2>Category: {{ category }}</h2>
+                <div>
+                    <a href="/categories">all categories</a>
+                    &nbsp; | &nbsp;
+                    <a href="/tags">all tags</a>
+                </div>
+            </nav>
         </header>
         <main>
             {% include "partials/_posts-page.html" %}

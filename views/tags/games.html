@@ -10,7 +10,8 @@ pagination:
 {% assign url = "https://fern.haus/tags/" | append: tag | slugify %}
 <!-- TODO: update social image -->
 {% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
-{% assign tags = posts.all_tags %}
+{% assign tags = posts.recent_tags %}
+{% assign tags_heading = "Recent Tags" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,14 @@ pagination:
     <body>
         <header>
             {% include "partials/_header-name.html" %}
-            <h2>Tag: {{ tag }}</h2>
+            <nav>
+                <h2>Tag: {{ tag }}</h2>
+                <div>
+                    <a href="/tags">all tags</a>
+                    &nbsp; | &nbsp;
+                    <a href="/categories">all categories</a>
+                </div>
+            </nav>
         </header>
         <main>
             {% include "partials/_posts-page.html" %}

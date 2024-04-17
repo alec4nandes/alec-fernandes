@@ -1,4 +1,7 @@
+{% assign post_categories = post.categories %}
+
 <div class="single-post">
+    {% include "partials/_post-categories.html" %}
     <a class="image-and-title" href="/posts/{{ post.post_id | slugify }}.html">
         <div class="feature-image" style="background-image: url('{{ post.feature_image }}');"></div>
         <h2>{{ post.title }}</h2>

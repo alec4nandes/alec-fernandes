@@ -1,5 +1,10 @@
 <div id="tags">
-    <h2>Tags</h2>
+    {% if tags_heading %}
+        <h2>{{ tags_heading }}</h2>
+    {% else %}
+        <h2>Tags</h2>
+    {% endif %}
+    <a href="/tags">all tags</a>
     <ul class="tags-list">
         {% for tag in tags %}
             <li>

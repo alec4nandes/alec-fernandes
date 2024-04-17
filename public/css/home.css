@@ -58,9 +58,15 @@ body {
             text-transform: uppercase;
         }
 
-        & h2 {
+        & nav {
             background-color: var(--color-5);
             color: var(--color-1);
+
+            & div {
+                & a {
+                    color: var(--color-2);
+                }
+            }
         }
 
         & #name-and-logo {
@@ -88,10 +94,27 @@ body {
 
             & #posts-container {
                 flex: 1;
+                font-size: 1.1rem;
+                line-height: 1.65rem;
 
                 & .single-post {
                     &:not(.whole-post) {
                         border-bottom-color: var(--color-2);
+                    }
+
+                    & .post-categories {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        font-size: 1rem;
+                        gap: 10px;
+                        margin-bottom: 10px;
+
+                        & .post-category-link {
+                            background-color: var(--color-3);
+                            color: var(--color-1);
+                            padding: 5px 10px;
+                        }
                     }
 
                     & .image-and-title {
@@ -101,8 +124,8 @@ body {
                     }
 
                     & .caption {
-                        font-size: 0.9rem;
                         color: var(--color-4);
+                        font-size: 1rem;
                     }
 
                     & .subtitle {
@@ -111,7 +134,7 @@ body {
 
                     & .date-posted {
                         color: var(--color-4);
-                        font-size: 0.9rem;
+                        font-size: 1rem;
                     }
                 }
 
@@ -131,6 +154,10 @@ body {
 
             & a {
                 color: var(--color-2);
+            }
+
+            & h2 {
+                padding: 0 5px;
             }
 
             & #categories-and-tags {
@@ -172,7 +199,7 @@ body {
 
                 & #tags {
                     & .tags-list {
-                        font-size: 0.9rem;
+                        margin-top: 12px;
                     }
                 }
             }
@@ -282,7 +309,16 @@ header {
 
     & h2 {
         margin: 0;
-        padding: 20px 10px;
+    }
+
+    & nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &:not(#mobile-nav) {
+            padding: 20px 10px;
+        }
     }
 
     & #name-and-logo {
@@ -451,6 +487,13 @@ main {
                 margin: 8px 0;
             }
 
+            & #categories {
+                & .all-categories-link {
+                    display: inline-block;
+                    padding-bottom: 12px;
+                }
+            }
+
             & #tags {
                 overflow: auto;
 
@@ -495,7 +538,7 @@ footer {
             & #categories {
                 flex-direction: row;
 
-                & h2 {
+                & #categories-sidebar-heading {
                     display: none;
                 }
 

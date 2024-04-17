@@ -1,0 +1,7 @@
+<div class="post-categories">
+    {% for category in post_categories %}
+        <a class="post-category-link" href="/categories/{{ category | slugify }}">
+            {{ category }}
+        </a>
+    {% endfor %}
+</div>

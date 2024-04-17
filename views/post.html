@@ -17,7 +17,10 @@ permalink: "posts/{{ post.post_id | slugify }}.html"
 {% assign url = url_middle | append : ".html" | slugify %}
 {% assign social_image = "https://fern.haus" | append: post.feature_image %}
 {% assign categories = post.categories %}
+{% assign post_categories = post.categories %}
+{% assign categories_heading = "Post Categories" %}
 {% assign tags = post.tags %}
+{% assign tags_heading = "Post Tags" %}
 
 <!DOCTYPE html>
 <html lang="en">

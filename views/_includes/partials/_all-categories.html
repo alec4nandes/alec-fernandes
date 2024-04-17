@@ -1,5 +1,14 @@
 <div id="categories">
-    <h2>Categories</h2>
+    <div id="categories-sidebar-heading">
+        {% if categories_heading %}
+            <h2>{{ categories_heading }}</h2>
+        {% else %}
+            <h2>Categories</h2>
+        {% endif %}
+        {% if show_all_categories_link %}
+            <a class="all-categories-link" href="/categories">all categories</a>
+        {% endif %}
+    </div>
     {% for category in categories %}
         <a class="category-link" href="/categories/{{ category | slugify }}">
             {{ category }}
