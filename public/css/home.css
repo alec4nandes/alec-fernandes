@@ -46,10 +46,10 @@ body {
     }
 
     & header {
-        & a:has(h1) {
-            color: var(--color-1);
-            text-decoration: none;
-            text-transform: uppercase;
+        & #name-and-logo {
+            & a {
+                color: var(--color-1);
+            }
         }
 
         & nav {
@@ -161,36 +161,6 @@ body {
             }
 
             & #categories-and-tags {
-                & .social-icons {
-                    display: flex;
-                    gap: 10px;
-                    justify-content: center;
-
-                    & a {
-                        height: 28px;
-                        width: 28px;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        overflow: hidden;
-
-                        &:hover {
-                            box-shadow: 0 0 6px #eee;
-                        }
-
-                        & img {
-                            height: 100%;
-                            width: 100%;
-
-                            &.instagram-icon {
-                                height: 34px;
-                                width: 34px;
-                            }
-                        }
-                    }
-                }
-
                 & #home-link {
                     background-color: var(--color-3);
                     color: var(--color-1);
@@ -277,6 +247,64 @@ a {
     text-transform: uppercase;
 }
 
+& #hamburger-menu-button,
+& #close-menu {
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    & img {
+        width: 100%;
+        filter: invert(1);
+    }
+}
+
+#hamburger-menu {
+    --width: 250px;
+
+    height: 100%;
+    width: var(--width);
+    background-color: var(--color-3);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    overflow: auto;
+    padding: 30px 15px;
+    position: fixed;
+    transition: 1s;
+    left: 0;
+    z-index: 10;
+
+    &.closed {
+        left: calc(-1 * var(--width));
+    }
+
+    & #close-menu {
+        height: 22px;
+        width: 22px;
+        margin: 5px;
+    }
+
+    & a {
+        color: var(--color-1);
+        font-weight: bold;
+    }
+}
+
 #home-link,
 .pagination {
     padding: 20px 10px;
@@ -286,6 +314,36 @@ hr {
     height: 2px;
     background-color: var(--color-accent-2);
     border: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+    & a {
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        &:hover {
+            box-shadow: 0 0 6px #eee;
+        }
+
+        & img {
+            height: 100%;
+            width: 100%;
+
+            &.instagram-icon {
+                height: 34px;
+                width: 34px;
+            }
+        }
+    }
 }
 
 ul {
@@ -298,6 +356,8 @@ xmp {
     white-space: pre-wrap;
     word-break: break-word;
 }
+
+/* LAYOUT */
 
 header,
 main,
@@ -325,6 +385,35 @@ header {
         margin: 0;
     }
 
+    & #name-and-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 10px;
+        position: relative;
+
+        & #hamburger-menu-button {
+            height: 30px;
+            width: 35px;
+            left: 0;
+            top: 0;
+        }
+
+        & a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            & #header-logo {
+                height: auto;
+                width: 60px;
+                border-radius: 50%;
+            }
+        }
+    }
+
     & nav {
         display: flex;
         flex-direction: column;
@@ -332,19 +421,6 @@ header {
 
         &:not(#mobile-nav) {
             padding: 20px 10px;
-        }
-    }
-
-    & #name-and-logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px 10px;
-
-        & #header-logo {
-            height: auto;
-            width: 60px;
-            border-radius: 50%;
         }
     }
 
@@ -538,6 +614,8 @@ footer {
     padding: 20px 10px;
     text-align: center;
 }
+
+/* RESPONSIVE */
 
 @media only screen and (max-width: 550px) {
     header {
