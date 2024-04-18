@@ -5,8 +5,19 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "elev": "node build-views/build-views-script.js && npx @11ty/eleventy",
-        "deploy": "firebase deploy",
+        "rm-cats-views": "rmdir /s /q \"views/categories\"",
+        "rm-tags-views": "rmdir /s /q \"views/tags\"",
+        "rm-dirs-views": "npm run rm-cats-views && npm run rm-tags-views",
+        "rm-posts-public": "rmdir /s /q \"public/posts\"",
+        "rm-cats-public": "rmdir /s /q \"public/categories\"",
+        "rm-tags-public": "rmdir /s /q \"public/tags\"",
+        "rm-dirs-public": "npm run rm-posts-public && npm run rm-cats-public && npm run rm-tags-public",
+        "rm-dirs": "npm run rm-dirs-views && npm run rm-dirs-public",
+        "make-dirs": "mkdir \"views/categories\" && mkdir \"views/tags\"",
+        "clear": "npm run rm-dirs && npm run make-dirs",
+        "build-views": "node build-views/build-views-script.js",
+        "elev": "npm run build-views && npx @11ty/eleventy",
+        "deploy": "npm run clear && npm run elev && firebase deploy",
         "serve": "firebase serve --only functions,hosting"
     },
     "repository": {
