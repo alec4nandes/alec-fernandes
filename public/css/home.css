@@ -103,17 +103,9 @@ body {
                     }
 
                     & .post-categories {
-                        display: flex;
-                        align-items: center;
-                        flex-wrap: wrap;
-                        font-size: 1rem;
-                        gap: 10px;
-                        margin-bottom: 10px;
-
                         & .post-category-link {
-                            background-color: var(--color-3);
                             color: var(--color-1);
-                            padding: 5px 10px;
+                            font-size: 0.85rem;
                         }
                     }
 
@@ -281,7 +273,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
+    align-items: flex-start;
     overflow: auto;
     padding: 30px 15px;
     position: fixed;
@@ -410,6 +402,8 @@ header {
                 height: auto;
                 width: 60px;
                 border-radius: 50%;
+                box-sizing: border-box;
+                padding: 3px;
             }
         }
     }
@@ -471,6 +465,21 @@ main {
 
                 & p {
                     margin: 20px 0;
+                }
+
+                & .post-categories {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    font-size: 1rem;
+                    gap: 10px;
+                    margin-left: 15px;
+
+                    & .post-category-link {
+                        background-color: var(--color-3);
+                        border-radius: 5px 5px 0 0;
+                        padding: 5px 10px;
+                    }
                 }
 
                 & .image-and-title {
