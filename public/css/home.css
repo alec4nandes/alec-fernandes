@@ -64,7 +64,7 @@ body {
         }
 
         & #name-and-logo {
-            & #header-logo {
+            & #logo-container {
                 background-color: var(--color-1);
             }
         }
@@ -398,12 +398,17 @@ header {
             text-decoration: none;
             text-transform: uppercase;
 
-            & #header-logo {
-                height: auto;
+            & #logo-container {
+                height: 60px;
                 width: 60px;
                 border-radius: 50%;
                 box-sizing: border-box;
-                padding: 3px;
+                padding: 5px;
+
+                & #header-logo {
+                    height: 100%;
+                    width: 100%;
+                }
             }
         }
     }
