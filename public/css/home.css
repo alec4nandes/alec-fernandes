@@ -81,6 +81,7 @@ body {
 
             & .pagination {
                 background-color: var(--color-2);
+                color: var(--color-4);
 
                 & a {
                     font-weight: bold;
