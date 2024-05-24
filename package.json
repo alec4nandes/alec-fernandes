@@ -18,6 +18,8 @@
         "build-views": "node build-views/build-views-script.js",
         "elev": "npm run build-views && npx @11ty/eleventy",
         "deploy": "npm run clear && npm run elev && firebase deploy",
+        "dharma-tweet": "node dharma-deploy/dharma-deploy.js",
+        "dharma": "firebase deploy && npm run dharma-tweet",
         "serve": "firebase serve --only functions,hosting"
     },
     "repository": {
@@ -31,9 +33,11 @@
     },
     "homepage": "https://alec-fernandes.web.app",
     "dependencies": {
+        "dotenv": "^16.4.5",
         "firebase": "^9.23.0",
         "firebase-admin": "^11.9.0",
-        "html-minifier": "^4.0.0"
+        "html-minifier": "^4.0.0",
+        "twitter-api-v2": "^1.17.0"
     },
     "devDependencies": {
         "@11ty/eleventy": "^2.0.1"
