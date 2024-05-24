@@ -1,11 +1,16 @@
-const { getPostsData } = require("../../db/get-posts.js");
+const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
 
 module.exports = async function () {
-    const allPosts = (await getPostsData("posts")).map((post) => ({
-            ...post,
-            blurb: getBlurb(post),
-        })),
-        getAll = (key) =>
+    let allPosts = (await getPostsData("posts")).map((post) => ({
+        ...post,
+        blurb: getBlurb(post),
+    }));
+    const dharmaPosts = await getPostsData("dharma");
+    // include Dharma Posts under the Culture category on Fern Haus
+    dharmaPosts.forEach((post) => (post.categories = ["Culture"]));
+    // add Dharma Posts to Fern Haus
+    allPosts = [...allPosts, ...dharmaPosts].sort(sortDateDescending);
+    const getAll = (key) =>
             [
                 ...new Set(
                     allPosts
@@ -25,7 +30,7 @@ module.exports = async function () {
         recent_tags: getRecentTags(allPosts, 40),
         tag_data: getData(allPosts, "tags"),
         tags_by_letter: getTagsByLetter(allTags),
-        dharma_posts: await getPostsData("dharma"),
+        dharma_posts: dharmaPosts,
     };
 };
 

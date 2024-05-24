@@ -1,17 +1,19 @@
-<div id="tags">
-    {% if tags_heading %}
-        <h2>{{ tags_heading }}</h2>
-    {% else %}
-        <h2>Tags</h2>
-    {% endif %}
-    <a href="/tags">all tags</a>
-    <ul class="tags-list">
-        {% for tag in tags %}
-            <li>
-                <a class="tag-link" href="/tags/{{ tag | slugify }}">
-                    {{ tag }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+{% if tags.size > 0 %}
+    <div id="tags">
+        {% if tags_heading %}
+            <h2>{{ tags_heading }}</h2>
+        {% else %}
+            <h2>Tags</h2>
+        {% endif %}
+        <a href="/tags">all tags</a>
+        <ul class="tags-list">
+            {% for tag in tags %}
+                <li>
+                    <a class="tag-link" href="/tags/{{ tag | slugify }}">
+                        {{ tag }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

@@ -1,7 +1,7 @@
 const { collection, getDocs } = require("firebase/firestore");
 const { db } = require("./database.js");
 
-// type is "posts" or "drafts"
+// type is "posts" or "dharma"
 async function getPostsData(type) {
     const querySnapshot = await getDocs(collection(db, type)),
         result = [];
@@ -14,10 +14,10 @@ async function getPostsData(type) {
     });
     result.sort(sortDateDescending);
     return result;
+}
 
-    function sortDateDescending(postA, postB) {
-        return new Date(postB.date).getTime() - new Date(postA.date).getTime();
-    }
+function sortDateDescending(postA, postB) {
+    return new Date(postB.date).getTime() - new Date(postA.date).getTime();
 }
 
 async function getCategoriesAndTags() {
@@ -36,4 +36,4 @@ async function getCategoriesAndTags() {
     return { categories: format(c), tags: format(t) };
 }
 
-module.exports = { getPostsData, getCategoriesAndTags };
+module.exports = { getPostsData, getCategoriesAndTags, sortDateDescending };
