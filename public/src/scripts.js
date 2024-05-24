@@ -17,12 +17,16 @@ const openMenuBtn = document.querySelector("#hamburger-menu-button"),
     closeMenuBtn = document.querySelector("#close-menu"),
     menu = document.querySelector("#hamburger-menu");
 
-openMenuBtn.onclick = () => {
-    openMenuBtn.style.display = "none";
-    menu.classList.remove("closed");
-};
+if (openMenuBtn) {
+    openMenuBtn.onclick = () => {
+        openMenuBtn.style.display = "none";
+        menu.classList.remove("closed");
+    };
+}
 
-closeMenuBtn.onclick = () => {
-    openMenuBtn.style.display = "block";
-    menu.classList.add("closed");
-};
+if (closeMenuBtn) {
+    closeMenuBtn.onclick = () => {
+        openMenuBtn.style.display = "block";
+        menu.classList.add("closed");
+    };
+}

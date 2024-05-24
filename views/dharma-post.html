@@ -1,0 +1,57 @@
+---
+pagination:
+    data: posts.dharma_posts
+    size: 1
+    alias: post
+permalink: "dharma/posts/{{ post.post_id | slugify }}.html"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% assign suffix = " &mdash; FERN HAUS" %}
+        {% assign title = post.title | append: suffix %}
+        {% if post.subtitle == "" %}
+            {% assign description = "A post about the Buddhist suttas." %}
+        {% else %}
+            {% assign description = post.subtitle %}
+        {% endif %}
+        {% assign url_prefix = "https://fern.haus/dharma/posts/" %}
+        {% assign url_middle = post.post_id | slugify %}
+        {% assign url_suffix = ".html" %}
+        {% assign url = url_prefix | append: url_middle | append: url_suffix %}
+        {% if post.feature_image == "" %}
+            {% assign social_image = "https://fern.haus/assets/feature-images/moon-sun-tides-api.jpg" %}
+        {% else %}
+            {% assign social_image = "https://fern.haus" | append: post.feature_image %}
+        {% endif %}
+        {% assign show_home = true %}
+        {% include "partials/_meta-tags-basic.html" %}
+        <link rel="stylesheet" href="/css/dharma-posts.css">
+    </head>
+    <body>
+        {% include "partials/_dharma-header.html" %}
+        <main id="post">
+            {% if post.feature_image != "" %}
+                <img
+                    id="feature-image"
+                    src="{{ post.feature_image }}"
+                    alt="{{ post.feature_image_alt }}"/>
+            {% endif %}
+            {% if post.feature_image != "" and post.feature_image_caption != "" %}
+                <p id="caption">
+                    <em>{{ post.feature_image_caption }}</em>
+                </p>
+            {% endif %}
+            <div id="text">
+                <h2>{{ post.title }}</h2>
+                {% if post.subtitle != "" %}
+                    <p class="subtitle">{{ post.subtitle }}</p>
+                {% endif %}
+                <p class="date-posted">{{ post.date }}</p>
+                <div id="content">{{ post.content }}</div>
+            </div>
+        </main>
+        {% include "partials/_dharma-footer.html" %}
+    </body>
+</html>

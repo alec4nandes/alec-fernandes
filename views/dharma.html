@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% assign title = "Dharma &mdash; FERN HAUS" %}
+        {% assign description = "A collection of writings about the Buddhist suttas." %}
+        {% assign url = "https://fern.haus/dharma" %}
+        {% assign social_image = "https://fern.haus/assets/feature-images/moon-sun-tides-api.jpg" %}
+        {% include "partials/_meta-tags-basic.html" %}
+        <link rel="stylesheet" href="/css/dharma-posts.css">
+    </head>
+    <body>
+        {% include "partials/_dharma-header.html" %}
+        <main id="posts">
+            {% for post in posts.dharma_posts %}
+                <div class="post-summary">
+                    {% if post.feature_image != "" %}
+                        <a
+                            href="/dharma/posts/{{post.post_id | slugify}}.html"
+                            class="list-image"
+                            style="background-image: url('{{ post.feature_image }}')"></a>
+                    {% else %}
+                        <a
+                            href="/dharma/posts/{{post.post_id | slugify}}.html"
+                            class="list-image no-image"></a>
+                    {% endif %}
+                    <div class="title-container">
+                        <p class="date-posted">{{ post.date }}</p>
+                        <h2>
+                            <a href="/dharma/posts/{{post.post_id | slugify}}.html">
+                                {{ post.title }}
+                            </a>
+                        </h2>
+                        <p class="subtitle">
+                            {% if post.subtitle != "" %}
+                                {{ post.subtitle }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </main>
+        {% include "partials/_dharma-footer.html" %}
+    </body>
+</html>

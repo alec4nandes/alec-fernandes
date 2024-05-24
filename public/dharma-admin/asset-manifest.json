@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dharma-admin/static/css/main.495e9fb5.css",
+    "main.js": "/dharma-admin/static/js/main.1fadf7ea.js",
+    "static/js/453.0fbaa72e.chunk.js": "/dharma-admin/static/js/453.0fbaa72e.chunk.js",
+    "index.html": "/dharma-admin/index.html",
+    "main.495e9fb5.css.map": "/dharma-admin/static/css/main.495e9fb5.css.map",
+    "main.1fadf7ea.js.map": "/dharma-admin/static/js/main.1fadf7ea.js.map",
+    "453.0fbaa72e.chunk.js.map": "/dharma-admin/static/js/453.0fbaa72e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.495e9fb5.css",
+    "static/js/main.1fadf7ea.js"
+  ]
+}

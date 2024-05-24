@@ -1,0 +1,165 @@
+@import url("https://api.fontshare.com/v2/css?f[]=switzer@300,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap");
+
+body {
+    background-color: #1c1c1c;
+    color: #ccc;
+    font-family: Switzer, Helvetica, Arial, sans-serif;
+    margin: 0 15px;
+}
+
+a {
+    color: #eeb54d;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+#caption,
+.date-posted,
+#subheader {
+    color: #888;
+}
+
+footer {
+    color: #666;
+    margin: 50px 0;
+    text-align: center;
+}
+
+h1,
+h2 {
+    font-family: "DM Serif Display", Georgia, "Times New Roman", Times, serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+header {
+    margin: 60px 0 40px;
+    text-align: center;
+
+    & h1 {
+        margin: 0;
+    }
+
+    & .subheader {
+        font-family: "DM Serif Display", Georgia, "Times New Roman", Times,
+            serif;
+        font-size: 1.25rem;
+        margin: 10px 0;
+    }
+}
+
+main {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+
+    & .subtitle {
+        font-weight: 700;
+    }
+
+    &#post {
+        border-radius: 20px;
+
+        & #feature-image {
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+        }
+
+        & #caption {
+            margin: 0;
+            padding: 10px 15px 0;
+        }
+
+        & #text {
+            padding: 20px 15px 40px;
+            text-wrap: pretty;
+
+            & h2 {
+                margin: 0;
+            }
+
+            & .subtitle {
+                font-size: 1.2rem;
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
+main#post,
+.post-summary {
+    background-color: #2b2621;
+}
+
+.post-summary {
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+
+    & .list-image {
+        max-width: 225px;
+        min-height: 150px;
+        min-width: 100px;
+        width: 100%;
+        background-color: #333;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 20px 0 0 20px;
+
+        &.no-image {
+            background-image: url("/assets/bg/dark-concrete.jpg");
+        }
+    }
+
+    & .title-container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        padding: 15px 20px;
+        text-wrap: pretty;
+
+        & h2 {
+            margin: 7px 0 10px;
+        }
+
+        & p {
+            &.date-posted {
+                margin: 10px 0 0;
+            }
+
+            &.subtitle {
+                margin: 0 0 10px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .post-summary {
+        flex-direction: column;
+
+        & .list-image {
+            height: 180px;
+            max-width: 100%;
+            min-height: 100%;
+            min-width: 100%;
+            border-radius: 20px 20px 0 0;
+
+            &.no-image {
+                height: 40px;
+            }
+        }
+    }
+}

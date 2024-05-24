@@ -25,6 +25,7 @@ module.exports = async function () {
         recent_tags: getRecentTags(allPosts, 40),
         tag_data: getData(allPosts, "tags"),
         tags_by_letter: getTagsByLetter(allTags),
+        dharma_posts: await getPostsData("dharma"),
     };
 };
 
