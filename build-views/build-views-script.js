@@ -1,5 +1,5 @@
-const { getCategoriesAndTags } = require("../db/get-posts.js");
-const fs = require("fs");
+const fs = require("fs"),
+    { getCategoriesAndTags } = require("../db/get-posts.js");
 
 getCategoriesAndTags()
     .then(({ categories, tags }) => {

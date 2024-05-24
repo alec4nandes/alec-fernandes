@@ -45,11 +45,11 @@ header {
     margin: 60px 0 40px;
     text-align: center;
 
-    & h1 {
+    h1 {
         margin: 0;
     }
 
-    & .subheader {
+    #subheader {
         font-family: "DM Serif Display", Georgia, "Times New Roman", Times,
             serif;
         font-size: 1.25rem;
@@ -62,32 +62,32 @@ main {
     max-width: 700px;
     margin: auto;
 
-    & .subtitle {
+    .subtitle {
         font-weight: 700;
     }
 
     &#post {
         border-radius: 20px;
 
-        & #feature-image {
+        #feature-image {
             width: 100%;
             border-radius: 20px 20px 0 0;
         }
 
-        & #caption {
+        #caption {
             margin: 0;
             padding: 10px 15px 0;
         }
 
-        & #text {
+        #text {
             padding: 20px 15px 40px;
             text-wrap: pretty;
 
-            & h2 {
+            h2 {
                 margin: 0;
             }
 
-            & .subtitle {
+            .subtitle {
                 font-size: 1.2rem;
                 margin-top: 15px;
             }
@@ -106,7 +106,7 @@ main#post,
     justify-content: center;
     margin-bottom: 15px;
 
-    & .list-image {
+    .list-image {
         max-width: 225px;
         min-height: 150px;
         min-width: 100px;
@@ -122,7 +122,7 @@ main#post,
         }
     }
 
-    & .title-container {
+    .title-container {
         display: flex;
         flex: 1;
         flex-direction: column;
@@ -130,11 +130,11 @@ main#post,
         padding: 15px 20px;
         text-wrap: pretty;
 
-        & h2 {
+        h2 {
             margin: 7px 0 10px;
         }
 
-        & p {
+        p {
             &.date-posted {
                 margin: 10px 0 0;
             }
@@ -150,7 +150,7 @@ main#post,
     .post-summary {
         flex-direction: column;
 
-        & .list-image {
+        .list-image {
             height: 180px;
             max-width: 100%;
             min-height: 100%;
