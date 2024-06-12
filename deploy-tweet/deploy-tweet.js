@@ -36,7 +36,9 @@ async function getAllPostsHelper(coll) {
     const querySnapshot = await getDocs(collection(db, coll)),
         all = [];
     querySnapshot.forEach((doc) => {
-        all.push({ post_id: doc.id, ...doc.data() });
+        const data = doc.data();
+        // don't add drafts
+        !data.is_draft && all.push({ post_id: doc.id, ...data });
     });
     return all;
 }

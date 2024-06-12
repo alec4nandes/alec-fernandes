@@ -7,10 +7,12 @@ async function getPostsData(type) {
         result = [];
     querySnapshot.forEach((doc) => {
         const data = doc.data();
-        result.push({
-            ...data,
-            post_id: doc.id,
-        });
+        // don't add drafts
+        !data.is_draft &&
+            result.push({
+                ...data,
+                post_id: doc.id,
+            });
     });
     result.sort(sortDateDescending);
     return result;
