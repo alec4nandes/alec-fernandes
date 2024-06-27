@@ -14,7 +14,7 @@
         <header>
             {% include "partials/_header-name.html" %}
             <nav>
-                <h2>All Tags</h2>
+                <h1>All Tags</h1>
             </nav>
         </header>
         <main>
@@ -22,7 +22,7 @@
                 <div id="posts-container">
                     <div class="single-post whole-post">
                         {% for tags_list in posts.tags_by_letter %}
-                            <h3>{{ tags_list.letter }}</h3>
+                            <h2>{{ tags_list.letter }}</h2>
                             <ul class="tags-list">
                                 {% for tag in tags_list.tags %}
                                     <li>

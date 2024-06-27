@@ -1,5 +1,9 @@
 <header>
-    <h1>Dharma Posts</h1>
+    {% if is_home == true %}
+        <h1 id="blog-name">Dharma Posts</h1>
+    {% else %}
+        <div id="blog-name">Dharma Posts</div>
+    {% endif %}
     <p id="subheader">
         <em>A collection of writings about the Buddhist suttas.</em>
     </p>

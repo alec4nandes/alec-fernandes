@@ -29,11 +29,12 @@ footer {
 }
 
 h1,
-h2 {
+h2,
+#blog-name {
     font-family: "DM Serif Display", Georgia, "Times New Roman", Times, serif;
 }
 
-h1 {
+#blog-name {
     text-align: center;
 }
 
@@ -45,7 +46,10 @@ header {
     margin: 60px 0 40px;
     text-align: center;
 
-    h1 {
+    h1,
+    #blog-name {
+        font-size: 2rem;
+        font-weight: bold;
         margin: 0;
     }
 
@@ -83,6 +87,7 @@ main {
             padding: 20px 15px 40px;
             text-wrap: pretty;
 
+            h1,
             h2 {
                 margin: 0;
             }
@@ -90,6 +95,11 @@ main {
             .subtitle {
                 font-size: 1.2rem;
                 margin-top: 15px;
+            }
+
+            .subtitle,
+            #content {
+                line-height: 1.65rem;
             }
         }
     }

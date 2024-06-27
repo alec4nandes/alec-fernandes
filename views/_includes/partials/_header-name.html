@@ -8,7 +8,11 @@
                 src="/assets/logo/fern-haus-site-logo.png"
                 alt="Fern Haus logo: a house wrapped with two fern branches.">
         </div>
-        <h1>Fern Haus</h1>
+        {% if is_home == true %}
+            <h1 id="blog-name">Fern Haus</h1>
+        {% else %}
+            <div id="blog-name">Fern Haus</div>
+        {% endif %}
     </a>
 </div>
 

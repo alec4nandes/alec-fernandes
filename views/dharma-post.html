@@ -32,25 +32,27 @@ permalink: "dharma/posts/{{ post.post_id | slugify }}.html"
     <body>
         {% include "partials/_dharma-header.html" %}
         <main id="post">
-            {% if post.feature_image != "" %}
-                <img
+            <article>
+                {% if post.feature_image != "" %}
+                    <img
                     id="feature-image"
                     src="{{ post.feature_image }}"
                     alt="{{ post.feature_image_alt }}"/>
-            {% endif %}
-            {% if post.feature_image != "" and post.feature_image_caption != "" %}
-                <p id="caption">
-                    <em>{{ post.feature_image_caption }}</em>
-                </p>
-            {% endif %}
-            <div id="text">
-                <h2>{{ post.title }}</h2>
-                {% if post.subtitle != "" %}
-                    <p class="subtitle">{{ post.subtitle }}</p>
                 {% endif %}
-                <p class="date-posted">{{ post.date }}</p>
-                <div id="content">{{ post.content }}</div>
-            </div>
+                {% if post.feature_image != "" and post.feature_image_caption != "" %}
+                    <p id="caption">
+                        <em>{{ post.feature_image_caption }}</em>
+                    </p>
+                {% endif %}
+                <div id="text">
+                    <h1>{{ post.title }}</h1>
+                    {% if post.subtitle != "" %}
+                        <p class="subtitle">{{ post.subtitle }}</p>
+                    {% endif %}
+                    <p class="date-posted">{{ post.date }}</p>
+                    <div id="content">{{ post.content }}</div>
+                </div>
+            </article>
         </main>
         {% include "partials/_dharma-footer.html" %}
     </body>
