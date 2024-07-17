@@ -1,8 +1,8 @@
-import { mkdirp } from "mkdirp";
-import fs from "fs";
-import path from "path";
 import { fileURLToPath } from "url";
+import path from "path";
 import { work } from "./work.mjs";
+import fs from "fs";
+import { mkdirp } from "mkdirp";
 import { JSDOM } from "jsdom";
 
 const __filename = fileURLToPath(import.meta.url),
@@ -11,9 +11,7 @@ const __filename = fileURLToPath(import.meta.url),
 writeAll();
 
 async function writeAll() {
-    for (const { fileName, type, url } of work) {
-        await writeHTML({ fileName, type, url });
-    }
+    await Promise.all(work.map(writeHTML));
 }
 
 async function writeHTML({ fileName, type, url }) {
@@ -25,47 +23,26 @@ async function writeHTML({ fileName, type, url }) {
     fs.writeFileSync(filePath + "index.html", html);
     await mkdirp(filePath + "assets");
     await mkdirp(filePath + "styles");
-    for (const { src, fileName } of assets) {
-        const response = await fetch(src),
-            imageBuffer = await (await response.blob()).arrayBuffer(),
-            imageData = Buffer.from(imageBuffer, "binary");
-        fs.writeFileSync(filePath + `assets/${fileName}`, imageData);
-    }
-    for (const { href, fileName } of styles) {
-        try {
-            const response = await fetch(href),
-                text = await response.text();
-            fs.writeFileSync(filePath + `styles/${fileName}`, text);
-        } catch (err) {
-            console.log(href);
-            console.log(err);
-        }
-    }
+    await saveAssets({ assets, filePath });
+    await saveStylesheets({ styles, filePath });
     console.log("DONE WITH", fileName);
 }
 
 function parseRaw({ raw, url }) {
     const dom = new JSDOM(raw),
-        scripts = [...dom.window.document.querySelectorAll("script")],
-        linkTags = [...dom.window.document.querySelectorAll("link")],
-        images = [...dom.window.document.querySelectorAll("img")],
-        showLessButton = [
-            ...dom.window.document.querySelectorAll("button"),
-        ].find((btn) => btn.textContent === "Show Less"),
-        assets = [],
-        styles = [];
-    scripts.forEach((script) => script.remove());
-    linkTags
-        .filter(({ href }) => !href.includes("fonts.googleapis.com"))
-        .forEach((linkTag) => {
-            const { href } = linkTag,
-                fileName = href.split("/").filter(Boolean).at(-1).split("?")[0];
-            linkTag.href = "styles/" + fileName;
-            styles.push({ href, fileName });
-        });
-    images
+        assets = redirectImgTags(dom),
+        styles = redirectLinkTags(dom);
+    removeScriptTags(dom);
+    removeShowLessButton(dom);
+    appendHTML({ dom, url });
+    return { html: dom.serialize(), assets, styles };
+}
+
+function redirectImgTags(dom) {
+    const images = [...dom.window.document.querySelectorAll("img")];
+    return images
         .filter((img) => !img.getAttribute("aria-hidden"))
-        .forEach((img) => {
+        .map((img) => {
             const src = (img.dataset.srcset || img.dataset.src || img.src)
                     ?.split(",")[0]
                     .split("?")[0],
@@ -76,10 +53,42 @@ function parseRaw({ raw, url }) {
             if (isProfilePic || isNooryPic) {
                 img.style.width = "auto";
             }
-            assets.push({ src, fileName });
+            return { src, fileName };
         });
+}
+
+function redirectLinkTags(dom) {
+    const linkTags = [...dom.window.document.querySelectorAll("link")];
+    return linkTags
+        .filter(({ href }) => !href.includes("fonts.googleapis.com"))
+        .map((linkTag) => {
+            const { href } = linkTag,
+                fileName = href.split("/").filter(Boolean).at(-1).split("?")[0];
+            linkTag.href = "styles/" + fileName;
+            return { href, fileName };
+        });
+}
+
+function removeScriptTags(dom) {
+    const scripts = [...dom.window.document.querySelectorAll("script")];
+    scripts.forEach((script) => script.remove());
+}
+
+function removeShowLessButton(dom) {
+    const showLessButton = [
+        ...dom.window.document.querySelectorAll("button"),
+    ].find((btn) => btn.textContent === "Show Less");
     showLessButton?.remove();
-    dom.window.document.body.innerHTML += `
+}
+
+function appendHTML({ dom, url }) {
+    const scriptTag = `<script src="/portfolio/scripts/main.js"></script>`;
+    dom.window.document.body.innerHTML +=
+        appendDialog(url) + appendInlineStyle() + scriptTag;
+}
+
+function appendDialog(url) {
+    return `
         <dialog style="max-width: 400px; width: 100%; text-align: center;">
             <p>
                 This is a static copy of a webpage from Coast to Coast AM's website.
@@ -97,6 +106,11 @@ function parseRaw({ raw, url }) {
             </p>
             <button id="close">close</button>
         </dialog>
+    `;
+}
+
+function appendInlineStyle() {
+    return `
         <style>
             .template-coast, .component-site-header {
                 background-image: url(/portfolio/assets/c2c-bg-2024.jpg) !important;
@@ -109,7 +123,44 @@ function parseRaw({ raw, url }) {
                 }
             }
         </style>
-        <script src="/portfolio/scripts/main.js"></script>
     `;
-    return { html: dom.serialize(), assets, styles };
+}
+
+async function saveAssets({ assets, filePath }) {
+    await Promise.all(
+        assets.map(({ src, fileName }) =>
+            saveAsset({ src, fileName, filePath })
+        )
+    );
+}
+
+async function saveAsset({ src, fileName, filePath }) {
+    try {
+        const response = await fetch(src),
+            imageBuffer = await (await response.blob()).arrayBuffer(),
+            imageData = Buffer.from(imageBuffer, "binary");
+        fs.writeFileSync(filePath + `assets/${fileName}`, imageData);
+    } catch (err) {
+        console.error(src);
+        console.error(err);
+    }
+}
+
+async function saveStylesheets({ styles, filePath }) {
+    await Promise.all(
+        styles.map(({ href, fileName }) =>
+            saveStylesheet({ href, fileName, filePath })
+        )
+    );
+}
+
+async function saveStylesheet({ href, fileName, filePath }) {
+    try {
+        const response = await fetch(href),
+            text = await response.text();
+        fs.writeFileSync(filePath + `styles/${fileName}`, text);
+    } catch (err) {
+        console.error(href);
+        console.error(err);
+    }
 }
