@@ -49,6 +49,9 @@ function parseRaw({ raw, url }) {
         scripts = [...dom.window.document.querySelectorAll("script")],
         linkTags = [...dom.window.document.querySelectorAll("link")],
         images = [...dom.window.document.querySelectorAll("img")],
+        showLessButton = [
+            ...dom.window.document.querySelectorAll("button"),
+        ].find((btn) => btn.textContent === "Show Less"),
         assets = [],
         styles = [];
     scripts.forEach((script) => script.remove());
@@ -75,6 +78,7 @@ function parseRaw({ raw, url }) {
             }
             assets.push({ src, fileName });
         });
+    showLessButton?.remove();
     dom.window.document.body.innerHTML += `
         <dialog style="max-width: 400px; width: 100%; text-align: center;">
             <p>
@@ -93,12 +97,19 @@ function parseRaw({ raw, url }) {
             </p>
             <button id="close">close</button>
         </dialog>
+        <style>
+            .template-coast, .component-site-header {
+                background-image: url(/portfolio/assets/c2c-bg-2024.jpg) !important;
+            }
+            
+            @media screen and (min-width: 1060px) {
+                .template-coast {
+                    background-image: url(/portfolio/assets/c2c-bg-large-2024.jpg) !important;
+                    background-size: cover !important;
+                }
+            }
+        </style>
         <script src="/portfolio/scripts/main.js"></script>
     `;
-    dom.window.document.querySelector(".template-coast").style.backgroundImage =
-        "url(/portfolio/assets/c2c-bg-large-2024.jpg)";
-    dom.window.document.querySelector(
-        ".component-site-header"
-    ).style.backgroundImage = "url(/portfolio/assets/c2c-bg-large-2024.jpg)";
     return { html: dom.serialize(), assets, styles };
 }
