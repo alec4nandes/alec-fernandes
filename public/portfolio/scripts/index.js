@@ -23,7 +23,9 @@ function makeListItem({ item, c2c }) {
         fileName = url.split("/").filter(Boolean).at(-1);
     return `
         <li>
-            <a href="${c2c}/${fileName}/index.html">${title}</a>
+            <a href="${c2c}/${fileName}/index.html" target="_blank">
+                ${title}
+            </a>
         </li>
     `;
 }
