@@ -38,6 +38,8 @@
         "firebase": "^9.23.0",
         "firebase-admin": "^11.9.0",
         "html-minifier": "^4.0.0",
+        "jsdom": "^24.1.0",
+        "mkdirp": "^3.0.1",
         "twitter-api-v2": "^1.17.0"
     },
     "devDependencies": {
