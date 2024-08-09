@@ -1,31 +1,49 @@
-import { work } from "./work.mjs";
+redirectRelativeLinks();
+addNavMenuHandlers();
+// addDialogHandlers();
 
-makeListItems("article");
-makeListItems("recap");
-
-function makeListItems(type) {
-    const items = work
-            .filter(({ type: t }) => t.toLowerCase() === type)
-            .sort(sortDateDescending),
-        plural = type + "s",
-        c2c = `c2c-${plural}`;
-    document.querySelector("#" + c2c).innerHTML = items
-        .map((item) => makeListItem({ item, c2c }))
-        .join("");
+function redirectRelativeLinks() {
+    const links = [...document.querySelectorAll("a")];
+    for (const link of links) {
+        const { href } = link,
+            isRelative = href.includes(window.location.origin);
+        if (isRelative) {
+            const newHref = href.replace(
+                window.location.origin,
+                "https://coasttocoastam.com"
+            );
+            link.href = newHref;
+        }
+    }
 }
 
-function sortDateDescending({ date: dateA }, { date: dateB }) {
-    return new Date(dateB).getTime() - new Date(dateA).getTime();
+function addNavMenuHandlers() {
+    document.querySelector(".nav-toggler").onclick = menuToggler;
+    document.querySelector(`[aria-label="Close Site Navigation"]`).onclick =
+        menuToggler;
+    [...document.querySelectorAll(".child-menu-toggler")].forEach(
+        (elem) => (elem.onclick = childMenuToggler)
+    );
 }
 
-function makeListItem({ item, c2c }) {
-    const { url, title } = item,
-        fileName = url.split("/").filter(Boolean).at(-1);
-    return `
-        <li>
-            <a href="${c2c}/${fileName}/index.html" target="_blank">
-                ${title}
-            </a>
-        </li>
-    `;
+function menuToggler() {
+    const navElem = document.querySelector("#component-site-nav"),
+        isOpen = navElem.classList.contains("open");
+    navElem.classList[isOpen ? "remove" : "add"]("open");
 }
+
+function childMenuToggler(e) {
+    let li = e.target;
+    while (!li.classList.contains("menu-top-label")) {
+        li = li.parentNode;
+    }
+    const isOpen = li.classList.contains("open");
+    li.classList[isOpen ? "remove" : "add"]("open");
+}
+
+// function addDialogHandlers() {
+//     const dialog = document.querySelector("dialog"),
+//         closeDialog = dialog.querySelector("#close");
+//     dialog.showModal();
+//     closeDialog.onclick = () => dialog.close();
+// }

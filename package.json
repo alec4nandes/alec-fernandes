@@ -21,7 +21,8 @@
         "reset": "npm run clear && npm run elev",
         "deploy-tweet": "node deploy-tweet/deploy-tweet.js",
         "deploy": "npm run reset && firebase deploy && npm run deploy-tweet",
-        "serve": "firebase serve --only functions,hosting"
+        "serve": "firebase serve --only functions,hosting",
+        "portfolio": "node public/portfolio/scripts/copy.mjs"
     },
     "repository": {
         "type": "git",
@@ -40,6 +41,7 @@
         "html-minifier": "^4.0.0",
         "jsdom": "^24.1.0",
         "mkdirp": "^3.0.1",
+        "puppeteer": "^23.0.2",
         "twitter-api-v2": "^1.17.0"
     },
     "devDependencies": {
