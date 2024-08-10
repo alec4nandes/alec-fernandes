@@ -53,11 +53,25 @@ function getDirectories(source) {
 async function scrape({ url, directory, subDirectory }) {
     try {
         const browser = await puppeteer.launch({ headless: false }),
-            page = await browser.newPage();
+            page = await browser.newPage(),
+            stylesheetPromises = [];
+        page.on("response", async (response) => {
+            if (response.request().resourceType() === "stylesheet") {
+                stylesheetPromises.push(
+                    new Promise(async (resolve) =>
+                        resolve({
+                            url: response.url(),
+                            text: await response.text(),
+                        })
+                    )
+                );
+            }
+        });
         console.log(`Scraping from: ${url}...`);
         await page.goto(url);
-        const source = await waitForLoad({ page, ms: 5000 });
-        await writeFile({ source, directory, subDirectory });
+        const source = await waitForLoad({ page, ms: 5000 }),
+            styleReplacements = await getStyleReplacements(stylesheetPromises);
+        await writeFile({ source, directory, subDirectory, styleReplacements });
         await browser.close();
     } catch (err) {
         console.log(err);
@@ -78,16 +92,36 @@ function waitForLoad({ page, ms }) {
     });
 }
 
-async function writeFile({ source, directory, subDirectory }) {
+async function getStyleReplacements(stylesheetPromises) {
+    const stylesheets = await Promise.all(stylesheetPromises);
+    return stylesheets.reduce((acc, { url, text }) => {
+        const matches = text
+            .match(/url\((.+?)\)/g)
+            ?.map((m) => m.match(/url\((.+?)\)/)[1]);
+        return matches?.length
+            ? {
+                  ...acc,
+                  [url]: [...new Set(matches)],
+              }
+            : acc;
+    }, {});
+}
+
+async function writeFile({
+    source,
+    directory,
+    subDirectory,
+    styleReplacements,
+}) {
     const dom = new JSDOM(source),
-        assets = redirectImgTags(dom),
+        assets = await redirectImgTags(dom),
         styles = redirectLinkTags(dom),
         filePath = `${topDir}/${directory}/${subDirectory}`;
     removeBumperBtn(dom);
     removeScriptTags(dom);
     addMyScriptTag(dom);
-    await saveAssets({ assets, filePath });
-    await saveStylesheets({ styles, filePath });
+    await saveAssets({ assets, filePath: topDir });
+    await saveStylesheets({ styles, filePath: topDir, styleReplacements });
     await mkdirp(`${topDir}/${directory}/${subDirectory}`);
     fs.writeFileSync(`${filePath}/index.html`, dom.serialize());
 }
