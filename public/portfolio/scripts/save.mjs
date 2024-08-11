@@ -1,18 +1,47 @@
 import fs from "fs";
 import { mkdirp } from "mkdirp";
 import { getSrc } from "./src.mjs";
+import { topDir } from "./dir.mjs";
+
+const resourcePaths = await getExistingResourcePaths();
+
+async function getExistingResourcePaths() {
+    const filePath = `${topDir}/resources`;
+    try {
+        return fs
+            .readdirSync(filePath, { withFileTypes: true })
+            .map(({ name }) => name);
+    } catch (err) {
+        await mkdirp(filePath);
+        return [];
+    }
+}
 
 async function redirectImgTags(dom) {
     const images = [...dom.window.document.querySelectorAll("img")],
         promises = images
             .filter((img) => !img.getAttribute("aria-hidden"))
             .map(async (img) => {
-                const src = await getSrc(img),
+                const { all, smallest: src } = await getSrc(img),
                     { blob, ext } = await getBlobAndExt(src),
                     fileName = getFileName(src, ext),
-                    imgReplace = dom.window.document.createElement("img");
-                imgReplace.src = `/portfolio/c2c/resources/${fileName}`;
-                img.replaceWith(imgReplace);
+                    filePath = `/portfolio/c2c/resources/${fileName}`;
+                // always add src
+                img.src = filePath;
+                Object.entries(all)
+                    .filter(([, value]) => value)
+                    .map(([key]) => key.toLowerCase())
+                    .forEach((key) => {
+                        const isDataSet = key.includes("data");
+                        isDataSet
+                            ? (img.dataset[key.replace("data", "")] = filePath)
+                            : (img[key] = filePath);
+                    });
+                img.classList.remove("lazyload");
+                img.classList.remove("lazyloaded");
+                if (img.alt.includes("profile image of")) {
+                    img.style.width = "auto";
+                }
                 return { src, blob, fileName };
             });
     return await Promise.all(promises);
@@ -21,7 +50,12 @@ async function redirectImgTags(dom) {
 async function getBlobAndExt(src) {
     const response = await fetch(src),
         blob = await response.blob(),
-        ext = "." + blob.type.slice(blob.type.indexOf("/") + 1);
+        ext =
+            "." +
+            blob.type
+                .slice(blob.type.indexOf("/") + 1)
+                .split("+")[0]
+                .trim();
     return { blob, ext };
 }
 
@@ -54,10 +88,14 @@ function redirectLinkTags(dom) {
 async function saveAssets({ assets, filePath }) {
     await mkdirp(`${filePath}/resources`);
     await Promise.all(
-        assets.map(({ src, blob, fileName }) =>
+        getNew(assets).map(({ src, blob, fileName }) =>
             saveAsset({ src, blob, fileName, filePath })
         )
     );
+}
+
+function getNew(items) {
+    return items.filter(({ fileName }) => !resourcePaths.includes(fileName));
 }
 
 async function saveAsset({ src, blob, fileName, filePath }) {
@@ -74,7 +112,7 @@ async function saveAsset({ src, blob, fileName, filePath }) {
 async function saveStylesheets({ styles, filePath, styleReplacements }) {
     await mkdirp(`${filePath}/resources`);
     await Promise.all(
-        styles.map(({ href, fileName }) =>
+        getNew(styles).map(({ href, fileName }) =>
             saveStylesheet({ href, fileName, filePath, styleReplacements })
         )
     );
@@ -99,8 +137,7 @@ async function saveStylesheet({ href, fileName, filePath, styleReplacements }) {
         }
         fs.writeFileSync(`${filePath}/resources/${fileName}`, text);
     } catch (err) {
-        console.error(href);
-        console.error(err);
+        console.error(`Failed to fetch: ${href}`);
     }
 }
 

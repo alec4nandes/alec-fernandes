@@ -1,5 +1,3 @@
-import { fileURLToPath } from "url";
-import path from "path";
 import { mkdirp } from "mkdirp";
 import fs from "fs";
 import { articleSlugs, showDates } from "./work.mjs";
@@ -11,10 +9,7 @@ import {
     saveAssets,
     saveStylesheets,
 } from "./save.mjs";
-
-const __filename = fileURLToPath(import.meta.url),
-    __dirname = path.dirname(__filename),
-    topDir = `${__dirname}/../c2c`;
+import { topDir } from "./dir.mjs";
 
 await mkdirp(topDir);
 
@@ -117,8 +112,9 @@ async function writeFile({
         assets = await redirectImgTags(dom),
         styles = redirectLinkTags(dom),
         filePath = `${topDir}/${directory}/${subDirectory}`;
-    removeBumperBtn(dom);
-    removeScriptTags(dom);
+    removeElem(dom, ".bumper-music button");
+    removeElem(dom, "script");
+    removeElem(dom, "iframe");
     addMyScriptTag(dom);
     await saveAssets({ assets, filePath: topDir });
     await saveStylesheets({ styles, filePath: topDir, styleReplacements });
@@ -126,13 +122,9 @@ async function writeFile({
     fs.writeFileSync(`${filePath}/index.html`, dom.serialize());
 }
 
-function removeBumperBtn(dom) {
-    dom.window.document.querySelector(".bumper-music button")?.remove();
-}
-
-function removeScriptTags(dom) {
-    const scripts = [...dom.window.document.querySelectorAll("script")];
-    scripts.forEach((script) => script.remove());
+function removeElem(dom, selector) {
+    const elems = [...dom.window.document.querySelectorAll(selector)];
+    elems.forEach((elem) => elem.remove());
 }
 
 function addMyScriptTag(dom) {
@@ -140,3 +132,5 @@ function addMyScriptTag(dom) {
     script.src = "/portfolio/scripts/index.js";
     dom.window.document.body.append(script);
 }
+
+export { topDir };

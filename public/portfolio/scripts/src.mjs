@@ -16,7 +16,7 @@ async function getSrc(imgElem) {
         ),
         urls = await Promise.all(urlPromises),
         [smallest] = urls.sort(sortSize)[0];
-    return smallest;
+    return { all: attrs, smallest };
 }
 
 function getSrcAttributes(imgElem) {
@@ -26,7 +26,10 @@ function getSrcAttributes(imgElem) {
 }
 
 function removeSearchQuery(url) {
-    return url.split("?")[0];
+    const ops = new URL(url).searchParams.get("ops");
+    return (
+        url.split("?")[0] + (ops && !ops.includes("http") ? `?ops=${ops}` : "")
+    );
 }
 
 async function getSize(resp) {
