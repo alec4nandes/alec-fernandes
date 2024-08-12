@@ -1,4 +1,4 @@
-import { articles, shows, articleSlugs, showDates } from "./work.mjs";
+import { articles, shows } from "./work.mjs";
 
 makeListItems("article");
 makeListItems("show");

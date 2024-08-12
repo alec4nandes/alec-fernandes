@@ -32,6 +32,7 @@ for (const [directory, value] of Object.entries(data)) {
 }
 
 console.log("DONE!");
+process.exit();
 
 function getExistingPages() {
     return getDirectories(topDir)
@@ -114,7 +115,11 @@ async function writeFile({
         filePath = `${topDir}/${directory}/${subDirectory}`;
     removeElem(dom, ".bumper-music button");
     removeElem(dom, "script");
-    removeElem(dom, "iframe");
+    // removeElem(dom, "iframe");
+    // keep youtube iframe:
+    [...dom.window.document.querySelectorAll("iframe")]
+        .filter(({ src }) => !src.toLowerCase().includes("youtube.com"))
+        .forEach((elem) => elem.remove());
     addMyScriptTag(dom);
     await saveAssets({ assets, filePath: topDir });
     await saveStylesheets({ styles, filePath: topDir, styleReplacements });
