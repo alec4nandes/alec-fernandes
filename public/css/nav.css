@@ -1,0 +1,35 @@
+nav {
+    ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 25px;
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            &.social-icons {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                z-index: 1;
+
+                a {
+                    display: flex;
+
+                    img {
+                        height: 24px;
+                        border: 1px solid #30323d;
+                        border-radius: 50%;
+                        filter: invert(100%);
+                        transition: opacity 0.5s;
+
+                        &:hover {
+                            opacity: 0.6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

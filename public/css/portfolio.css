@@ -20,13 +20,6 @@ body {
 
         nav {
             ul {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px 25px;
-                list-style-type: none;
-                padding: 0;
-
                 li {
                     a {
                         color: #e4bb97;

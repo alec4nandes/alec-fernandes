@@ -6,46 +6,46 @@
     gtag('js', new Date());
 
     gtag('config', 'G-7QM5KTX0XK');
-</script> <meta charset="UTF-8"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <meta name="type" property="og:type" content="website"/> <meta name="title" property="og:title" content="Rotate a 2-sided Object to Show Both Sides with CSS &mdash; FERN HAUS"/> <meta name="url" property="og:url" content="https-fern-haus-posts-rotate-2-sided-object-show-both-sides-css-html"/> <meta name="description" property="og:description" content="Build this cool visual effect with multiple animations. &mdash; Web Dev &mdash; animations, HTML, CSS, Sass"/> <meta name="image" property="og:image" content="https://fern.haus/assets/feature-images/rotate-2-sided-object-show-both-sides-CSS.jpg"/> <!-- twitter meta tags --> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:site" content="@alec4nandes"/> <meta name="twitter:title" content="Rotate a 2-sided Object to Show Both Sides with CSS &mdash; FERN HAUS"/> <meta name="twitter:description" content="Build this cool visual effect with multiple animations. &mdash; Web Dev &mdash; animations, HTML, CSS, Sass"/> <meta name="twitter:image" content="https://fern.haus/assets/feature-images/rotate-2-sided-object-show-both-sides-CSS.jpg"/> <!-- end meta tags --> <title>Rotate a 2-sided Object to Show Both Sides with CSS &mdash; FERN HAUS</title> <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.png"/> <link rel="stylesheet" href="/css/blog.css"/> </head> <body> <header> <div id="name-and-logo"> <button id="hamburger-menu-button"> <img src="/assets/hamburger-menu-icon.png"> </button> <a href="/"> <div id="logo-container"> <img id="header-logo" src="/assets/logo/fern-haus-site-logo.png" alt="Fern Haus logo: a house wrapped with two fern branches."> </div> <div id="blog-name">Fern Haus</div> </a> </div> <div id="hamburger-menu" class="closed"> <button id="close-menu"> <img src="/assets/hamburger-menu-close-icon.png"> </button> <h2>Menu</h2> <a href="/">Home</a> <a href="/categories">All Categories</a> <a href="/tags">All Tags</a> <a href="/about">About</a> <a href="/about">Contact</a> <section class="social-icons"> <a href="https://twitter.com/fern_haus_" target="_blank"> <img class="x-icon" src="/assets/social/x.png"/> </a> <a href="https://instagram.com/fern_haus_" target="_blank"> <img class="instagram-icon" src="/assets/social/instagram.png"/> </a> <a href="https://www.tiktok.com/@fern_haus_" target="_blank"> <img class="tiktok-icon" src="/assets/social/tiktok.png"/> </a> </section> </div> </header> <main> <section id="main-content"> <div id="posts-container"> <div id="latest-post"> <div class="single-post whole-post"> <div class="post-categories"> <a class="post-category-link" href="/categories/web-dev"> Web Dev </a> </div> <div class="whole-post-image-container"> <img src="/assets/feature-images/rotate-2-sided-object-show-both-sides-CSS.jpg" alt=""/> </div> <p class="caption"> <em>Photo by <a href="https://unsplash.com/@siora18?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener">Siora Photography</a> on <a href="https://unsplash.com/photos/kY6HbkiauSc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></em> </p> <h1>Rotate a 2-sided Object to Show Both Sides with CSS</h1> <p class="subtitle"> Build this cool visual effect with multiple animations. </p> <p class="date-posted"> 2023-06-23T13:51-07:00 </p> <p class="blurb"> I recently worked on a project that involved flipping a coin. It had to spin rapidly on the screen while showing each distinct side. </p> <p> "I'll just stack two circles and rotate them." How easy, or so I thought. </p> <p> Layering two divs and rotating their container isn't enough to show the other side. The layer with the higher z-index, either explicit or implicit, will always be on top. My next attempt involved three animations: one that rotated the coin and two others that alternated the z-index of each side. </p> <p> Running these multiple animations looked fine on desktop sites, but it appeared glitchy on mobile. That's when I found the final answer: <em>transform: translateZ()</em>. </p> <p> By pushing each side slightly along their z-axis in different directions, then preserving this 3D layout within the coin container, I was able to get the animation running perfectly. </p> <p> <em>Embarrassing side note: and even before I tried running multiple CSS animations at once, I toggled each z-index with a timed JavaScript function (yikes 😳). It just shows how there can be many ways to do the same thing in web development, but in my opinion the following method is the simplest for spinning a two-sided object:</em> </p> <h3>Creating the coin</h3> <h4>HTML</h4> <p> The coin is a div element with two div child elements representing the coin's sides. </p> <pre><code><xmp><div class="coin">
-    <div class="back side"></div>
-    <div class="front side"></div>
+</script> <meta charset="UTF-8"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <meta name="type" property="og:type" content="website"/> <meta name="title" property="og:title" content="Rotate a 2-sided Object to Show Both Sides with CSS &mdash; Alec Fernandes"/> <meta name="url" property="og:url" content="https-fern-haus-posts-rotate-2-sided-object-show-both-sides-css-html"/> <meta name="description" property="og:description" content="Build this cool visual effect with multiple animations. &mdash; Tech &mdash; animations, HTML, CSS, Sass"/> <meta name="image" property="og:image" content="https://fern.haus/assets/feature-images/rotate-2-sided-object-show-both-sides-CSS.jpg"/> <!-- twitter meta tags --> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:site" content="@alec4nandes"/> <meta name="twitter:title" content="Rotate a 2-sided Object to Show Both Sides with CSS &mdash; Alec Fernandes"/> <meta name="twitter:description" content="Build this cool visual effect with multiple animations. &mdash; Tech &mdash; animations, HTML, CSS, Sass"/> <meta name="twitter:image" content="https://fern.haus/assets/feature-images/rotate-2-sided-object-show-both-sides-CSS.jpg"/> <!-- end meta tags --> <title>Rotate a 2-sided Object to Show Both Sides with CSS &mdash; Alec Fernandes</title> <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.png"/> <link rel="stylesheet" href="/css/blog.css"/> </head> <body> <header> <div id="name-and-logo"> <button id="hamburger-menu-button"> <img src="/assets/hamburger-menu-icon.png"> </button> <a href="/"> <div id="logo-container"> <img id="header-logo" src="/assets/logo/fern-haus-site-logo.png" alt="Fern Haus logo: a house wrapped with two fern branches."> </div> <div id="blog-name">Alec Fernandes</div> </a> </div> <div id="hamburger-menu" class="closed"> <button id="close-menu"> <img src="/assets/hamburger-menu-close-icon.png"> </button> <h2>Menu</h2> <a href="/">Home</a> <a href="/categories">All Categories</a> <a href="/tags">All Tags</a> <a href="/about">About</a> <a href="/about">Contact</a> <section class="social-icons"> <a href="https://twitter.com/alec4nandes" target="_blank"> <img class="x-icon" src="/assets/social/x.png"/> </a> <a href="https://instagram.com/alec4nandes" target="_blank"> <img class="instagram-icon" src="/assets/social/instagram.png"/> </a> <a href="https://www.tiktok.com/@alec4nandes" target="_blank"> <img class="tiktok-icon" src="/assets/social/tiktok.png"/> </a> </section> </div> </header> <main> <section id="main-content"> <div id="posts-container"> <div id="latest-post"> <div class="single-post whole-post"> <div class="post-categories"> <a class="post-category-link" href="/categories/tech"> Tech </a> </div> <div class="whole-post-image-container"> <img src="/assets/feature-images/rotate-2-sided-object-show-both-sides-CSS.jpg" alt=""/> </div> <p class="caption"> <em>Photo by <a href="https://unsplash.com/@siora18?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener">Siora Photography</a> on <a href="https://unsplash.com/photos/kY6HbkiauSc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></em> </p> <h1>Rotate a 2-sided Object to Show Both Sides with CSS</h1> <p class="subtitle"> Build this cool visual effect with multiple animations. </p> <p class="date-posted"> 2023-06-23T13:51-07:00 </p> <p class="blurb"> I recently worked on a project that involved flipping a coin. It had to spin rapidly on the screen while showing each distinct side. </p> <p> "I'll just stack two circles and rotate them." How easy, or so I thought. </p> <p> Layering two divs and rotating their container isn't enough to show the other side. The layer with the higher z-index, either explicit or implicit, will always be on top. My next attempt involved three animations: one that rotated the coin and two others that alternated the z-index of each side. </p> <p> Running these multiple animations looked fine on desktop sites, but it appeared glitchy on mobile. That's when I found the final answer: <em>transform: translateZ()</em>. </p> <p> By pushing each side slightly along their z-axis in different directions, then preserving this 3D layout within the coin container, I was able to get the animation running perfectly. </p> <p> <em>Embarrassing side note: and even before I tried running multiple CSS animations at once, I toggled each z-index with a timed JavaScript function (yikes 😳). It just shows how there can be many ways to do the same thing in web development, but in my opinion the following method is the simplest for spinning a two-sided object:</em> </p> <h3>Creating the coin</h3> <h4>HTML</h4> <p> The coin is a div element with two div child elements representing the coin's sides. </p> <pre><code><xmp><div class="coin">
+<div class="back side"></div>
+<div class="front side"></div>
 </div>
 </xmp></code></pre> <h4>CSS/Sass</h4> <p> The coin will be 100 pixels both tall and wide with a red back and a blue front. We need to separate each side by moving them in opposite directions along their z-axis. This is done with <em>transform: translateZ()</em>. Finally, we need to set <em>transform-style: preserve-3d</em> on the container. </p> <pre><code><xmp>.coin {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    transform-style: preserve-3d;
+height: 100px;
+width: 100px;
+position: relative;
+transform-style: preserve-3d;
 
-    & .side {
-        height: 100%;
-        width: 100%;
-        border-radius: 50%;
-        position: absolute;
+& .side {
+height: 100%;
+width: 100%;
+border-radius: 50%;
+position: absolute;
 
-        &.back {
-            background-color: red;
-            transform: translateZ(0.1px);
-        }
+&.back {
+background-color: red;
+transform: translateZ(0.1px);
+}
 
-        &.front {
-            background-color: blue;
-            transform: translateZ(-0.1px);
-        }
-    }
+&.front {
+background-color: blue;
+transform: translateZ(-0.1px);
+}
+}
 }
 </xmp></code></pre> <h3>Animations</h3> <h4>Spin the coin rapidly</h4> <p> This simple animation spins the coin on its x-axis from 0 degrees to 360 degrees. </p> <pre><code><xmp>@keyframes spin {
-    0% {
-        transform: rotateX(0deg);
-    }
-    50% {
-        transform: rotateX(180deg);
-    }
-    100% {
-        transform: rotateХ(360deg);
-    }
+0% {
+transform: rotateX(0deg);
+}
+50% {
+transform: rotateX(180deg);
+}
+100% {
+transform: rotateХ(360deg);
+}
 }
 </xmp></code></pre> <h3>Putting it all together</h3> <p> For the final step, all that's left is to add the animation to the coin's container element. </p> <pre><code><xmp>.coin {
-    animation: spin 0.75s infinite;
-    ...
+animation: spin 0.75s infinite;
+...
 }
-</xmp></code></pre> <h3>Play with my code</h3> <p> <a href="/examples/coin-flip" rel="noopener" target="_blank">See the code in action here</a>, or download <a href="/examples/coin-flip/coin-flip.zip" rel="noopener" target="_blank">the code here</a>. </p> <br/> </div> </div> </div> </section> <section id="sidebar" class="whole-post-sidebar"> <div id="categories-and-tags"> <a id="home-link" href="/">Go Home</a> <section class="social-icons"> <a href="https://twitter.com/fern_haus_" target="_blank"> <img class="x-icon" src="/assets/social/x.png"/> </a> <a href="https://instagram.com/fern_haus_" target="_blank"> <img class="instagram-icon" src="/assets/social/instagram.png"/> </a> <a href="https://www.tiktok.com/@fern_haus_" target="_blank"> <img class="tiktok-icon" src="/assets/social/tiktok.png"/> </a> </section> <div id="categories"> <div id="categories-sidebar-heading"> <h2>Post Categories</h2> <a class="all-categories-link" href="/categories">all categories</a> </div> <a class="category-link" href="/categories/web-dev"> Web Dev </a> </div> <div id="tags"> <h2>Post Tags</h2> <a href="/tags">all tags</a> <ul class="tags-list"> <li> <a class="tag-link" href="/tags/animations"> animations </a> </li> <li> <a class="tag-link" href="/tags/html"> HTML </a> </li> <li> <a class="tag-link" href="/tags/css"> CSS </a> </li> <li> <a class="tag-link" href="/tags/sass"> Sass </a> </li> </ul> </div> </div> </section> </main> <footer> <p> <em>&copy; Alec Fernandes 2024</em> </p> <p> <a href="/about">About Fern Haus</a> </p> </footer> <script src="/src/scripts.js"></script> </body> </html>
+</xmp></code></pre> <h3>Play with my code</h3> <p> <a href="/examples/coin-flip" rel="noopener" target="_blank">See the code in action here</a>, or download <a href="/examples/coin-flip/coin-flip.zip" rel="noopener" target="_blank">the code here</a>. </p> <br/> </div> </div> </div> </section> <section id="sidebar" class="whole-post-sidebar"> <div id="categories-and-tags"> <a id="home-link" href="/">Go Home</a> <section class="social-icons"> <a href="https://twitter.com/alec4nandes" target="_blank"> <img class="x-icon" src="/assets/social/x.png"/> </a> <a href="https://instagram.com/alec4nandes" target="_blank"> <img class="instagram-icon" src="/assets/social/instagram.png"/> </a> <a href="https://www.tiktok.com/@alec4nandes" target="_blank"> <img class="tiktok-icon" src="/assets/social/tiktok.png"/> </a> </section> <div id="categories"> <div id="categories-sidebar-heading"> <h2>Post Categories</h2> <a class="all-categories-link" href="/categories">all categories</a> </div> <a class="category-link" href="/categories/tech"> Tech </a> </div> <div id="tags"> <h2>Post Tags</h2> <a href="/tags">all tags</a> <ul class="tags-list"> <li> <a class="tag-link" href="/tags/animations"> animations </a> </li> <li> <a class="tag-link" href="/tags/html"> HTML </a> </li> <li> <a class="tag-link" href="/tags/css"> CSS </a> </li> <li> <a class="tag-link" href="/tags/sass"> Sass </a> </li> </ul> </div> </div> </section> </main> <footer> <p> <em>&copy; Alec Fernandes 2024</em> </p> <p> <a href="/about">About</a> </p> </footer> <script src="/src/scripts.js"></script> </body> </html>

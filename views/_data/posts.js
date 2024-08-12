@@ -6,9 +6,9 @@ module.exports = async function () {
         blurb: getBlurb(post),
     }));
     const dharmaPosts = await getPostsData("dharma");
-    // include Dharma Posts under the Culture category on Fern Haus
+    // include Dharma Posts under the Culture category on Alec Fernandes
     dharmaPosts.forEach((post) => (post.categories = ["Culture"]));
-    // add Dharma Posts to Fern Haus
+    // add Dharma Posts to Alec Fernandes
     allPosts = [...allPosts, ...dharmaPosts].sort(sortDateDescending);
     const getAll = (key) =>
             [
