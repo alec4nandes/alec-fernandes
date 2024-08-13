@@ -1,5 +1,4 @@
 <section id="main-content">
-    {% include "partials/_pagination.html" %}
     <div id="posts-container">
         {% for post in pagination.items %}
             {% if page_num == 1 and forloop.index == 1 %}
