@@ -1,9 +1,8 @@
-const { collection, getDocs } = require("firebase/firestore");
 const { db } = require("./database.js");
 
 // type is "posts" or "dharma"
 async function getPostsData(type) {
-    const querySnapshot = await getDocs(collection(db, type)),
+    const querySnapshot = await db.collection(type).get(),
         result = [];
     querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -23,7 +22,7 @@ function sortDateDescending(postA, postB) {
 }
 
 async function getCategoriesAndTags() {
-    const querySnapshot = await getDocs(collection(db, "posts")),
+    const querySnapshot = await db.collection("posts").get(),
         c = [],
         t = [];
     querySnapshot.forEach((doc) => {

@@ -1,15 +1,12 @@
-const { initializeApp } = require("firebase/app");
-const { getAuth } = require("firebase/auth");
-const { getFirestore } = require("firebase/firestore");
-const { getAnalytics, isSupported } = require("firebase/analytics");
-const { firebaseConfig } = require("./firebase-config.js");
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+const admin = require("firebase-admin");
+const { initializeApp } = require("firebase-admin/app");
+const { getFirestore } = require("firebase-admin/firestore");
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig),
-    auth = getAuth(app),
-    db = getFirestore(app),
-    analytics = isSupported().then((yes) => yes && getAnalytics(app));
+const { serviceAccount } = require("./firebase-config.js");
 
-module.exports = { app, db, auth, analytics };
+const app = initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+    }),
+    db = getFirestore(app);
+
+module.exports = { app, db };

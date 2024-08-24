@@ -3,20 +3,7 @@
 
 // db functions
 
-const { initializeApp } = require("firebase/app"),
-    {
-        collection,
-        doc,
-        getDoc,
-        getDocs,
-        getFirestore,
-        setDoc,
-    } = require("firebase/firestore"),
-    { getAuth, signInWithEmailAndPassword } = require("firebase/auth"),
-    { firebaseConfig } = require("./firebase-config-node.js"),
-    app = initializeApp(firebaseConfig),
-    db = getFirestore(app),
-    auth = getAuth(app);
+const { db } = require("../db/database.js");
 
 async function getLatestTweet() {
     const latestPost = (await getAllPosts())[0],
@@ -33,7 +20,7 @@ async function getAllPosts() {
 }
 
 async function getAllPostsHelper(coll) {
-    const querySnapshot = await getDocs(collection(db, coll)),
+    const querySnapshot = await db.collection(coll).get(),
         all = [];
     querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -44,19 +31,14 @@ async function getAllPostsHelper(coll) {
 }
 
 async function getLastPostedTweet() {
-    const { last_tweet } = (await getDoc(doc(db, "tweets", "data"))).data();
+    const { last_tweet } = (
+        await db.collection("tweets").doc("data").get()
+    ).data();
     return last_tweet;
 }
 
-async function signIn() {
-    const email = process.env.FIREBASE_EMAIL,
-        password = process.env.FIREBASE_PASSWORD;
-    await signInWithEmailAndPassword(auth, email, password);
-    return true;
-}
-
 async function setLastPostedTweet(tweetText) {
-    await setDoc(doc(db, "tweets", "data"), { last_tweet: tweetText });
+    await db.collection("tweets").doc("data").set({ last_tweet: tweetText });
     console.log("Last tweet updated.");
 }
 
@@ -67,9 +49,8 @@ const { TwitterApi } = require("twitter-api-v2");
 
 async function deployTweet() {
     const latestTweet = await getLatestTweet(),
-        lastPosted = await getLastPostedTweet(),
-        signedIn = await signIn();
-    if (signedIn && latestTweet !== lastPosted) {
+        lastPosted = await getLastPostedTweet();
+    if (latestTweet !== lastPosted) {
         const tweetedSuccessfully = await postTweet(latestTweet);
         if (tweetedSuccessfully) {
             await setLastPostedTweet(latestTweet);
