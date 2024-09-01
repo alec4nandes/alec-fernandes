@@ -20,9 +20,16 @@
             <hr />
             <label>
                 AI temperature:
-                <input type="number" min="0" max="1" step="0.05" value="0.5" />
+                <input
+                    id="post-temp"
+                    type="number"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value="0.5"
+                />
             </label>
-            <button>get post</button>
+            <button id="ai-post">get post</button>
             <div id="post-content" contenteditable="true"></div>
             <div class="revisions">
                 <label><input type="checkbox" /><span>revise </span></label>
@@ -36,9 +43,16 @@
             <hr />
             <label>
                 AI temperature:
-                <input type="number" min="0" max="1" step="0.05" value="0.5" />
+                <input
+                    id="tweet-temp"
+                    type="number"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value="0.5"
+                />
             </label>
-            <button>get tweet</button>
+            <button id="ai-tweet">get tweet</button>
             <div id="tweet-content" contenteditable="true"></div>
             <div>0 characters</div>
             <div class="revisions">

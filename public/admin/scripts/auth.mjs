@@ -5,6 +5,7 @@
 */
 
 import config from "./db-dev.mjs";
+import { handleAiPost, handleAiTweet } from "./content.mjs";
 
 firebase.initializeApp(config);
 
@@ -19,6 +20,11 @@ firebase.auth().onAuthStateChanged(async (user) => {
         window.location.href = "/admin";
         return;
     }
+    const postBtn = document.querySelector("button#ai-post"),
+        tweetBtn = document.querySelector("button#ai-tweet"),
+        token = await user.getIdToken(true);
+    postBtn && (postBtn.onclick = (e) => handleAiPost(e, token));
+    tweetBtn && (tweetBtn.onclick = (e) => handleAiTweet(e, token));
 });
 
 const signInElem = document.querySelector("form#sign-in");

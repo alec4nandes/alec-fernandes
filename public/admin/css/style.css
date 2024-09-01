@@ -53,6 +53,10 @@ div[contenteditable="true"] {
     text-align: left;
 }
 
+div[contenteditable="true"] {
+    white-space: break-spaces;
+}
+
 ul {
     width: fit-content;
     margin: auto;
