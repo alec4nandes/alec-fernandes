@@ -1,0 +1,61 @@
+body {
+    background-color: #222;
+    color: #eee;
+    margin: 50px 15px;
+    text-align: center;
+
+    &,
+    input,
+    textarea {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+    }
+}
+
+a {
+    color: cornflowerblue;
+}
+
+button {
+    width: fit-content;
+    margin: auto;
+}
+
+form {
+    margin: auto;
+
+    &#sign-in {
+        width: fit-content;
+
+        table {
+            tr:not(:last-child) {
+                td:first-child {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+hr {
+    width: 100%;
+}
+
+input:not([type="checkbox"]),
+textarea,
+div[contenteditable="true"] {
+    appearance: none;
+    background-color: #eee;
+    border-radius: 3px;
+    color: #222;
+    border: 1.5px solid navy;
+    padding: 3px;
+    text-align: left;
+}
+
+ul {
+    width: fit-content;
+    margin: auto;
+    padding-left: 25px;
+    text-align: left;
+}

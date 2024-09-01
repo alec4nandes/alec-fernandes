@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Post &mdash; Alec Fernandes</title>
+        <link rel="stylesheet" href="/admin/css/style.css" />
+        <link rel="stylesheet" href="/admin/css/edit.css" />
+        <script src="/__/firebase/8.10.1/firebase-app.js"></script>
+        <script src="/__/firebase/8.10.1/firebase-auth.js"></script>
+        <script src="/__/firebase/8.10.1/firebase-firestore.js"></script>
+        <script src="/admin/scripts/auth.mjs" type="module" defer></script>
+        <script src="/admin/scripts/edit.mjs" type="module" defer></script>
+    </head>
+    <body>
+        <h1>Edit Post</h1>
+        <form id="edit">
+            <label for="topic">topic:</label>
+            <textarea id="topic" name="topic"></textarea>
+            <hr />
+            <label>
+                AI temperature:
+                <input type="number" min="0" max="1" step="0.05" value="0.5" />
+            </label>
+            <button>get post</button>
+            <div id="post-content" contenteditable="true"></div>
+            <div class="revisions">
+                <label><input type="checkbox" /><span>revise </span></label>
+                <button>accept all</button>
+                <button>reject all</button>
+            </div>
+            <div id="formatting">
+                <button id="format-btn">format</button>
+                <button id="unformat-btn">unformat</button>
+            </div>
+            <hr />
+            <label>
+                AI temperature:
+                <input type="number" min="0" max="1" step="0.05" value="0.5" />
+            </label>
+            <button>get tweet</button>
+            <div id="tweet-content" contenteditable="true"></div>
+            <div>0 characters</div>
+            <div class="revisions">
+                <label><input type="checkbox" /><span>revise</span></label>
+                <button>accept all</button>
+                <button>reject all</button>
+            </div>
+            <hr />
+            <h2>Meta Data</h2>
+            <div id="post-meta-data">
+                <label for="post-id">post id:</label>
+                <input id="post-id" name="post_id" required />
+                <button id="slugify">slugify title for ID</button>
+                <label for="title">title:</label>
+                <input id="title" name="title" required />
+                <label for="subtitle"> subtitle: </label>
+                <input id="subtitle" name="subtitle" />
+                <label for="feature-image-path">feature image path:</label>
+                <input id="feature-image-path" name="feature_image" />
+                <label for="feature-image-caption">
+                    feature image caption:
+                </label>
+                <input
+                    id="feature-image-caption"
+                    name="feature_image_caption"
+                />
+                <button id="format-caption">format caption</button>
+                <label for="feature-image-alt">feature image alt:</label>
+                <input id="feature-image-alt" name="feature_image_alt" />
+                <label for="categories" required>categories:</label>
+                <input id="categories" name="categories" required />
+                <label for="tags">tags:</label>
+                <input id="tags" name="tags" />
+                <label for="date">date:</label>
+                <input id="date" type="datetime-local" name="date" />
+            </div>
+            <hr />
+            <div id="publish-btns">
+                <label>
+                    <input type="checkbox" name="is_draft" />
+                    draft
+                </label>
+                <button type="submit">update</button>
+                <button id="delete">delete</button>
+                <a href="/admin">back to list</a>
+            </div>
+        </form>
+    </body>
+</html>

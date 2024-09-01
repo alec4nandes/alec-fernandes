@@ -1,0 +1,31 @@
+form#edit {
+    max-width: 500px;
+
+    &,
+    #post-meta-data {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+textarea#topic,
+#tweet-content {
+    height: 150px;
+    overflow: auto;
+}
+
+#post-content {
+    height: 400px;
+    overflow: auto;
+}
+
+.revisions,
+#formatting,
+#publish-btns {
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: auto;
+}

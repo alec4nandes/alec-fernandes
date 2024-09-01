@@ -20,7 +20,7 @@
         "elev": "npm run build-views && npx @11ty/eleventy",
         "reset": "npm run clear && npm run elev",
         "deploy-tweet": "node deploy-tweet/deploy-tweet.js",
-        "deploy": "npm run reset && firebase deploy && npm run deploy-tweet",
+        "deploy": "bash deploy.sh",
         "serve": "firebase serve --only functions,hosting",
         "portfolio": "node public/portfolio/scripts/copy.mjs"
     },

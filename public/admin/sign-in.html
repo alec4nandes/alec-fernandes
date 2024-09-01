@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Sign In &mdash; Alec Fernandes</title>
+        <link rel="stylesheet" href="/admin/css/style.css" />
+        <script src="/__/firebase/8.10.1/firebase-app.js"></script>
+        <script src="/__/firebase/8.10.1/firebase-auth.js"></script>
+        <script src="/admin/scripts/auth.mjs" type="module" defer></script>
+    </head>
+    <body>
+        <h1>Blog Admin</h1>
+        <form id="sign-in">
+            <table>
+                <tr>
+                    <td><label for="email">email:</label></td>
+                    <td><input type="email" id="email" name="email" /></td>
+                </tr>
+                <tr>
+                    <td><label for="pw">password:</label></td>
+                    <td><input type="password" id="pw" name="pw" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">sign in</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
