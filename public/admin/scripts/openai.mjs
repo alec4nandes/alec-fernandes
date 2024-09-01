@@ -1,3 +1,5 @@
+const IS_DEVELOPMENT = true;
+
 /**
  * OpenAI Buffered Response:
  * Buffered responses provide more reliable JSON.
@@ -30,8 +32,9 @@ async function openAiBuffered({
 }) {
     try {
         displayElem && (displayElem.textContent = message.start);
-        const endpoint =
-                "https://22bgimafvhroblvxfwaicex73e0khmzb.lambda-url.us-east-2.on.aws/",
+        const endpoint = IS_DEVELOPMENT
+                ? "https://g5ejo7pibjkti6vpriyzsk2sly0mbfce.lambda-url.us-east-2.on.aws/"
+                : "https://22bgimafvhroblvxfwaicex73e0khmzb.lambda-url.us-east-2.on.aws/",
             response = await getStreamResponse({
                 endpoint,
                 systemContent,
@@ -80,8 +83,9 @@ async function openAiStreamed({
 }) {
     try {
         displayElem && (displayElem.textContent = message.start);
-        const endpoint =
-                "https://qkhc7ig77yaaly33hd6i2he6yi0ydqdx.lambda-url.us-east-2.on.aws/",
+        const endpoint = IS_DEVELOPMENT
+                ? "https://jrq6h6yp72fwdd6cnqvqfjwn4i0hpotu.lambda-url.us-east-2.on.aws/"
+                : "https://qkhc7ig77yaaly33hd6i2he6yi0ydqdx.lambda-url.us-east-2.on.aws/",
             response = await getStreamResponse({
                 endpoint,
                 systemContent,

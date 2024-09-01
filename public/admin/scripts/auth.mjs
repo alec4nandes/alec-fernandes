@@ -6,6 +6,11 @@
 
 import config from "./db-dev.mjs";
 import { handleAiPost, handleAiTweet } from "./content.mjs";
+import {
+    handleRevise,
+    handleAccept,
+    handleReject,
+} from "./ai-editor/editor.mjs";
 
 firebase.initializeApp(config);
 
@@ -20,11 +25,26 @@ firebase.auth().onAuthStateChanged(async (user) => {
         window.location.href = "/admin";
         return;
     }
-    const postBtn = document.querySelector("button#ai-post"),
-        tweetBtn = document.querySelector("button#ai-tweet"),
-        token = await user.getIdToken(true);
-    postBtn && (postBtn.onclick = (e) => handleAiPost(e, token));
-    tweetBtn && (tweetBtn.onclick = (e) => handleAiTweet(e, token));
+    const formElem = document.querySelector("form#edit");
+    if (formElem) {
+        const postBtn = formElem.querySelector("button#ai-post"),
+            tweetBtn = formElem.querySelector("button#ai-tweet"),
+            revisePostBtn = formElem.querySelector("button.post.revise-btn"),
+            reviseTweetBtn = formElem.querySelector("button.tweet.revise-btn"),
+            acceptPostBtn = formElem.querySelector("button.post.accept-btn"),
+            acceptTweetBtn = formElem.querySelector("button.tweet.accept-btn"),
+            rejectPostBtn = formElem.querySelector("button.post.reject-btn"),
+            rejectTweetBtn = formElem.querySelector("button.tweet.reject-btn"),
+            token = await user.getIdToken(true);
+        postBtn.onclick = (e) => handleAiPost(e, token);
+        tweetBtn.onclick = (e) => handleAiTweet(e, token);
+        revisePostBtn.onclick = (e) => handleRevise(e, token, "post");
+        reviseTweetBtn.onclick = (e) => handleRevise(e, token, "tweet");
+        acceptPostBtn.onclick = (e) => handleAccept(e, "post");
+        acceptTweetBtn.onclick = (e) => handleAccept(e, "tweet");
+        rejectPostBtn.onclick = (e) => handleReject(e, "post");
+        rejectTweetBtn.onclick = (e) => handleReject(e, "tweet");
+    }
 });
 
 const signInElem = document.querySelector("form#sign-in");

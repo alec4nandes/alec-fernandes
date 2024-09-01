@@ -54,7 +54,7 @@ div[contenteditable="true"] {
 }
 
 div[contenteditable="true"] {
-    white-space: break-spaces;
+    white-space: pre-line;
 }
 
 ul {

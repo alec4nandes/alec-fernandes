@@ -29,3 +29,25 @@ textarea#topic,
     gap: 10px;
     margin: auto;
 }
+
+.revision {
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        text-decoration: underline rgb(152, 13, 13);
+    }
+
+    s {
+        color: rgb(152, 13, 13);
+        font-style: italic;
+    }
+
+    b {
+        color: rgb(57, 168, 57);
+    }
+}
+
+.accept-btn,
+.reject-btn {
+    display: none;
+}
