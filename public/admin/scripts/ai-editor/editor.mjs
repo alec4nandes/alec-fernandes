@@ -1,5 +1,6 @@
 import format from "./format.mjs";
 import { openAiBuffered } from "../openai.mjs";
+import { handleCharCount } from "../char-count.mjs";
 
 async function handleRevise(e, token, type) {
     e.preventDefault();
@@ -23,6 +24,7 @@ async function handleRevise(e, token, type) {
         }
         e.target.style.display = "none";
         showHideBtns({ isShowRevise: false, type });
+        handleCharCount();
         return true;
     } catch (err) {
         console.error(err);
@@ -72,6 +74,7 @@ function handleAcceptReject({ type, isAccept }) {
         }
         getPlainText(displayElem);
         showHideBtns({ isShowRevise: true, type });
+        handleCharCount();
     } catch (err) {
         console.error(err);
     }

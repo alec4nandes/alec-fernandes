@@ -1,4 +1,5 @@
 import { openAiStreamed } from "./openai.mjs";
+import { handleCharCount } from "./char-count.mjs";
 
 async function handleAiPost(e, token) {
     e.preventDefault();
@@ -46,8 +47,9 @@ async function getTweet({ topic, temperature, postUrl, token }) {
     const maxChar = 280 - postUrl.length,
         systemContent =
             "You are a blogger. " +
-            "Write a short tweet that contains hashtags " +
-            `and is under ${maxChar} characters. ` +
+            "Write a short tweet that contains hashtags. " +
+            `The tweet, including hashtags, must be under ` +
+            `${maxChar} characters. ` +
             "Do not write the tweet in quotes.",
         displayElem = document.querySelector("#tweet-content");
     await getContentHelper({
@@ -58,6 +60,7 @@ async function getTweet({ topic, temperature, postUrl, token }) {
         token,
     });
     displayElem.textContent += postUrl;
+    handleCharCount();
 }
 
 async function getContentHelper({

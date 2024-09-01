@@ -4,6 +4,8 @@
     <script src="/admin/scripts/auth.js" type="module" defer></script>
 */
 
+import { handleCharCount } from "./char-count.mjs";
+
 loadPost();
 
 document.querySelector("form#edit").onsubmit = handleUpdatePost;
@@ -13,13 +15,7 @@ document.querySelector("button#format-caption").onclick = handleFormatCaption;
 document.querySelector("button#delete").onclick = handleDelete;
 document.querySelector("button#format-btn").onclick = handleFormat;
 document.querySelector("button#unformat-btn").onclick = handleUnformat;
-document.querySelector("#tweet-content").oninput = (e) => {
-    const charCount = e.target.innerText.length,
-        charCountElem = document.querySelector("#char-count");
-    charCountElem.classList[charCount >= 280 ? "add" : "remove"]("too-long");
-    charCountElem.innerText =
-        charCount + " characters" + (charCount === 1 ? "" : "s");
-};
+document.querySelector("#tweet-content").oninput = handleCharCount;
 
 async function loadPost() {
     try {
@@ -30,20 +26,23 @@ async function loadPost() {
                 .get(),
             { id } = post,
             data = post.data(),
-            { is_draft, date, content, tweet } = data,
+            { is_draft, date, content, tweet, topic } = data,
             getInput = (name) =>
                 document.querySelector(`input[name="${name}"]`);
         delete data.is_draft;
         delete data.date;
+        delete data.topic;
         getInput("post_id").value = id;
         getInput("is_draft").checked = is_draft;
         getInput("date").value = parseDate(new Date(date));
         document.querySelector("#post-content").innerText = content;
         document.querySelector("#tweet-content").innerText = tweet;
+        document.querySelector("textarea#topic").value = topic;
         for (const [key, value] of Object.entries(data)) {
             const input = getInput(key);
             input && (input.value = value);
         }
+        handleCharCount();
     } catch (err) {
         console.error(err);
     }
