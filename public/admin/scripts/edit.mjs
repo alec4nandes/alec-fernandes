@@ -13,6 +13,13 @@ document.querySelector("button#format-caption").onclick = handleFormatCaption;
 document.querySelector("button#delete").onclick = handleDelete;
 document.querySelector("button#format-btn").onclick = handleFormat;
 document.querySelector("button#unformat-btn").onclick = handleUnformat;
+document.querySelector("#tweet-content").oninput = (e) => {
+    const charCount = e.target.innerText.length,
+        charCountElem = document.querySelector("#char-count");
+    charCountElem.classList[charCount >= 280 ? "add" : "remove"]("too-long");
+    charCountElem.innerText =
+        charCount + " characters" + (charCount === 1 ? "" : "s");
+};
 
 async function loadPost() {
     try {

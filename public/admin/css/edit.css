@@ -51,3 +51,9 @@ textarea#topic,
 .reject-btn {
     display: none;
 }
+
+#char-count {
+    &.too-long {
+        color: lightsalmon;
+    }
+}
