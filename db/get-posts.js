@@ -1,17 +1,12 @@
 const { db } = require("./database.js");
 
-// type is "posts" or "dharma"
-async function getPostsData(type) {
-    const querySnapshot = await db.collection(type).get(),
+async function getPostsData() {
+    const querySnapshot = await db.collection("posts").get(),
         result = [];
     querySnapshot.forEach((doc) => {
         const data = doc.data();
         // don't add drafts
-        !data.is_draft &&
-            result.push({
-                ...data,
-                post_id: doc.id,
-            });
+        !data.is_draft && result.push({ ...data, post_id: doc.id });
     });
     result.sort(sortDateDescending);
     return result;

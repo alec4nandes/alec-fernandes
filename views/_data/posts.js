@@ -1,16 +1,13 @@
 const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
 
 module.exports = async function () {
-    let allPosts = (await getPostsData("posts")).map((post) => ({
-        ...post,
-        blurb: getBlurb(post),
-    }));
-    const dharmaPosts = await getPostsData("dharma");
-    // include Dharma Posts under the Culture category on Alec Fernandes
-    dharmaPosts.forEach((post) => (post.categories = ["Culture"]));
-    // add Dharma Posts to Alec Fernandes
-    allPosts = [...allPosts, ...dharmaPosts].sort(sortDateDescending);
-    const getAll = (key) =>
+    const allPosts = (await getPostsData())
+            .map((post) => ({
+                ...post,
+                blurb: getBlurb(post),
+            }))
+            .sort(sortDateDescending),
+        getAll = (key) =>
             [
                 ...new Set(
                     allPosts
@@ -21,7 +18,6 @@ module.exports = async function () {
             ].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
         allCategories = getAll("categories"),
         allTags = getAll("tags");
-
     return {
         all_posts: allPosts,
         all_categories: allCategories,
@@ -30,7 +26,6 @@ module.exports = async function () {
         recent_tags: getRecentTags(allPosts, 40),
         tag_data: getData(allPosts, "tags"),
         tags_by_letter: getTagsByLetter(allTags),
-        dharma_posts: dharmaPosts,
     };
 };
 
