@@ -1,4 +1,4 @@
-const IS_DEVELOPMENT = true;
+import { bufferedEndpoint, streamedEndpoint } from "./db-dev.mjs";
 
 /**
  * OpenAI Buffered Response:
@@ -32,9 +32,7 @@ async function openAiBuffered({
 }) {
     try {
         displayElem && (displayElem.textContent = message.start);
-        const endpoint = IS_DEVELOPMENT
-                ? "https://g5ejo7pibjkti6vpriyzsk2sly0mbfce.lambda-url.us-east-2.on.aws/"
-                : "https://22bgimafvhroblvxfwaicex73e0khmzb.lambda-url.us-east-2.on.aws/",
+        const endpoint = bufferedEndpoint,
             response = await getStreamResponse({
                 endpoint,
                 systemContent,
@@ -83,9 +81,7 @@ async function openAiStreamed({
 }) {
     try {
         displayElem && (displayElem.textContent = message.start);
-        const endpoint = IS_DEVELOPMENT
-                ? "https://jrq6h6yp72fwdd6cnqvqfjwn4i0hpotu.lambda-url.us-east-2.on.aws/"
-                : "https://qkhc7ig77yaaly33hd6i2he6yi0ydqdx.lambda-url.us-east-2.on.aws/",
+        const endpoint = streamedEndpoint,
             response = await getStreamResponse({
                 endpoint,
                 systemContent,
