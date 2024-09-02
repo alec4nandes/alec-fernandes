@@ -25,6 +25,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
         window.location.href = "/admin";
         return;
     }
+    document.body.style.display = "block";
     const formElem = document.querySelector("form#edit");
     if (formElem) {
         const postBtn = formElem.querySelector("button#ai-post"),
