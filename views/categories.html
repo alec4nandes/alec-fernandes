@@ -24,8 +24,13 @@
                 <div id="posts-container">
                     <div class="single-post whole-post all-categories-page">
                         {% for category in posts.all_categories %}
-                            <a class="category-link" href="/categories/{{ category | slugify }}">
-                                {{ category }}
+                            <a
+                                class="category-link"
+                                href="/categories/{{ category | slugify }}"
+                                style="background-image:
+                                    url('/assets/categories/{{ category | slugify }}.jpg');"
+                            >
+                                <span>{{ category }}</span>
                             </a>
                         {% endfor %}
                     </div>

@@ -41,10 +41,18 @@ body {
 
     .category-link {
         background: linear-gradient(to bottom, var(--color-2), var(--color-3));
+        background-size: cover;
+        background-position: top center;
         color: var(--color-5) !important;
         font-size: 1.25rem;
         font-weight: bold;
         line-height: 1.25rem;
+
+        span {
+            background-color: rgba(240, 240, 240, 0.75);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
     }
 
     header {
@@ -445,7 +453,7 @@ header {
 }
 
 main {
-    min-height: 700px;
+    min-height: 850px;
 
     #main-content {
         max-width: 80%;
@@ -687,10 +695,14 @@ footer {
                     height: auto;
                     min-height: auto;
                     width: auto;
-                    background-image: none;
+                    background-image: none !important;
                     font-weight: normal;
                     padding: 5px 12px;
                     text-align: center;
+
+                    span {
+                        background-color: transparent;
+                    }
                 }
             }
         }

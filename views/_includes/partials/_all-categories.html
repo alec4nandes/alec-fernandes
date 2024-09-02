@@ -10,8 +10,13 @@
         {% endif %}
     </div>
     {% for category in categories %}
-        <a class="category-link" href="/categories/{{ category | slugify }}">
-            {{ category }}
+        <a
+            class="category-link"
+            href="/categories/{{ category | slugify }}"
+            style="background-image:
+                url('/assets/categories/{{ category | slugify }}.jpg');"
+        >
+            <span>{{ category }}</span>
         </a>
     {% endfor %}
 </div>
