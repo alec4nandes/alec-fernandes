@@ -1,36 +1,41 @@
 <div id="name-and-logo">
     <button id="hamburger-menu-button">
-        <img src="/assets/hamburger-menu-icon.png">
+        <img src="/assets/hamburger-menu-icon.png" />
     </button>
     <a href="/">
         <div id="logo-container">
-            <img id="header-logo"
+            <img
+                id="header-logo"
                 src="/assets/logo/fern-haus-site-logo.png"
-                alt="Fern Haus logo: a house wrapped with two fern branches.">
+                alt="Fern Haus logo: a house wrapped with two fern branches."
+            />
         </div>
         {% if is_home == true %}
-            <h1 id="blog-name">
-                <span>Alec</span>
-                <span>Fernandes</span>
-            </h1>
+        <h1 id="blog-name">
+            <span>Alec</span>
+            <span>Fernandes</span>
+        </h1>
         {% else %}
-            <div id="blog-name">
-                <span>Alec</span>
-                <span>Fernandes</span>
-            </div>
+        <div id="blog-name">
+            <span>Alec</span>
+            <span>Fernandes</span>
+        </div>
         {% endif %}
     </a>
 </div>
 
 <div id="hamburger-menu" class="closed">
     <button id="close-menu">
-        <img src="/assets/hamburger-menu-close-icon.png">
+        <img src="/assets/hamburger-menu-close-icon.png" />
     </button>
     <h2>Menu</h2>
     <a href="/">Home</a>
     <a href="/categories">All Categories</a>
     <a href="/tags">All Tags</a>
     <a href="/about">About</a>
+    <a href="/portfolio" target="_blank">Published Work</a>
+    <a href="/tags/my-projects">Web Dev Projects</a>
+    <a href="/gallery" target="_blank">Graphic Design</a>
     <a href="/about">Contact</a>
     {% include "partials/_social.html" %}
 </div>
