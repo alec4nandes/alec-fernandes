@@ -77,12 +77,12 @@ function formatPostData(formElem) {
     post.is_draft = !!post.is_draft;
     post.categories = splitter(post.categories);
     post.tags = splitter(post.tags);
-    post.date += getTimezone();
+    post.date += getTimezone(new Date(post.date));
     return post;
 }
 
-function getTimezone() {
-    const tz = new Date().getTimezoneOffset() / 60,
+function getTimezone(date) {
+    const tz = (date || new Date()).getTimezoneOffset() / 60,
         tzHours = ~~tz,
         tzMinutes = (tz - tzHours) * 60;
     return `${tz < 0 ? "+" : "-"}${pad(tzHours)}:${pad(tzMinutes)}`;
@@ -109,7 +109,7 @@ function handleSlugifyTitle(e) {
             .trim()
             .toLowerCase()
             .replaceAll(/[— –]/g, "-")
-            .replaceAll(/[‘’“”.,:;—–]+/g, "");
+            .replaceAll(/[‘’“”.,:;—–]/g, "");
     document.querySelector("input#post-id").value = slug;
 }
 
@@ -136,7 +136,10 @@ async function handleDelete(e) {
 
 function handleFormat(e) {
     e.preventDefault();
-    const contentElem = document.querySelector("#post-content"),
+    const contentElem = document
+            .querySelector("#post-content")
+            .replaceAll(/[“”]/g, '"')
+            .replaceAll(/[‘’]/g, "'"),
         paragraphs =
             "<p>\n" +
             contentElem.innerText.trim().replaceAll("\n\n", "\n</p>\n\n<p>\n") +

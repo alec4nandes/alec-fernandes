@@ -1,3 +1,6 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
 
 module.exports = async function () {
@@ -30,19 +33,9 @@ module.exports = async function () {
 };
 
 function getBlurb(post) {
-    const words = post.content.split(`<p class="blurb">`)[1]?.split("</p>")[0],
-        regex = /<a [^>]+>(.+?)<\/a>/g,
-        matches = {};
-    let m;
-    while ((m = regex.exec(words))) {
-        matches[m[0]] = m[1];
-    }
-    console.log(matches);
-    let result = words;
-    for (const [m1, m2] of Object.entries(matches)) {
-        result = result?.replaceAll(m1, m2);
-    }
-    result = result?.slice(0, 200).split(" ");
+    const dom = new JSDOM(`<body>${post.content}</body>`),
+        blurb = dom.window.document.querySelector(".blurb").textContent,
+        result = blurb?.slice(0, 200).split(" ");
     // remove last incomplete word
     result?.pop();
     return result?.join(" ");

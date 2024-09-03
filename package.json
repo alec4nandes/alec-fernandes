@@ -38,12 +38,12 @@
         "firebase": "^9.23.0",
         "firebase-admin": "^11.11.1",
         "html-minifier": "^4.0.0",
-        "jsdom": "^24.1.0",
         "mkdirp": "^3.0.1",
         "puppeteer": "^23.0.2",
         "twitter-api-v2": "^1.17.0"
     },
     "devDependencies": {
-        "@11ty/eleventy": "^2.0.1"
+        "@11ty/eleventy": "^2.0.1",
+        "jsdom": "^25.0.0"
     }
 }
