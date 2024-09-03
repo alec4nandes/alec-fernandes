@@ -136,14 +136,13 @@ async function handleDelete(e) {
 
 function handleFormat(e) {
     e.preventDefault();
-    const contentElem = document
-            .querySelector("#post-content")
+    const contentElem = document.querySelector("#post-content"),
+        content = contentElem.innerText
+            .trim()
             .replaceAll(/[“”]/g, '"')
-            .replaceAll(/[‘’]/g, "'"),
-        paragraphs =
-            "<p>\n" +
-            contentElem.innerText.trim().replaceAll("\n\n", "\n</p>\n\n<p>\n") +
-            "\n</p>";
+            .replaceAll(/[‘’]/g, "'")
+            .replaceAll("\n\n", "\n</p>\n\n<p>\n"),
+        paragraphs = `<p>\n${content}\n</p>`;
     contentElem.innerText = paragraphs;
 }
 
