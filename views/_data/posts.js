@@ -1,6 +1,6 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-
+const { slugifier } = require("../../db/get-posts.js");
 const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
 
 module.exports = async function () {
@@ -34,7 +34,7 @@ module.exports = async function () {
 
 function getBlurb(post) {
     const dom = new JSDOM(`<body>${post.content}</body>`),
-        blurb = dom.window.document.querySelector(".blurb").textContent,
+        blurb = dom.window.document.querySelector(".blurb")?.textContent,
         result = blurb?.slice(0, 200).split(" ");
     // remove last incomplete word
     result?.pop();
@@ -46,7 +46,7 @@ function getData(allPosts, postsKey) {
     for (const post of allPosts) {
         const arr = post[postsKey];
         for (const item of arr) {
-            const key = item.replaceAll("&", "and").replaceAll(" ", "");
+            const key = slugifier(item);
             result[key] = {
                 posts: [...(result[key]?.posts || []), post],
                 ...(postsKey === "categories"

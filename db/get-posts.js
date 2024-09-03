@@ -32,4 +32,16 @@ async function getCategoriesAndTags() {
     return { categories: format(c), tags: format(t) };
 }
 
-module.exports = { getPostsData, getCategoriesAndTags, sortDateDescending };
+function slugifier(str) {
+    return str
+        .replaceAll("&", "and")
+        .replaceAll(/[\.\s]/g, "-")
+        .toLowerCase();
+}
+
+module.exports = {
+    getPostsData,
+    getCategoriesAndTags,
+    sortDateDescending,
+    slugifier,
+};

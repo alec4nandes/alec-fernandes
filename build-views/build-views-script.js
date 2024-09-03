@@ -1,5 +1,5 @@
 const fs = require("fs"),
-    { getCategoriesAndTags } = require("../db/get-posts.js");
+    { getCategoriesAndTags, slugifier } = require("../db/get-posts.js");
 
 getCategoriesAndTags()
     .then(({ categories, tags }) => {
@@ -17,11 +17,9 @@ function buildView(isCat, arr) {
         caps = isCat ? "CATEGORY" : "TAG",
         file = fs.readFileSync(`build-views/templates/${plural}.html`, "utf8");
     for (const item of arr) {
-        const noAmp = item.replaceAll("&", "and"),
-            id = noAmp.replaceAll(" ", ""),
-            slug = noAmp.replaceAll(" ", "-").toLowerCase(),
+        const slug = slugifier(item),
             parsed = file
-                .replaceAll(`__${caps}_ID__`, id)
+                .replaceAll(`__${caps}_ID__`, slug)
                 .replaceAll(`__${caps}__`, item);
         fs.writeFileSync(`views/${plural}/${slug}.html`, parsed, (err) => {
             err && console.error(err);
