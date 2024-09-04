@@ -131,6 +131,7 @@ async function handleDelete(e) {
             .doc(getPostId())
             .delete();
         alert("Post deleted!");
+        window.location.href = "/admin";
     }
 }
 
