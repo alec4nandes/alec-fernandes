@@ -36,11 +36,11 @@ function getBlurb(post, maxLength) {
     const dom = new JSDOM(`<body>${post.content}</body>`),
         blurbElem = dom.window.document.querySelector(".blurb");
     if (blurbElem) {
-        const blurb = blurbElem.textContent.slice(0, maxLength).trim(),
+        const blurb = blurbElem.textContent.slice(0, maxLength),
             words = blurb.split(" ");
         // remove last incomplete word
         blurb.length === maxLength && words.pop();
-        const result = words.join(" "),
+        const result = words.join(" ").trim(),
             endsWithPeriod = result.charAt(result.length - 1) === ".";
         return endsWithPeriod ? result.slice(0, result.length - 1) : result;
     }
