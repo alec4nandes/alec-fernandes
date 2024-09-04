@@ -354,11 +354,6 @@ hr {
         img {
             height: 100%;
             width: 100%;
-
-            &.instagram-icon {
-                height: 34px;
-                width: 34px;
-            }
         }
     }
 }

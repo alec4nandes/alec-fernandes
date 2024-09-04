@@ -33,6 +33,10 @@ body {
         max-width: 600px;
         width: 100%;
 
+        & > p {
+            text-wrap: balance;
+        }
+
         .list {
             background-color: #f1f2f6;
             border-radius: 10px;
