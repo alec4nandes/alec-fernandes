@@ -17,11 +17,10 @@ function sortDateDescending(postA, postB) {
 }
 
 async function getCategoriesAndTags() {
-    const querySnapshot = await db.collection("posts").get(),
+    const allPosts = await getPostsData(),
         c = [],
         t = [];
-    querySnapshot.forEach((doc) => {
-        const { categories, tags } = doc.data();
+    allPosts.forEach(({ categories, tags }) => {
         c.push(...categories);
         t.push(...tags);
     });

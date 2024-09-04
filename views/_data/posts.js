@@ -7,7 +7,7 @@ module.exports = async function () {
     const allPosts = (await getPostsData())
             .map((post) => ({
                 ...post,
-                blurb: getBlurb(post),
+                blurb: getBlurb(post, 200),
             }))
             .sort(sortDateDescending),
         getAll = (key) =>
@@ -32,13 +32,18 @@ module.exports = async function () {
     };
 };
 
-function getBlurb(post) {
+function getBlurb(post, maxLength) {
     const dom = new JSDOM(`<body>${post.content}</body>`),
-        blurb = dom.window.document.querySelector(".blurb")?.textContent,
-        result = blurb?.slice(0, 200).split(" ");
-    // remove last incomplete word
-    result?.pop();
-    return result?.join(" ");
+        blurbElem = dom.window.document.querySelector(".blurb");
+    if (blurbElem) {
+        const blurb = blurbElem.textContent.slice(0, maxLength).trim(),
+            words = blurb.split(" ");
+        // remove last incomplete word
+        blurb.length === maxLength && words.pop();
+        const result = words.join(" "),
+            endsWithPeriod = result.charAt(result.length - 1) === ".";
+        return endsWithPeriod ? result.slice(0, result.length - 1) : result;
+    }
 }
 
 function getData(allPosts, postsKey) {
