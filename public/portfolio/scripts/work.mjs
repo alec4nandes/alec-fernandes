@@ -1,4 +1,8 @@
 const articles = {
+    "police-chiefs-focus-on-uap-in-new-official-handbook":
+        "Police Chiefs Focus on UAP in New Official Handbook",
+    "watch-mushroom-growing-inside-robot-controls-its-movements":
+        "Watch: Mushroom Growing Inside Robot Controls Its Movements",
     "video-several-ufos-spotted-in-southern-california":
         "Video: Several UFOs Spotted in Southern California",
     "watch-robot-smiles-with-living-human-skin":
@@ -18,6 +22,8 @@ const articles = {
 };
 
 const shows = {
+    "2024-09-08": "Alien Encounters / Energy Healing",
+    "2024-09-05": "Earth's Power Grid / Paranormal Podcast Network",
     "2024-08-26": "Student Loan Crisis / Astrology Wisdom",
     "2024-08-25": "UAP Secrets / Scientist's Mysterious Death",
     "2024-08-17": "Near Death / The Metaphysical Closet",
