@@ -8,11 +8,12 @@ const config = {
     measurementId: "G-7QM5KTX0XK",
 };
 
-const bufferedEndpoint =
-    "https://22bgimafvhroblvxfwaicex73e0khmzb.lambda-url.us-east-2.on.aws/";
-
-const streamedEndpoint =
-    "https://qkhc7ig77yaaly33hd6i2he6yi0ydqdx.lambda-url.us-east-2.on.aws/";
+const endpoints = {
+    buffered:
+        "https://22bgimafvhroblvxfwaicex73e0khmzb.lambda-url.us-east-2.on.aws/",
+    streamed:
+        "https://qkhc7ig77yaaly33hd6i2he6yi0ydqdx.lambda-url.us-east-2.on.aws/",
+};
 
 export default config;
-export { bufferedEndpoint, streamedEndpoint };
+export { endpoints };

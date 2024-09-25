@@ -1,4 +1,4 @@
-import { bufferedEndpoint, streamedEndpoint } from "./db-dev.mjs";
+import { endpoints } from "./db-dev.mjs";
 
 /**
  * OpenAI Buffered Response:
@@ -32,7 +32,7 @@ async function openAiBuffered({
 }) {
     try {
         displayElem && (displayElem.textContent = message.start);
-        const endpoint = bufferedEndpoint,
+        const endpoint = endpoints.buffered,
             response = await getStreamResponse({
                 endpoint,
                 systemContent,
@@ -81,7 +81,7 @@ async function openAiStreamed({
 }) {
     try {
         displayElem && (displayElem.textContent = message.start);
-        const endpoint = streamedEndpoint,
+        const endpoint = endpoints.streamed,
             response = await getStreamResponse({
                 endpoint,
                 systemContent,
@@ -148,7 +148,7 @@ function getFetchBody({
             systemContent && { role: "system", content: systemContent },
             { role: "user", content: prompt },
         ].filter(Boolean),
-        projectId: "BLOG",
+        projectId: "DEV",
         ...fullJSONSchema(jsonSchema),
         ...(temperature ? { temperature } : {}),
         token,
