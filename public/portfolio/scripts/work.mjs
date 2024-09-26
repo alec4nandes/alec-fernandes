@@ -1,4 +1,8 @@
 const articles = {
+    "video-chinese-zoo-proudly-displays-painted-dogs-as-pandas":
+        "Video: Chinese Zoo Proudly Displays Dogs Painted as Pandas",
+    "video-light-anomaly-appears-inside-washington-state-museum":
+        "Video: 'Light Anomaly' Appears Inside Washington State Museum",
     "police-chiefs-focus-on-uap-in-new-official-handbook":
         "Police Chiefs Focus on UAP in New Official Handbook",
     "watch-mushroom-growing-inside-robot-controls-its-movements":
@@ -22,6 +26,10 @@ const articles = {
 };
 
 const shows = {
+    "2024-09-26": "Mind Guidance / Black Magic",
+    "2024-09-22": "Global UAP Secrets / Remote Viewing & UFO Bases",
+    "2024-09-21": "Cyber Threats / Paranormal Investigations",
+    "2024-09-20": "The Chocolate Business / Open Lines",
     "2024-09-08": "Alien Encounters / Energy Healing",
     "2024-09-05": "Earth's Power Grid / Paranormal Podcast Network",
     "2024-08-26": "Student Loan Crisis / Astrology Wisdom",
