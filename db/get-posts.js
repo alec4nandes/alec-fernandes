@@ -6,7 +6,11 @@ async function getPostsData() {
     querySnapshot.forEach((doc) => {
         const data = doc.data();
         // don't add drafts
-        !data.is_draft && result.push({ ...data, post_id: doc.id });
+        if (!data.is_draft) {
+            // fix tabs in <pre> tags
+            data.content = data.content.replaceAll("&#9;", "  ");
+            result.push({ ...data, post_id: doc.id });
+        }
     });
     result.sort(sortDateDescending);
     return result;

@@ -26,7 +26,7 @@ const articles = {
 };
 
 const shows = {
-    "2024-09-26": "Mind Guidance / Black Magic",
+    "2024-09-26": "Fearless Guidance / Black Magic",
     "2024-09-22": "Global UAP Secrets / Remote Viewing & UFO Bases",
     "2024-09-21": "Cyber Threats / Paranormal Investigations",
     "2024-09-20": "The Chocolate Business / Open Lines",
