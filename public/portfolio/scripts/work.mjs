@@ -1,4 +1,10 @@
 const articles = {
+    "video-bats-face-off-in-beauty-competition":
+        "Video: Bats Face Off in Beauty Competition",
+    "watch-indiana-residents-report-multiple-ufo-sightings-within-weeks":
+        "Watch: Indiana Residents Report Multiple UFO Sightings within Weeks",
+    "watch-comet-passes-by-earth-for-first-time-in-80000-years":
+        "Watch: Comet Passes by Earth for First Time in 80,000 Years",
     "video-chinese-zoo-proudly-displays-painted-dogs-as-pandas":
         "Video: Chinese Zoo Proudly Displays Dogs Painted as Pandas",
     "video-light-anomaly-appears-inside-washington-state-museum":
@@ -26,6 +32,14 @@ const articles = {
 };
 
 const shows = {
+    "2024-10-26": "Haunted Locations / Horror Movies",
+    "2024-10-25": "ET Contactee / Open Lines",
+    "2024-10-22": "Natural Remedies / Spirit Communications",
+    "2024-10-21": "Challenging Climate Change / Supernatural Tales",
+    "2024-10-20": "Imperiled Animals / Navajo Rangers",
+    "2024-10-19": "Hauntings & Exorcisms / Dogman Encounters",
+    "2024-10-18": "Global Forces / Dreams & Open Lines",
+    "2024-10-13": "Feng Shui Techniques / Astrological Concepts",
     "2024-09-26": "Fearless Guidance / Black Magic",
     "2024-09-22": "Global UAP Secrets / Remote Viewing & UFO Bases",
     "2024-09-21": "Cyber Threats / Paranormal Investigations",
