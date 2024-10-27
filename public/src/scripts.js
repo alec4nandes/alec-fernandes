@@ -1,5 +1,5 @@
 // parse all dates to local device timezone
-document.querySelectorAll(".date-posted").forEach(
+document.querySelectorAll(".date, .date-posted").forEach(
     (elem) =>
         (elem.textContent = new Date(elem.textContent.trim())
             .toLocaleDateString("en-us", {

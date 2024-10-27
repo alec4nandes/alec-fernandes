@@ -1,43 +1,96 @@
----
-pagination:
-    data: posts.all_posts
-    size: 7
----
-
-{% assign is_home = true %}
-{% assign page_num = pagination.pageNumber | plus : 1 %}
-{% assign title = "Alec Fernandes" %}
-{% assign description = "A blog about unusual topics, culture, and tech. Follow me @alec4nandes on TikTok, Instagram and X." %}
-{% assign url = "https://fern.haus" %}
-<!-- TODO: update social image -->
-{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
-{% assign categories = posts.all_categories %}
-{% assign tags = posts.recent_tags %}
-{% assign tags_heading = "Recent Tags" %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {% include "partials/_meta-tags.html" %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Alec Fernandes</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/css/home.css" />
     </head>
     <body>
         <header>
-            {% include "partials/_header-name.html" %}
-            <nav id="mobile-nav">
-                {% include "partials/_all-categories.html" %}
+            <h1>Alec Fernandes</h1>
+            <nav>
+                <p>
+                    [[ SOCIAL ICONS ]] &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/about">about</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/portfolio">published work</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/portfolio/resume.pdf" target="_blank">resume</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/gallery">graphic design</a>
+                </p>
             </nav>
         </header>
         <main>
-            {% include "partials/_posts-page.html" %}
-            <section id="sidebar">
-                <div id="categories-and-tags">
-                    <a id="home-link" href="/about">About Alec Fernandes</a>
-                    {% include "partials/_social.html" %}
-                    {% include "partials/_all-categories.html" %}
-                    {% include "partials/_all-tags.html" %}
+            <section id="pn-updates">
+                <h2><a href="/paranormal">Paranormal Update</a></h2>
+                {% for post in home.pnUpdates %}
+                <div class="update">
+                    <a href="/posts/{{ post.post_id }}.html">
+                        <div
+                            style="background-image: url('{{ post.feature_image }}');"
+                        >
+                            <div class="content">
+                                <h3>{{ post.subtitle }}</h3>
+                                <p class="date">{{ post.date }}</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+                {% endfor %}
+                <p><a href="/paranormal">more paranormal updates</a></p>
+            </section>
+            <section id="categories">
+                {% for cat in home.categories %}
+                <div class="category">
+                    <div>
+                        <h2>
+                            <a href="/categories/${category}">
+                                {{ cat.category }}
+                            </a>
+                        </h2>
+                        <div class="cat-container">
+                            <div class="content">
+                                <h3>
+                                    <a href="/posts/${post_id}.html">
+                                        {{ cat.posts[0].title }}
+                                    </a>
+                                </h3>
+                                <p class="date">{{ cat.posts[0].date }}</p>
+                                <!-- IF... -->
+                                <p class="subtitle">
+                                    {{ cat.posts[0].subtitle }}
+                                </p>
+                            </div>
+                            <a href="/posts/{{ cat.posts[0].post_id }}.html">
+                                <div
+                                    class="image"
+                                    style="
+                                        background-image: url('{{ cat.posts[0].feature_image }}');
+                                    "
+                                ></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <p><a href="/categories">more stories</a></p>
             </section>
         </main>
-        {% include "partials/_footer.html" %}
+
+        <script src="/src/scripts.js"></script>
     </body>
 </html>

@@ -1,0 +1,43 @@
+---
+pagination:
+    data: posts.all_posts
+    size: 7
+---
+
+{% assign is_home = true %}
+{% assign page_num = pagination.pageNumber | plus : 1 %}
+{% assign title = "Alec Fernandes" %}
+{% assign description = "A blog about unusual topics, culture, and tech. Follow me @alec4nandes on TikTok, Instagram and X." %}
+{% assign url = "https://fern.haus" %}
+<!-- TODO: update social image -->
+{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
+{% assign categories = posts.all_categories %}
+{% assign tags = posts.recent_tags %}
+{% assign tags_heading = "Recent Tags" %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "partials/_meta-tags.html" %}
+    </head>
+    <body>
+        <header>
+            {% include "partials/_header-name.html" %}
+            <nav id="mobile-nav">
+                {% include "partials/_all-categories.html" %}
+            </nav>
+        </header>
+        <main>
+            {% include "partials/_posts-page.html" %}
+            <section id="sidebar">
+                <div id="categories-and-tags">
+                    <a id="home-link" href="/about">About Alec Fernandes</a>
+                    {% include "partials/_social.html" %}
+                    {% include "partials/_all-categories.html" %}
+                    {% include "partials/_all-tags.html" %}
+                </div>
+            </section>
+        </main>
+        {% include "partials/_footer.html" %}
+    </body>
+</html>
