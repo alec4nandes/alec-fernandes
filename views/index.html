@@ -1,9 +1,18 @@
+{% assign is_home = true %}
+{% assign page_num = pagination.pageNumber | plus : 1 %}
+{% assign title = "Alec Fernandes" %}
+{% assign description = "A blog about unusual topics, culture, and tech. Follow me @alec4nandes on TikTok, Instagram and X." %}
+{% assign url = "https://fern.haus" %}
+<!-- TODO: update social image -->
+{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
+{% assign categories = posts.all_categories %}
+{% assign tags = posts.recent_tags %}
+{% assign tags_heading = "Recent Tags" %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Alec Fernandes</title>
+        {% include "partials/_meta-tags-basic.html" %}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -28,7 +37,7 @@
         </header>
         <main>
             <section id="pn-updates">
-                <h2><a href="/paranormal">Paranormal Update</a></h2>
+                <h2><a href="/tags/coast-to-coast-am">Paranormal Update</a></h2>
                 {% for post in home.pnUpdates %}
                 <div class="update">
                     <a href="/posts/{{ post.post_id }}.html">
@@ -43,21 +52,27 @@
                     </a>
                 </div>
                 {% endfor %}
-                <p><a href="/paranormal">more paranormal updates</a></p>
+                <p>
+                    <a href="/tags/coast-to-coast-am">
+                        more paranormal updates
+                    </a>
+                </p>
             </section>
             <section id="categories">
                 {% for cat in home.categories %}
                 <div class="category">
                     <div>
                         <h2>
-                            <a href="/categories/${category}">
+                            <a href="/categories/{{ cat.category | slugify }}">
                                 {{ cat.category }}
                             </a>
                         </h2>
                         <div class="cat-container">
                             <div class="content">
                                 <h3>
-                                    <a href="/posts/${post_id}.html">
+                                    <a
+                                        href="/posts/{{ cat.posts[0].post_id }}.html"
+                                    >
                                         {{ cat.posts[0].title }}
                                     </a>
                                 </h3>
