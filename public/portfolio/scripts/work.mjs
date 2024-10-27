@@ -32,7 +32,7 @@ const articles = {
 };
 
 const shows = {
-    "2024-10-26": "Haunted Locations / Horror Movies",
+    "2024-10-26": "Haunted Houses / Horror Movies",
     "2024-10-25": "ET Contactee / Open Lines",
     "2024-10-22": "Natural Remedies / Spirit Communications",
     "2024-10-21": "Challenging Climate Change / Supernatural Tales",
