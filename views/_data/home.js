@@ -1,4 +1,4 @@
-const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
+const { getPostsData } = require("../../db/get-posts.js");
 
 module.exports = async function () {
     const allPosts = await getPostsData(),

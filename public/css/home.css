@@ -58,7 +58,37 @@ header {
     }
 
     nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px 15px;
+        flex-wrap: wrap;
         text-align: right;
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+
+            a {
+                height: 28px;
+                width: 28px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+
+                &:hover {
+                    box-shadow: 0 0 6px #eee;
+                }
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
     }
 }
 
