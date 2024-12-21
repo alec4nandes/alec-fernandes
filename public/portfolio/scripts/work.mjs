@@ -1,4 +1,14 @@
 const articles = {
+    "man-running-from-police-gets-stuck-in-chimney":
+        "Man Running from Police Gets Stuck in Chimney",
+    "watch-drones-as-large-as-suvs-spotted-over-staten-island":
+        "Watch: Drones 'as Large as SUVs' Spotted over Staten Island",
+    "watch-photo-and-video-show-strange-lights-above-washington-dc":
+        "Watch: Photo and Video Show Strange Lights Above Washington, DC",
+    "watch-mysterious-object-breaks-apart-in-night-sky-over-texas":
+        "Watch: Mysterious Object Breaks Apart in Night Sky over Texas",
+    "historian-unveils-royal-familys-many-ghost-encounters":
+        "Historian Unveils Royal Family's Many Ghost Encounters",
     "video-bats-face-off-in-beauty-competition":
         "Video: Bats Face Off in Beauty Competition",
     "watch-indiana-residents-report-multiple-ufo-sightings-within-weeks":
@@ -32,6 +42,21 @@ const articles = {
 };
 
 const shows = {
+    "2024-12-19": "Building a Better Brain / Animal Reincarnation",
+    "2024-12-18": "Death of Elvis / Channeling Higher Wisdom",
+    "2024-12-14": "UFO Mass Sightings / Lost Scriptures",
+    "2024-12-13": "UFO Reports / Life After Death / Open Lines",
+    "2024-12-12": "Climate Shifts & Agriculture / Spirit Contact",
+    "2024-12-11": "Global Tensions & Tech / Cryptozoology Review",
+    "2024-12-08": "Maroon 5 & Therapy / Shamanic Energy Work",
+    "2024-11-30": "Power of Gold / Dystopia & Surveillance",
+    "2024-11-29": "Tiny Mistakes / Open Lines",
+    "2024-11-24": "Path to Singularity / The Energy Cure",
+    "2024-11-21": "Roswell & Ufology / Folklore & Exorcisms",
+    "2024-11-20": "Near-Death Experience / Astrological Forecast",
+    "2024-11-11": "Fuzzy Logic / Reptilians / Working with Veterans",
+    "2024-11-10": "Biblical Treasures / UFO Swarms",
+    "2024-10-31": "Demonic Investigations / Ghost to Ghost 2024",
     "2024-10-26": "Haunted Houses / Horror Movies",
     "2024-10-25": "ET Contactee / Open Lines",
     "2024-10-22": "Natural Remedies / Spirit Communications",

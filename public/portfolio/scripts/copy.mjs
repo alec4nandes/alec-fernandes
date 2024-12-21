@@ -36,6 +36,7 @@ process.exit();
 
 function getExistingPages() {
     return getDirectories(topDir)
+        .filter((dir) => !dir.toLowerCase().includes(".ds_store"))
         .map((dir) => getDirectories(`${topDir}/${dir}`))
         .flat();
 }
