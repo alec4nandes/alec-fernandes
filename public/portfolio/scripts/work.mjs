@@ -1,4 +1,10 @@
 const articles = {
+    "watch-ufo-whistleblower-describes-recovery-of-egg-shaped-craft":
+        "Watch: UFO Whistleblower Describes Recovery of Egg-shaped Craft",
+    "untouched-trees-from-la-wildfires-ignite-conspiracy-theories":
+        "Untouched Trees from LA Wildfires Ignite Conspiracy Theories",
+    "watch-la-news-chopper-films-ufo-above-wildfires":
+        "Watch: LA News Chopper Films UFO Above Wildfires",
     "man-running-from-police-gets-stuck-in-chimney":
         "Man Running from Police Gets Stuck in Chimney",
     "watch-drones-as-large-as-suvs-spotted-over-staten-island":
@@ -42,6 +48,18 @@ const articles = {
 };
 
 const shows = {
+    "2025-02-03": "Eyeing Your Potential / NDEs & the Afterlife",
+    "2025-02-02": "Exploring the Other Side / Power of the Knights Templar",
+    "2025-01-30": "Quantum Physics & the Bible / ET Encounters",
+    "2025-01-29": "Green Energy Breakdown / Dangerous Artificial Intelligence",
+    "2025-01-26": "Grey Abilities / Ufology",
+    "2025-01-23": "Digital Emergency Kits / Coincidences & Synchronicities",
+    "2025-01-18": "NDEs & Transformation / Modern Health Crisis",
+    "2025-01-17": "Decoding Dreams / Conspiracy Culture",
+    "2025-01-12": "The Final War / Earthing & Trauma Healing",
+    "2025-01-11": "The ET Abduction Experience / Open Lines",
+    "2024-12-27": "Arizona's Plasma UFOs / Open Lines",
+    "2024-12-22": "Biggest UFO Stories of 2024",
     "2024-12-19": "Building a Better Brain / Animal Reincarnation",
     "2024-12-18": "Death of Elvis / Channeling Higher Wisdom",
     "2024-12-14": "UFO Mass Sightings / Lost Scriptures",
