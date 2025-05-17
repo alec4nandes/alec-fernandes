@@ -1,4 +1,16 @@
 const articles = {
+    "watch-border-patrol-agent-reports-witnessing-ufos-in-arizona":
+        "Watch: Border Patrol Agent Reports Witnessing UFOs in Arizona",
+    "mysterious-hum-torments-scottish-islands":
+        "Mysterious Hum Torments Scottish Islanders",
+    "watch-bright-light-and-glowing-ring-spotted-over-texas":
+        "Watch: Bright Light and Glowing Ring Spotted over Texas",
+    "new-report-claims-kenya-space-junk-has-more-mysterious-origin":
+        "New Report Claims Kenya 'Space Junk' Has More Mysterious Origin",
+    "possible-tic-tac-craft-spotted-in-images-from-mars":
+        "Possible Tic-Tac Craft Spotted in Images from Mars",
+    "video-teen-with-werewolf-syndrome-sets-record-for-hairiest-face":
+        "Video: Teen with 'Werewolf Syndrome' sets Record for Hairiest Face",
     "watch-ufo-whistleblower-describes-recovery-of-egg-shaped-craft":
         "Watch: UFO Whistleblower Describes Recovery of Egg-shaped Craft",
     "untouched-trees-from-la-wildfires-ignite-conspiracy-theories":
@@ -48,6 +60,25 @@ const articles = {
 };
 
 const shows = {
+    "2025-05-15": "Geoengineering & Chemtrails / Starseed Healing",
+    "2025-05-11": "JFK Jr. Death Conspiracy / The Omega Car",
+    "2025-05-04": "Universe & Consciousness / UAP Disclosure",
+    "2025-05-03": "Government ET Secrets / Shadow People",
+    "2025-05-02": "Tarot Therapy / Open Lines",
+    "2025-04-27": "UAP Wiki Wars / Vegas True Crime",
+    "2025-04-17": "Fighting the Federal Reserve / Angels & Consciousness",
+    "2025-04-13": "Mitchell-Hedges Crystal Skull / Murder in Central Florida",
+    "2025-04-06": "Prayer & Finances / Past & Future Lives",
+    "2025-03-29":
+        "Antarctica & Ancient Civilizations / Mysteries of the Pyramids",
+    "2025-03-28": "Astrology Forecast / Open Lines",
+    "2025-03-24": "JFK Assassination Files / Spiritual Transformation",
+    "2025-03-23": "Remote Viewing & OBEs / Kung Fu & Martial Arts",
+    "2025-03-15": "Investigating Bigfoot / Ghost Hunting & Parapsychology",
+    "2025-03-09": "Afterlife Evidence / Weather Magic",
+    "2025-02-24": "Changing Gun Policy / AI & Communicating with the Dead",
+    "2025-02-23":
+        "National Park Disappearances / Unidentified Submerged Objects",
     "2025-02-03": "Eyeing Your Potential / NDEs & the Afterlife",
     "2025-02-02": "Exploring the Other Side / Power of the Knights Templar",
     "2025-01-30": "Quantum Physics & the Bible / ET Encounters",
