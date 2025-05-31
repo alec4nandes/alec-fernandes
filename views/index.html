@@ -77,9 +77,12 @@
                                     </a>
                                 </h3>
                                 <p class="date">{{ cat.posts[0].date }}</p>
-                                <!-- IF... -->
                                 <p class="subtitle">
-                                    {{ cat.posts[0].subtitle }}
+                                    {% if cat.posts[0].subtitle != "" %}
+                                        {{ cat.posts[0].subtitle }}
+                                    {% elsif cat.posts[0].blurb %}
+                                        {{ cat.posts[0].blurb }}
+                                    {% endif %}
                                 </p>
                             </div>
                             <a href="/posts/{{ cat.posts[0].post_id }}.html">

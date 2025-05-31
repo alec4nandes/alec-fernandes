@@ -4,12 +4,7 @@ const { slugifier } = require("../../db/get-posts.js");
 const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
 
 module.exports = async function () {
-    const allPosts = (await getPostsData())
-            .map((post) => ({
-                ...post,
-                blurb: getBlurb(post, 200),
-            }))
-            .sort(sortDateDescending),
+    const allPosts = (await getPostsData()).sort(sortDateDescending),
         getAll = (key) =>
             [
                 ...new Set(
@@ -31,20 +26,6 @@ module.exports = async function () {
         tags_by_letter: getTagsByLetter(allTags),
     };
 };
-
-function getBlurb(post, maxLength) {
-    const dom = new JSDOM(`<body>${post.content}</body>`),
-        blurbElem = dom.window.document.querySelector(".blurb");
-    if (blurbElem) {
-        const blurb = blurbElem.textContent.slice(0, maxLength),
-            words = blurb.split(" ");
-        // remove last incomplete word
-        blurb.length === maxLength && words.pop();
-        const result = words.join(" ").trim(),
-            endsWithPeriod = result.charAt(result.length - 1) === ".";
-        return endsWithPeriod ? result.slice(0, result.length - 1) : result;
-    }
-}
 
 function getData(allPosts, postsKey) {
     const result = {};
