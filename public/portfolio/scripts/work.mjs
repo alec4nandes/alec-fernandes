@@ -1,4 +1,10 @@
 const articles = {
+    "human-remains-aboard-memorial-space-flight-lost-at-sea":
+        "Human Remains Aboard Memorial Space Flight Lost at Sea",
+    "beekeeper-sics-swarm-on-police-during-traffic-stop":
+        "Beekeeper Sics Swarm on Police During Traffic Stop",
+    "area-51-cover-story-raises-more-questions-than-answers":
+        "Area 51 Cover Story Raises More Questions than Answers",
     "watch-border-patrol-agent-reports-witnessing-ufos-in-arizona":
         "Watch: Border Patrol Agent Reports Witnessing UFOs in Arizona",
     "mysterious-hum-torments-scottish-islands":
@@ -60,6 +66,15 @@ const articles = {
 };
 
 const shows = {
+    "2025-06-28": "Weight Loss Secrets / Roswell & Disclosure",
+    "2025-06-27": "The Medicine Wheel & Spiritual Healing / Open Lines",
+    "2025-06-22": "Pain Medication Controversy / Gray Barker & UFOs",
+    "2025-06-21": "Land of the Lost / Beekeeping",
+    "2025-06-20": "What's in a Name? / Open Lines",
+    "2025-06-18": "Gambling Addiction / Iran, Israel & Psychic Abilities",
+    "2025-06-08": "Reclaiming Your Power / Dark Enlightenment",
+    "2025-05-25": "Skinwalker Ranch / Hunting Astronomical Anomalies",
+    "2025-05-22": "Numerology & Current Events / Dinosaurs & Dragons",
     "2025-05-15": "Geoengineering & Chemtrails / Starseed Healing",
     "2025-05-11": "JFK Jr. Death Conspiracy / The Omega Car",
     "2025-05-04": "Universe & Consciousness / UAP Disclosure",
