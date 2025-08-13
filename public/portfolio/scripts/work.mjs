@@ -1,4 +1,14 @@
 const articles = {
+    "paranormal-investigator-warns-famous-haunted-houses-new-owners":
+        "Paranormal Investigator Warns Famous Haunted House's New Owners",
+    "ai-reads-coffee-grounds-tells-woman-to-leave-her-husband":
+        "AI Reads Coffee Grounds, Tells Woman to Leave Her Husband",
+    "bigfoot-included-in-official-list-of-brand-new-emojis-1":
+        "Bigfoot Included in Official List of Brand New Emojis",
+    "watch-scientists-bioengineer-remote-controlled-cyborg-bees":
+        "Watch: Scientists Bioengineer Remote-Controlled Cyborg Bees",
+    "family-on-vacation-discovers-unicorn-skull":
+        "Family on Vacation Discovers 'Unicorn' Skull",
     "human-remains-aboard-memorial-space-flight-lost-at-sea":
         "Human Remains Aboard Memorial Space Flight Lost at Sea",
     "beekeeper-sics-swarm-on-police-during-traffic-stop":
@@ -66,6 +76,17 @@ const articles = {
 };
 
 const shows = {
+    "2025-08-10": "Commercial Space Industry / ESP Tales",
+    "2025-07-28": "Living Off the Grid / Paranormal Tours",
+    "2025-07-27": "Psychedelic Entities / The Aetherius Society",
+    "2025-07-24": "Dark Global Forces / Mysteries of Time",
+    "2025-07-20": "Strange Encounters & Flow State / Power of Astrology",
+    "2025-07-17": "Moon Missions / 'Conjuring' House Haunting",
+    "2025-07-16": "Neural & Space Technology / Spiritual Warfare",
+    "2025-07-13": "Past Life Regression & ETs / Marian Apparitions",
+    "2025-07-12": "Spiritual Encounters / Hidden Agendas",
+    "2025-07-11": "Epstein & The Wonderland Murders / Open Lines",
+    "2025-07-06": "Medical Supernatural Stories / Psychic Manifestation",
     "2025-06-28": "Weight Loss Secrets / Roswell & Disclosure",
     "2025-06-27": "The Medicine Wheel & Spiritual Healing / Open Lines",
     "2025-06-22": "Pain Medication Controversy / Gray Barker & UFOs",
