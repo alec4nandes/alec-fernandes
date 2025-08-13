@@ -1,10 +1,18 @@
 <footer>
     <p>
-        <em>&copy; Alec Fernandes 2024</em>
+        <em>
+            &copy; Alec Fernandes
+            <span id="current-year"></span>
+        </em>
     </p>
     <p>
         <a href="/about">About</a>
     </p>
 </footer>
+
+<script>
+    document.querySelector("#current-year").textContent =
+        new Date().getFullYear();
+</script>
 
 <script src="/src/scripts.js"></script>
