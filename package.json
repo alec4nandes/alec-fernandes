@@ -21,7 +21,8 @@
         "deploy-tweet": "node deploy-tweet/deploy-tweet.js",
         "deploy": "bash deploy.sh",
         "serve": "firebase serve --only functions,hosting",
-        "portfolio": "node public/portfolio/scripts/copy.mjs"
+        "portfolio": "node public/portfolio/scripts/copy.mjs",
+        "compress": "cd compress && node compress.js && cd .."
     },
     "repository": {
         "type": "git",

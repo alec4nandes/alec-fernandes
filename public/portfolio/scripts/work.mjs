@@ -1,4 +1,28 @@
 const articles = {
+    "watch-strange-triangular-object-appears-on-nasa-live-stream":
+        "Watch: Strange Triangular Object Appears on NASA Live Stream",
+    "video-eerie-glowing-red-ring-appears-over-small-town-in-italy":
+        "Video: Eerie Glowing Red Ring Appears over Small Town in Italy",
+    "solar-system-moving-much-faster-than-previously-thought":
+        "Solar System Moving Much Faster than Previously Thought",
+    "scientists-find-life-in-blue-volcanic-goo-that-burns-skin":
+        "Scientists Find Life in Blue Volcanic 'Goo' that Burns Skin",
+    "mans-tesla-likely-first-moving-vehicle-hit-by-meteorite":
+        "Man's Tesla Likely First Moving Vehicle Hit by Meteorite",
+    "bigfoot-featured-on-idaho-i-voted-stickers":
+        "Bigfoot Featured on Idaho 'I Voted' Stickers",
+    "company-takes-credit-for-ufos-over-nj-raises-more-questions":
+        "Company Takes Credit for UFOs over NJ, Raises More Questions",
+    "watch-cops-capture-giant-inflatable-pumpkin-on-the-run":
+        "Watch: Cops Capture Giant Inflatable Pumpkin on the Run",
+    "fbi-investigates-tampering-of-area-51-crash-site":
+        "FBI Investigates Tampering of Area 51 Crash Site",
+    "cursed-stolen-brick-returns-to-old-north-church":
+        "'Cursed' Stolen Brick Returns to Old North Church",
+    "walmart-bans-emotional-support-alligator-over-safety-concerns":
+        "Walmart Bans Emotional Support Alligator over Safety Concerns",
+    "congress-announces-date-for-new-ufo-hearing":
+        "Congress Announces Date for New UFO Hearing",
     "paranormal-investigator-warns-famous-haunted-houses-new-owners":
         "Paranormal Investigator Warns Famous Haunted House's New Owners",
     "ai-reads-coffee-grounds-tells-woman-to-leave-her-husband":
@@ -76,6 +100,28 @@ const articles = {
 };
 
 const shows = {
+    "2025-11-30": "Astrological Cycles / Understanding Dreams",
+    "2025-11-28": "The Nature of UFOs / Open Lines",
+    "2025-11-23": "American Sasquatch / Open Lines",
+    "2025-11-18": "Mental Time Travel / Depths of Evil",
+    "2025-11-17": "Food Freedom / Time Slips",
+    "2025-11-16": "Shift in Consciousness / The Original Zodiac",
+    "2025-11-09": "Global Conspiracies / Biblical Disclosure",
+    "2025-11-08": "Medic to Mystic / Bigfoot Investigations",
+    "2025-11-07": "Gemstone Therapy / Open Lines",
+    "2025-10-26": "Wrongful Conviction / Hidden UFO History",
+    "2025-10-24": "Future of Technology / Open Lines",
+    "2025-10-19": "Martian Anomalies / Dreamwork & Ancestors",
+    "2025-10-11": "The Science of God / Investigating Clay Wheeler",
+    "2025-10-10": "Alien Abduction Evidence / Open Lines",
+    "2025-10-09": "Current Events & Prophecy / Dark Happenings",
+    "2025-10-05": "AI Potentials / Alien Abductee Revelations",
+    "2025-09-28": "ETs, Psychic Phenomena, & UAPs",
+    "2025-09-27": "Panel: Roswell vs. Washington State",
+    "2025-09-14": "Blue Beings of Light / Astrology & Mortality",
+    "2025-09-04": "Ancient Forces & Modern Events / Remote Viewing & UFOs",
+    "2025-08-28": "Mapping Atlantis / UAP Revelations",
+    "2025-08-24": "Secrecy & UFO Disclosure / Paranormal Encounters",
     "2025-08-10": "Commercial Space Industry / ESP Tales",
     "2025-07-28": "Living Off the Grid / Paranormal Tours",
     "2025-07-27": "Psychedelic Entities / The Aetherius Society",
