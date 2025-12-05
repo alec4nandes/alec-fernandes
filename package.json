@@ -21,7 +21,7 @@
         "deploy-tweet": "node deploy-tweet/deploy-tweet.js",
         "deploy": "bash deploy.sh",
         "serve": "firebase serve --only functions,hosting",
-        "portfolio": "node public/portfolio/scripts/copy.mjs",
+        "portfolio": "cd public && node ../portfolio-scraper/scrape.js && cd ..",
         "compress": "cd compress && node compress.js && cd .."
     },
     "repository": {
@@ -39,8 +39,6 @@
         "firebase": "^9.23.0",
         "firebase-admin": "^11.11.1",
         "html-minifier": "^4.0.0",
-        "mkdirp": "^3.0.1",
-        "puppeteer": "^23.0.2",
         "twitter-api-v2": "^1.17.0"
     },
     "devDependencies": {
