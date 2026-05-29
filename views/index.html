@@ -1,15 +1,14 @@
-{% assign is_home = true %}
-{% assign page_num = pagination.pageNumber | plus : 1 %}
-{% assign title = "Alec Fernandes" %}
-{% assign description = "A blog about unusual topics, culture, and tech. Follow me @alec4nandes on TikTok, Instagram and X." %}
-{% assign url = "https://fern.haus" %}
+{% assign is_home = true %} {% assign page_num = pagination.pageNumber | plus :
+1 %} {% assign title = "Alec Fernandes" %} {% assign description = "A blog about
+unusual topics, culture, and tech. Follow me @alec4nandes on TikTok, Instagram
+and X." %} {% assign url = "https://fern.haus" %}
 <!-- TODO: update social image -->
-{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
-{% assign categories = posts.all_categories %}
-{% assign tags = posts.recent_tags %}
-{% assign tags_heading = "Recent Tags" %}
+{% assign social_image =
+"https://fern.haus/assets/ocean-gliderport-background.jpg" %} {% assign
+categories = posts.all_categories %} {% assign tags = posts.recent_tags %} {%
+assign tags_heading = "Recent Tags" %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         {% include "partials/_meta-tags-basic.html" %}
@@ -25,7 +24,7 @@
             href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="/css/home.css" />
+        <link rel="stylesheet" href="/css/index.css" />
     </head>
     <body>
         <header>
@@ -35,69 +34,132 @@
                 <a href="/about">about me</a>
             </nav>
         </header>
+
         <main>
-            <section id="pn-updates">
-                <h2><a href="/tags/coast-to-coast-am">Paranormal Update</a></h2>
-                {% for post in home.pnUpdates %}
-                <div class="update">
-                    <a href="/posts/{{ post.post_id }}.html">
-                        <div
-                            style="background-image: url('{{ post.feature_image }}');"
-                        >
-                            <div class="content">
-                                <h3>{{ post.subtitle }}</h3>
-                                <p class="date">{{ post.date }}</p>
-                            </div>
+            <article id="top-story">
+                <a href="/posts/{{ index.top.post_id }}.html">
+                    <div
+                        id="feature-image"
+                        style="background-image: url('{{ index.top.feature_image }}');"
+                    >
+                        <div id="top-tag">
+                            <h3>Top Story</h3>
                         </div>
-                    </a>
-                </div>
-                {% endfor %}
-                <p>
-                    <a href="/tags/coast-to-coast-am">
-                        more paranormal updates
-                    </a>
-                </p>
-            </section>
-            <section id="categories">
-                {% for cat in home.categories %}
-                <div class="category">
-                    <div>
+                    </div>
+                </a>
+                <div id="preview">
+                    <div id="text">
                         <h2>
-                            <a href="/categories/{{ cat.category | slugify }}">
-                                {{ cat.category }}
-                            </a>
+                            <a href="">{{ index.top.title }}</a>
                         </h2>
-                        <div class="cat-container">
-                            <div class="content">
-                                <h3>
-                                    <a
-                                        href="/posts/{{ cat.posts[0].post_id }}.html"
-                                    >
-                                        {{ cat.posts[0].title }}
-                                    </a>
-                                </h3>
-                                <p class="date">{{ cat.posts[0].date }}</p>
-                                <p class="subtitle">
-                                    {% if cat.posts[0].subtitle != "" %}
-                                        {{ cat.posts[0].subtitle }}
-                                    {% elsif cat.posts[0].blurb %}
-                                        {{ cat.posts[0].blurb }}
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <a href="/posts/{{ cat.posts[0].post_id }}.html">
-                                <div
-                                    class="image"
-                                    style="
-                                        background-image: url('{{ cat.posts[0].feature_image }}');
-                                    "
-                                ></div>
-                            </a>
+                        {% unless index.top.subtitle == blank %}
+                        <p class="subtitle">{{ index.top.subtitle }}</p>
+                        {% endunless %}
+                        <p class="date">
+                            {{ index.top.date }} /
+                            <a href="">{{ index.top.categories }}</a>
+                        </p>
+                        <p>
+                            {{ index.top.blurb }}
+                            <strong>
+                                (<a href="/posts/{{ index.top.post_id }}.html"
+                                    >read more</a
+                                >)
+                            </strong>
+                        </p>
+                    </div>
+                    <div id="tag-wrapper">
+                        <div id="read-blog-tag">
+                            <h3><a href="/blog">Read Blog</a></h3>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-                <p><a href="/categories">more stories</a></p>
+            </article>
+
+            <section id="links">
+                <h2><a href="/links">Around the Web</a></h2>
+                <ul>
+                    {% for link in index.links %}
+                    <li>
+                        <h3>
+                            <a href="{{ link.link }}" target="_blank">
+                                <strong>{{ link.title }}</strong>
+                            </a>
+                        </h3>
+                        <p class="date">{{ link.date }}</p>
+                        <p>{{ link.notes }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section id="featured-posts">
+                <h2>
+                    <a href="/blog">Featured Stories</a>
+                </h2>
+                <div id="posts">
+                    {% for post in index.featured %}
+                    <div class="featured-post">
+                        <a href="/posts/{{ post.post_id }}.html">
+                            <div
+                                class="image"
+                                style="background-image: url('{{ post.feature_image }}')"
+                            ></div>
+                        </a>
+                        <div class="content">
+                            <h3>
+                                <a href="/posts/{{ post.post_id }}.html">
+                                    {{ post.title }}
+                                </a>
+                            </h3>
+                            {% unless post.subtitle == blank %}
+                            <p class="subtitle">{{ post.subtitle }}</p>
+                            {% endunless %}
+                            <p class="date">
+                                {{ post.date }} /
+                                <a href="">{{ post.categories }}</a>
+                            </p>
+                            <p class="blurb">{{ post.blurb }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section id="pn-updates">
+                <h2>
+                    <a href="/categories/coast-to-coast-am">
+                        Coast to Coast AM
+                    </a>
+                </h2>
+                <div class="section-description">
+                    <p>
+                        I'm a writer and web producer for
+                        <a href="https://coasttocoastam.com" target="_blank"
+                            >Coast to Coast AM</a
+                        >, America's favorite late-night radio show! Here's an
+                        update for topics I've recently covered.
+                    </p>
+                </div>
+                <div class="update">
+                    <a href="/posts/{{ index.coast.post_id }}.html">
+                        <div
+                            style="background-image: url('{{ index.coast.feature_image }}')"
+                        >
+                            <div class="content">
+                                <h3>{{ index.coast.subtitle }}</h3>
+                                <p class="date">{{ index.coast.date }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <p class="cta">
+                    <a href="/categories/coast-to-coast-am">
+                        View C2C Portfolio
+                    </a>
+                    /
+                    <a href="/categories/web-projects">View Web Projects</a>
+                </p>
             </section>
         </main>
 

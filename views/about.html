@@ -2,16 +2,16 @@
 permalink: "about/index.html"
 ---
 
-{% assign title = "About Alec Fernandes" %}
-{% assign description = "Learn more about the blog of Alec Fernandes." %}
-{% assign url = "https://fern.haus/about" %}
+{% assign title = "About Alec Fernandes" %} {% assign description = "Learn more
+about the blog of Alec Fernandes." %} {% assign url = "https://fern.haus/about"
+%}
 <!-- TODO: update social image -->
-{% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
-{% assign categories = posts.all_categories %}
-{% assign tags = posts.recent_tags %}
-{% assign tags_heading = "Recent Tags" %}
+{% assign social_image =
+"https://fern.haus/assets/ocean-gliderport-background.jpg" %} {% assign
+categories = posts.all_categories %} {% assign tags = posts.recent_tags %} {%
+assign tags_heading = "Recent Tags" %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         {% include "partials/_meta-tags.html" %}
@@ -29,31 +29,55 @@ permalink: "about/index.html"
                     <div class="single-post whole-post">
                         <h1>About Alec Fernandes</h1>
                         <p>
-                            I'm a blogger and web developer interested in unusual topics, culture, and tech.
+                            I'm a blogger and web developer interested in
+                            unusual topics, culture, and tech.
                         </p>
                         <p>
-                            Got a hot lead? Email me at <a href="mailto:al@fern.haus">al@fern.haus</a>
+                            Got a hot lead? Email me at
+                            <a href="mailto:al@fern.haus">al@fern.haus</a>
                             or follow me on
-                            <a href="https://www.tiktok.com/@alec4nandes" target="_blank">TikTok</a>,
-                            <a href="https://instagram.com/alec4nandes" target="_blank">Instagram</a>
-                            or <a href="https://twitter.com/alec4nandes" target="_blank">X</a>
+                            <a
+                                href="https://www.tiktok.com/@alec4nandes"
+                                target="_blank"
+                                >TikTok</a
+                            >,
+                            <a
+                                href="https://instagram.com/alec4nandes"
+                                target="_blank"
+                                >Instagram</a
+                            >
+                            or
+                            <a
+                                href="https://twitter.com/alec4nandes"
+                                target="_blank"
+                                >X</a
+                            >
                             <strong>@alec4nandes</strong>
                         </p>
                         <div id="about-me-row">
-                            <img src="/assets/face5-gradient-bg.png" alt="Alec Fernandes smiling">
+                            <img
+                                src="/assets/face5-gradient-bg.png"
+                                alt="Alec Fernandes smiling"
+                            />
                             <ul>
                                 <li>
-                                    <a href="/portfolio" target="_blank">
-                                        writing portfolio
+                                    <a
+                                        href="/categories/coast-to-coast-am"
+                                        target="_blank"
+                                    >
+                                        C2C writing portfolio
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/portfolio/resume.pdf" target="_blank">
+                                    <a
+                                        href="/portfolio/resume.pdf"
+                                        target="_blank"
+                                    >
                                         resume
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/tags/my-projects">
+                                    <a href="/categories/web-projects">
                                         web dev projects
                                     </a>
                                 </li>
@@ -67,16 +91,15 @@ permalink: "about/index.html"
                     </div>
                 </div>
             </section>
-        </div>
-        <section id="sidebar" class="whole-post-sidebar">
-            <div id="categories-and-tags">
-                {% include "partials/_home-link.html" %}
-                {% include "partials/_social.html" %}
-                {% include "partials/_all-categories.html" %}
-                {% include "partials/_all-tags.html" %}
-            </div>
-        </section>
-    </main>
-    {% include "partials/_footer.html" %}
-</body>
+            <section id="sidebar" class="whole-post-sidebar">
+                <div id="categories-and-tags">
+                    {% include "partials/_home-link.html" %} {% include
+                    "partials/_social.html" %} {% include
+                    "partials/_all-categories.html" %} {% include
+                    "partials/_all-tags.html" %}
+                </div>
+            </section>
+        </main>
+        {% include "partials/_footer.html" %}
+    </body>
 </html>
