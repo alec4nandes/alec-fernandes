@@ -1,17 +1,17 @@
 ---
 pagination:
-    data: posts.tag_data.funny.posts
+    data: posts.category_data.science-and-culture.posts
     size: 7
 ---
 
-{% assign tag = "funny" %}
-{% assign title = "Tag: funny &mdash; Alec Fernandes" %}
-{% assign description = 'All posts by Alec Fernandes with the tag &quot;funny&quot;' %}
-{% assign url = "https://fern.haus/tags/" | append: tag | slugify %}
+{% assign category = "Science & Culture" %}
+{% assign title = "Category: Science & Culture &mdash; Alec Fernandes" %}
+{% assign description = 'All posts by Alec Fernandes under the category &quot;Science & Culture&quot;' %}
+{% assign url = "https://fern.haus/categories/" | append: category | slugify %}
 <!-- TODO: update social image -->
 {% assign social_image = "https://fern.haus/assets/ocean-gliderport-background.jpg" %}
-{% assign tags = posts.recent_tags %}
-{% assign tags_heading = "Recent Tags" %}
+{% assign tags = posts.category_data.science-and-culture.tags %}
+{% assign tags_heading = "Category Tags" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +22,11 @@ pagination:
         <header>
             {% include "partials/_header-name.html" %}
             <nav>
-                <h1>Tag: {{ tag }}</h1>
+                <h1>Category: {{ category }}</h1>
                 <div>
-                    <a href="/tags">all tags</a>
-                    &nbsp; | &nbsp;
                     <a href="/categories">all categories</a>
+                    &nbsp; | &nbsp;
+                    <a href="/tags">all tags</a>
                 </div>
             </nav>
         </header>

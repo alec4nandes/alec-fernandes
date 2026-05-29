@@ -11,7 +11,7 @@ module.exports = async function () {
                     allPosts
                         .map((post) => post[key])
                         .flat(Infinity)
-                        .filter(Boolean)
+                        .filter(Boolean),
                 ),
             ].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
         allCategories = getAll("categories"),
@@ -21,7 +21,7 @@ module.exports = async function () {
         all_categories: allCategories,
         category_data: getData(allPosts, "categories"),
         all_tags: allTags,
-        recent_tags: getRecentTags(allPosts, 40),
+        recent_tags: getRecentTags(allPosts, 30),
         tag_data: getData(allPosts, "tags"),
         tags_by_letter: getTagsByLetter(allTags),
     };
@@ -43,7 +43,7 @@ function getData(allPosts, postsKey) {
                                   ...post.tags,
                               ]),
                           ].sort((a, b) =>
-                              a.toLowerCase().localeCompare(b.toLowerCase())
+                              a.toLowerCase().localeCompare(b.toLowerCase()),
                           ),
                       }
                     : {}),

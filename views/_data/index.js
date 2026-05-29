@@ -1,4 +1,4 @@
-const { getPostsData } = require("../../db/get-posts.js");
+const { getPostsData, slugifier } = require("../../db/get-posts.js");
 
 module.exports = async function () {
     const allPosts = await getPostsData(),
@@ -50,11 +50,16 @@ justo et libero auctor semper non at elit. Maecenas
 eu arcu ullamcorper, faucibus purus in, auctor arcu.`,
             },
         ],
-        featured = await getFeatured(nonPortfolioPosts),
+        featured = await getFeatured(top, nonPortfolioPosts),
         coast = findCategory(allPosts, "Coast to Coast AM").toSorted(
             sortDateDescend,
         )[0];
-    return { top, links, featured, coast };
+    return {
+        top: slugifyCategories(top),
+        links,
+        featured: featured.map(slugifyCategories),
+        coast,
+    };
 };
 
 function getNonPortfolioPosts(allPosts) {
@@ -79,7 +84,15 @@ function sortDateDescend(a, b) {
     return getMs(b.date) - getMs(a.date);
 }
 
+function slugifyCategories(post) {
+    post.categories = post.categories.map((cat) => ({
+        name: cat,
+        slug: slugifier(cat),
+    }));
+    return post;
+}
+
 // TODO: AI select
-async function getFeatured(nonPortfolioPosts) {
-    return nonPortfolioPosts.slice(0, 4);
+async function getFeatured(top, nonPortfolioPosts) {
+    return nonPortfolioPosts.filter((post) => post !== top).slice(0, 4);
 }

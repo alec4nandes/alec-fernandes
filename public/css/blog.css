@@ -31,8 +31,8 @@ body {
     h1,
     h2,
     #blog-name {
-        font-family: "DM Serif Display", Georgia, "Times New Roman", Times,
-            serif;
+        font-family:
+            "DM Serif Display", Georgia, "Times New Roman", Times, serif;
     }
 
     xmp {
@@ -98,7 +98,6 @@ body {
             }
 
             #posts-container {
-                flex: 1;
                 font-size: 1.1rem;
                 line-height: 1.75rem;
                 padding-top: 20px;
@@ -454,8 +453,6 @@ header {
 }
 
 main {
-    min-height: 850px;
-
     #main-content {
         max-width: 80%;
         width: 100%;
@@ -597,7 +594,6 @@ main {
     #sidebar {
         min-width: 150px;
         flex: 1;
-        position: relative;
 
         #categories-and-tags {
             height: 100%;
@@ -605,7 +601,6 @@ main {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            position: absolute;
             text-align: center;
 
             h2 {
@@ -620,8 +615,6 @@ main {
             }
 
             #tags {
-                overflow: auto;
-
                 .tags-list {
                     list-style: none;
                     margin: 0;

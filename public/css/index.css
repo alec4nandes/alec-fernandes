@@ -115,8 +115,12 @@ main {
         margin: 0.5em 0;
     }
 
-    .date {
+    .date,
+    .date-and-cat {
         font-size: 0.85rem;
+    }
+
+    .date {
         margin: 5px 0 0;
         opacity: 0.6;
     }
@@ -343,15 +347,16 @@ main {
                     flex-direction: column;
 
                     .content {
-                        width: 100%;
                         background-color: rgba(0, 0, 0, 0.6);
-                        border-radius: 0 10px 0 0;
+                        border-radius: 10px 10px 0 0;
                         box-sizing: border-box;
                         color: #eee;
+                        margin: 0 auto;
                         padding: 10px;
                         text-align: center;
 
                         h3 {
+                            width: fit-content;
                             margin: 0;
                         }
                     }
