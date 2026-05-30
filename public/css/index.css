@@ -23,6 +23,10 @@
                 margin-top: 1.5em;
             }
         }
+
+        #links ul {
+            padding-left: 25px;
+        }
     }
 }
 
@@ -115,13 +119,16 @@ main {
         margin: 0.5em 0;
     }
 
-    .date,
-    .date-and-cat {
+    .date-and-cat,
+    .date {
         font-size: 0.85rem;
     }
 
+    .date-and-cat {
+        margin: 5px 0 !important;
+    }
+
     .date {
-        margin: 5px 0 0;
         opacity: 0.6;
     }
 
@@ -251,9 +258,12 @@ main {
 
                 li {
                     width: 50%;
+                    display: flex;
+                    gap: 5px;
 
-                    &::marker {
+                    &::before {
                         content: "⚡️ ";
+                        padding-top: 2px;
                     }
 
                     a,
@@ -276,6 +286,15 @@ main {
                         &.date {
                             margin: 0.5em 0;
                         }
+                    }
+
+                    .date-and-cat,
+                    .date {
+                        opacity: 0.6;
+                    }
+
+                    .date {
+                        opacity: 1;
                     }
                 }
             }

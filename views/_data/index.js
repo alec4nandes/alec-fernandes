@@ -1,4 +1,5 @@
 const { getPostsData, slugifier } = require("../../db/get-posts.js"),
+    { getLinksData } = require("../../db/get-links.js"),
     { z } = require("zod");
 
 require("dotenv").config();
@@ -7,52 +8,9 @@ module.exports = async function () {
     const allPosts = await getPostsData(),
         nonPortfolioPosts = getNonPortfolioPosts(allPosts),
         top = nonPortfolioPosts[0],
-        links = [
-            {
-                title: "This is an interesting link",
-                link: "https://google.com",
-                date: "2025-12-02T14:04-08:00",
-                notes: `
-Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Sed posuere magna sit amet sem ullamcorper
-ultrices. Quisque quis tellus turpis. Donec porta
-justo et libero auctor semper non at elit. Maecenas
-eu arcu ullamcorper, faucibus purus in, auctor arcu.`,
-            },
-            {
-                title: "This is an interesting link",
-                link: "https://google.com",
-                date: "2025-12-02T14:04-08:00",
-                notes: `
-Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Sed posuere magna sit amet sem ullamcorper
-ultrices. Quisque quis tellus turpis. Donec porta
-justo et libero auctor semper non at elit. Maecenas
-eu arcu ullamcorper, faucibus purus in, auctor arcu.`,
-            },
-            {
-                title: "This is an interesting link",
-                link: "https://google.com",
-                date: "2025-12-02T14:04-08:00",
-                notes: `
-Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Sed posuere magna sit amet sem ullamcorper
-ultrices. Quisque quis tellus turpis. Donec porta
-justo et libero auctor semper non at elit. Maecenas
-eu arcu ullamcorper, faucibus purus in, auctor arcu.`,
-            },
-            {
-                title: "This is an interesting link",
-                link: "https://google.com",
-                date: "2025-12-02T14:04-08:00",
-                notes: `
-Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Sed posuere magna sit amet sem ullamcorper
-ultrices. Quisque quis tellus turpis. Donec porta
-justo et libero auctor semper non at elit. Maecenas
-eu arcu ullamcorper, faucibus purus in, auctor arcu.`,
-            },
-        ],
+        allLinksData = await getLinksData(),
+        links = getLinks(allLinksData[0]),
+        allLinks = allLinksData.map(getLinks).flat(),
         featured = await getFeatured(top, nonPortfolioPosts),
         coast = findCategory(allPosts, "Coast to Coast AM").toSorted(
             sortDateDescend,
@@ -60,6 +18,7 @@ eu arcu ullamcorper, faucibus purus in, auctor arcu.`,
     return {
         top: slugifyCategories(top),
         links,
+        all_links: allLinks,
         featured: featured.map(slugifyCategories),
         coast,
     };
@@ -93,6 +52,12 @@ function slugifyCategories(post) {
         slug: slugifier(cat),
     }));
     return post;
+}
+
+function getLinks(linksData) {
+    return Object.values(linksData.categories)
+        .map(({ links }) => links)
+        .flat(Infinity);
 }
 
 async function getFeatured(top, nonPortfolioPosts) {

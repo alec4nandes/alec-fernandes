@@ -658,6 +658,45 @@ footer {
     }
 }
 
+/* MISC */
+
+ul#around-the-web-links {
+    margin-top: 2em;
+    padding: 0 20px 0 25px;
+
+    li {
+        display: flex;
+        gap: 5px;
+        padding-bottom: 1em;
+
+        &::before {
+            content: "⚡️ ";
+            padding-top: 2px;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        p {
+            margin: 0 !important;
+
+            &.date-and-cat {
+                margin: 0.5em 0 !important;
+            }
+        }
+
+        .date-and-cat,
+        .date {
+            opacity: 0.6;
+        }
+
+        .date {
+            opacity: 1;
+        }
+    }
+}
+
 /* RESPONSIVE */
 
 @media only screen and (max-width: 420px) {

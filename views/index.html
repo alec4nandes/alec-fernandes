@@ -83,17 +83,22 @@ assign tags_heading = "Recent Tags" %}
             </article>
 
             <section id="links">
-                <h2><a href="/links">Around the Web</a></h2>
+                <h2><a href="/around-the-web">Around the Web</a></h2>
                 <ul>
                     {% for link in index.links %}
                     <li>
-                        <h3>
-                            <a href="{{ link.link }}" target="_blank">
-                                <strong>{{ link.title }}</strong>
-                            </a>
-                        </h3>
-                        <p class="date">{{ link.date }}</p>
-                        <p>{{ link.notes }}</p>
+                        <div>
+                            <h3>
+                                <a href="{{ link.link }}" target="_blank">
+                                    <strong>{{ link.title }}</strong>
+                                </a>
+                            </h3>
+                            <p class="date-and-cat">
+                                published on
+                                <span class="date">{{ link.date }}</span>
+                            </p>
+                            <p>{{ link.notes }}</p>
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>

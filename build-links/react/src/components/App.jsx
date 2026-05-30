@@ -46,37 +46,50 @@ export default function App() {
         }
     }
 
-    return user ? (
-        <div>
+    return (
+        <>
             <h1>Blog Links</h1>
+            {user ? (
+                <div>
+                    <nav>
+                        <button onClick={() => signOut(auth)}>sign out</button>
+                        {view !== "categories" && (
+                            <button onClick={() => setView("categories")}>
+                                categories
+                            </button>
+                        )}
+                        {view !== "news" && (
+                            <button onClick={() => setView("news")}>
+                                get news
+                            </button>
+                        )}
+                        {view !== "sources" && (
+                            <button onClick={() => setView("sources")}>
+                                sources
+                            </button>
+                        )}
+                    </nav>
 
-            <nav>
-                <button onClick={() => signOut(auth)}>sign out</button>
-                {view !== "categories" && (
-                    <button onClick={() => setView("categories")}>
-                        categories
-                    </button>
-                )}
-                {view !== "news" && (
-                    <button onClick={() => setView("news")}>get news</button>
-                )}
-                {view !== "sources" && (
-                    <button onClick={() => setView("sources")}>sources</button>
-                )}
-            </nav>
+                    <hr />
 
-            <hr />
-
-            {view === "categories" && <AddCategory {...{ categories }} />}
-            {view === "news" && <News {...{ categories }} />}
-            {view === "sources" && <Sources />}
-        </div>
-    ) : (
-        <form onSubmit={handleSignIn}>
-            <input type="email" name="email" placeholder="email..." />
-            <input type="password" name="pw" placeholder="password..." />
-            <button type="submit">sign in</button>
-        </form>
+                    {view === "categories" && (
+                        <AddCategory {...{ categories }} />
+                    )}
+                    {view === "news" && <News {...{ categories }} />}
+                    {view === "sources" && <Sources />}
+                </div>
+            ) : (
+                <form id="sign-in" onSubmit={handleSignIn}>
+                    <input type="email" name="email" placeholder="email..." />
+                    <input
+                        type="password"
+                        name="pw"
+                        placeholder="password..."
+                    />
+                    <button type="submit">sign in</button>
+                </form>
+            )}
+        </>
     );
 }
 

@@ -1,0 +1,70 @@
+---
+pagination:
+    data: index.all_links
+    size: 20
+---
+
+{% assign title = "Around the Web" %} {% assign description = "Check out these
+interesting links!" %} {% assign url = "https://fern.haus/around-the-web" %}
+<!-- TODO: update social image -->
+{% assign social_image =
+"https://fern.haus/assets/ocean-gliderport-background.jpg" %} {% assign
+categories = posts.all_categories %} {% assign tags = posts.recent_tags %} {%
+assign tags_heading = "Recent Tags" %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        {% include "partials/_meta-tags.html" %}
+    </head>
+    <body>
+        <header>
+            {% include "partials/_header-name.html" %}
+            <nav id="mobile-nav">
+                {% include "partials/_all-categories.html" %}
+            </nav>
+        </header>
+        <main>
+            <section id="main-content">
+                <div id="posts-container">
+                    <div class="single-post whole-post">
+                        <h1>Around the Web</h1>
+                        <ul id="around-the-web-links">
+                            {% for link in pagination.items %}
+                            <li>
+                                <div>
+                                    <h3>
+                                        <a
+                                            href="{{ link.link }}"
+                                            target="_blank"
+                                        >
+                                            <strong>{{ link.title }}</strong>
+                                        </a>
+                                    </h3>
+                                    <p class="date-and-cat">
+                                        published on
+                                        <span class="date"
+                                            >{{ link.date }}</span
+                                        >
+                                    </p>
+                                    <p>{{ link.notes }}</p>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% include "partials/_pagination.html" %}
+            </section>
+            <section id="sidebar" class="whole-post-sidebar">
+                <div id="categories-and-tags">
+                    {% include "partials/_home-link.html" %} {% include
+                    "partials/_social.html" %} {% include
+                    "partials/_all-categories.html" %} {% include
+                    "partials/_all-tags.html" %}
+                </div>
+            </section>
+        </main>
+        {% include "partials/_footer.html" %}
+    </body>
+</html>

@@ -3,6 +3,10 @@ form {
     flex-direction: column;
     gap: 10px;
 
+    &#sign-in {
+        align-items: center;
+    }
+
     &:has(textarea) {
         width: 100%;
         max-width: 400px;
