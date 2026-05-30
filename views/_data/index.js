@@ -95,7 +95,6 @@ function slugifyCategories(post) {
     return post;
 }
 
-// TODO: AI select
 async function getFeatured(top, nonPortfolioPosts) {
     console.log("*** SELECTING FEATURED STORIES WITH AI ***");
     const instructions =

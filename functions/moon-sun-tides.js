@@ -1,19 +1,14 @@
 const lune = require("lune");
 
-const fetch = (...args) =>
-    import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
-async function getMoonSunTidesData(req, res) {
-    const { latitude, longitude, date, time } = req.query,
-        sending =
-            !isNaN(latitude) && !isNaN(longitude)
-                ? await handleLocalData(
-                      { latitude: +latitude, longitude: +longitude },
-                      date,
-                      time
-                  )
-                : { error_message: "invalid coordinates" };
-    res.send(sending);
+async function getMoonSunTidesData(request) {
+    const { latitude, longitude, date, time } = request.query;
+    return !isNaN(latitude) && !isNaN(longitude)
+        ? await handleLocalData(
+              { latitude: +latitude, longitude: +longitude },
+              date,
+              time,
+          )
+        : { error_message: "invalid coordinates" };
 }
 
 function formatToday() {
@@ -26,7 +21,7 @@ function formatToday() {
 
 async function handleLocalData(coords, date, time) {
     const moon = getMoonData(
-            date ? new Date(`${date} ${time || ""}`) : new Date()
+            date ? new Date(`${date} ${time || ""}`) : new Date(),
         ),
         d = date || formatToday(),
         { latitude, longitude } = coords,
@@ -71,7 +66,7 @@ function getMoonData(date) {
     const dayAfterNew = new Date(
         nextNewMoon.getFullYear(),
         nextNewMoon.getMonth(),
-        nextNewMoon.getDate() + 1
+        nextNewMoon.getDate() + 1,
     );
     phases = lune.phase_hunt(dayAfterNew);
     const data = { ...result, nextFullMoon: phases.full_date };
@@ -93,7 +88,7 @@ function processMoonData(data) {
 
 async function getNOAAStations() {
     const response = await fetch(
-            "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+            "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json",
         ),
         { stations } = await response.json();
     return stations;
@@ -109,7 +104,7 @@ function findNearestStation({ stations, latitude, longitude }) {
                 // pythag theorem (distance is hypotenuse)
                 trigDist = Math.sqrt(
                     Math.abs(latitude - lat) ** 2 +
-                        Math.abs(longitude - lng) ** 2
+                        Math.abs(longitude - lng) ** 2,
                 );
             if (
                 // could be set to zero if standing on exact coordinate
@@ -168,7 +163,7 @@ async function getTidesData(nearestStation, date) {
 
 async function getSolarData({ latitude, longitude }, date) {
     const response = await fetch(
-            `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=${date}&formatted=0`
+            `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=${date}&formatted=0`,
         ),
         { results } = await response.json(),
         { sunrise, sunset, solar_noon, day_length } = results,

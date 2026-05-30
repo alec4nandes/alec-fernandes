@@ -1,6 +1,9 @@
 db-dev.mjs
 firebase-config.js
 
+/public/links
+Archive.zip
+
 # Logs
 logs
 *.log
