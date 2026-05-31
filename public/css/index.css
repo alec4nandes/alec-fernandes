@@ -18,12 +18,6 @@
             }
         }
 
-        article#top-story {
-            h2 {
-                margin-top: 1.5em;
-            }
-        }
-
         #links ul {
             padding-left: 25px;
         }
@@ -162,6 +156,7 @@ main {
                 width: 100%;
                 background-position: center;
                 background-size: cover;
+                box-sizing: border-box;
                 padding-top: 20px;
 
                 #top-tag {
@@ -268,7 +263,7 @@ main {
 
                     a,
                     p {
-                        /* display: inline-block; */
+                        display: block;
                         padding-right: 20px;
                     }
 
