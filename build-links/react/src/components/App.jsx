@@ -12,7 +12,8 @@ import News from "./News";
 import Sources from "./Sources";
 
 export default function App() {
-    const [user, setUser] = useState(),
+    const [isLoaded, setIsLoaded] = useState(false),
+        [user, setUser] = useState(),
         [view, setView] = useState("news"),
         [categories, setCategories] = useState([]);
 
@@ -26,6 +27,7 @@ export default function App() {
                 setCategories(result);
             }),
             unsubAuth = onAuthStateChanged(auth, (userCred) => {
+                !isLoaded && setIsLoaded(true);
                 setUser(userCred?.email);
             });
         return () => {
@@ -47,49 +49,57 @@ export default function App() {
     }
 
     return (
-        <>
-            <h1>Blog Links</h1>
-            {user ? (
-                <div>
-                    <nav>
-                        <button onClick={() => signOut(auth)}>sign out</button>
-                        {view !== "categories" && (
-                            <button onClick={() => setView("categories")}>
-                                categories
+        isLoaded && (
+            <>
+                <h1>Blog Links</h1>
+                {user ? (
+                    <div>
+                        <nav>
+                            <button onClick={() => signOut(auth)}>
+                                sign out
                             </button>
-                        )}
-                        {view !== "news" && (
-                            <button onClick={() => setView("news")}>
-                                get news
-                            </button>
-                        )}
-                        {view !== "sources" && (
-                            <button onClick={() => setView("sources")}>
-                                sources
-                            </button>
-                        )}
-                    </nav>
+                            {view !== "categories" && (
+                                <button onClick={() => setView("categories")}>
+                                    categories
+                                </button>
+                            )}
+                            {view !== "news" && (
+                                <button onClick={() => setView("news")}>
+                                    get news
+                                </button>
+                            )}
+                            {view !== "sources" && (
+                                <button onClick={() => setView("sources")}>
+                                    sources
+                                </button>
+                            )}
+                        </nav>
 
-                    <hr />
+                        <hr />
 
-                    {view === "categories" && (
-                        <AddCategory {...{ categories }} />
-                    )}
-                    {view === "news" && <News {...{ categories }} />}
-                    {view === "sources" && <Sources />}
-                </div>
-            ) : (
-                <form id="sign-in" onSubmit={handleSignIn}>
-                    <input type="email" name="email" placeholder="email..." />
-                    <input
-                        type="password"
-                        name="pw"
-                        placeholder="password..."
-                    />
-                    <button type="submit">sign in</button>
-                </form>
-            )}
-        </>
+                        {view === "categories" && (
+                            <AddCategory {...{ categories }} />
+                        )}
+                        {view === "news" && <News {...{ categories }} />}
+                        {view === "sources" && <Sources />}
+                    </div>
+                ) : (
+                    <form id="sign-in" onSubmit={handleSignIn}>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="email..."
+                        />
+                        <input
+                            type="password"
+                            name="pw"
+                            placeholder="password..."
+                        />
+                        <button type="submit">sign in</button>
+                    </form>
+                )}
+            </>
+        )
     );
 }
 
@@ -118,7 +128,6 @@ function getSearchQuery(queries) {
 
 function getSources(sourceId) {
     const className = sourceId ? `.source-${sourceId}` : "";
-    console.log(className);
     return [...document.querySelectorAll(`.category${className}`)]
         .map((curr) =>
             [...curr.querySelectorAll("form.link-notes")]
@@ -128,8 +137,12 @@ function getSources(sourceId) {
                     return {
                         ...data,
                         notes: elem.notes.value.trim(),
-                        category_id: categoryId,
-                        category_name: categoryName,
+                        ...(categoryId && categoryName
+                            ? {
+                                  category_id: categoryId,
+                                  category_name: categoryName,
+                              }
+                            : {}),
                     };
                 }),
         )

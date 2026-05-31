@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../scripts/firebase.js";
 import { formatDate, getSources } from "./App";
 
@@ -57,10 +57,8 @@ export default function Editor({ links, sourceId }) {
             sourceLinks[i] = holder;
             try {
                 const docRef = doc(db, "links", sourceId);
-                await setDoc(docRef, {
-                    links: sourceLinks,
-                    date: new Date().toISOString(),
-                });
+                console.log(sourceLinks);
+                await updateDoc(docRef, { links: sourceLinks });
             } catch (err) {
                 console.error(err);
                 alert(err);
@@ -75,10 +73,12 @@ export default function Editor({ links, sourceId }) {
                 <br />
                 <small>
                     {formatDate(link.isoDate || link.date)}
-                    <em>
-                        {" "}
-                        / {link.category_name} ({link.category_id})
-                    </em>
+                    {link.category_id && link.category_name && (
+                        <em>
+                            {" "}
+                            / {link.category_name} ({link.category_id})
+                        </em>
+                    )}
                 </small>
                 {sourceId && (
                     <>
