@@ -10,11 +10,12 @@ import { auth, db } from "../scripts/firebase.js";
 import AddCategory from "./AddCategory";
 import News from "./News";
 import Sources from "./Sources";
+import Posts from "./Posts";
 
 export default function App() {
     const [isLoaded, setIsLoaded] = useState(false),
         [user, setUser] = useState(),
-        [view, setView] = useState("news"),
+        [view, setView] = useState("posts"),
         [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -50,55 +51,64 @@ export default function App() {
 
     return (
         isLoaded && (
-            <>
-                <h1>Blog Links</h1>
-                {user ? (
-                    <div>
-                        <nav>
-                            <button onClick={() => signOut(auth)}>
-                                sign out
-                            </button>
-                            {view !== "categories" && (
-                                <button onClick={() => setView("categories")}>
-                                    categories
-                                </button>
-                            )}
-                            {view !== "news" && (
-                                <button onClick={() => setView("news")}>
-                                    get news
-                                </button>
-                            )}
-                            {view !== "sources" && (
-                                <button onClick={() => setView("sources")}>
-                                    sources
-                                </button>
-                            )}
-                        </nav>
+            <div>
+                <nav>
+                    <button onClick={() => signOut(auth)}>sign out</button>
+                    {view !== "posts" && (
+                        <button onClick={() => setView("posts")}>posts</button>
+                    )}
+                    {view !== "categories" && (
+                        <button onClick={() => setView("categories")}>
+                            categories
+                        </button>
+                    )}
+                    {view !== "news" && (
+                        <button onClick={() => setView("news")}>
+                            get news
+                        </button>
+                    )}
+                    {view !== "sources" && (
+                        <button onClick={() => setView("sources")}>
+                            sources
+                        </button>
+                    )}
+                </nav>
 
-                        <hr />
+                <hr />
 
-                        {view === "categories" && (
-                            <AddCategory {...{ categories }} />
-                        )}
-                        {view === "news" && <News {...{ categories }} />}
-                        {view === "sources" && <Sources />}
-                    </div>
+                {view === "posts" ? (
+                    <Posts />
                 ) : (
-                    <form id="sign-in" onSubmit={handleSignIn}>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="email..."
-                        />
-                        <input
-                            type="password"
-                            name="pw"
-                            placeholder="password..."
-                        />
-                        <button type="submit">sign in</button>
-                    </form>
+                    <>
+                        <h1>Blog Links</h1>
+                        {user ? (
+                            <div>
+                                {view === "categories" && (
+                                    <AddCategory {...{ categories }} />
+                                )}
+                                {view === "news" && (
+                                    <News {...{ categories }} />
+                                )}
+                                {view === "sources" && <Sources />}
+                            </div>
+                        ) : (
+                            <form id="sign-in" onSubmit={handleSignIn}>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="email..."
+                                />
+                                <input
+                                    type="password"
+                                    name="pw"
+                                    placeholder="password..."
+                                />
+                                <button type="submit">sign in</button>
+                            </form>
+                        )}
+                    </>
                 )}
-            </>
+            </div>
         )
     );
 }
