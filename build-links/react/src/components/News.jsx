@@ -29,7 +29,14 @@ export default function News({ categories }) {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ query, timeframe_ms: ms }),
                 }).then((resp) => resp.json());
-            setLinks((data) => ({ ...data, [cat.id]: links }));
+            setLinks((data) => ({
+                ...data,
+                [cat.id]: links.map((link) => ({
+                    ...link,
+                    category_id: cat.id,
+                    category_name: cat.category_name,
+                })),
+            }));
         } catch (err) {
             console.error(err);
             alert(err);
@@ -42,12 +49,12 @@ export default function News({ categories }) {
         e.target.disabled = true;
         try {
             const result = getSources();
-            console.log(result);
+            console.log("***", result);
             if (Object.entries(result).length) {
                 const colRef = collection(db, "links");
                 await addDoc(colRef, {
                     date: new Date().toISOString(),
-                    categories: result,
+                    links: result,
                 });
                 alert("Links added to database!");
             } else {
@@ -87,11 +94,7 @@ export default function News({ categories }) {
             <hr />
 
             {categories.map((cat) => (
-                <div
-                    className="category"
-                    data-category_id={cat.id}
-                    data-category_name={cat.category_name}
-                >
+                <div className="category">
                     <button onClick={(e) => handleGetNews({ e, cat })}>
                         {cat.category_name}
                     </button>

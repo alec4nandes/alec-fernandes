@@ -36,7 +36,7 @@ export default function Sources() {
             if (Object.entries(result).length) {
                 await setDoc(docRef, {
                     date: new Date().toISOString(),
-                    categories: result,
+                    links: result,
                 });
                 alert("Sources updated!");
             } else {
@@ -55,29 +55,15 @@ export default function Sources() {
         <div>
             <h2>Sources</h2>
             {sources?.map((source) => (
-                <>
-                    <details>
-                        <summary>{formatDate(source.date)}</summary>
-                        <button
-                            onClick={(e) => handleUpdateSources({ e, source })}
-                        >
-                            update sources
-                        </button>
-                        {Object.entries(source.categories).map(
-                            ([catId, cat]) => (
-                                <div
-                                    className={`category source-${source.id}`}
-                                    data-category_id={catId}
-                                    data-category_name={cat.category_name}
-                                >
-                                    <h4>{cat.category_name}</h4>
-                                    <Editor links={cat.links} />
-                                </div>
-                            ),
-                        )}
-                    </details>
-                    <hr />
-                </>
+                <details>
+                    <summary>{formatDate(source.date)}</summary>
+                    <button onClick={(e) => handleUpdateSources({ e, source })}>
+                        update sources
+                    </button>
+                    <div className={`category source-${source.id}`}>
+                        <Editor links={source.links} sourceId={source.id} />
+                    </div>
+                </details>
             ))}
         </div>
     );

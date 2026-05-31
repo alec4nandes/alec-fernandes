@@ -119,25 +119,21 @@ function getSearchQuery(queries) {
 function getSources(sourceId) {
     const className = sourceId ? `.source-${sourceId}` : "";
     console.log(className);
-    return [...document.querySelectorAll(`.category${className}`)].reduce(
-        (acc, curr) => {
-            const catId = curr.dataset.category_id,
-                catName = curr.dataset.category_name,
-                links = [...curr.querySelectorAll("form.link-notes")]
-                    .filter((elem) => elem.notes.value.trim())
-                    .map((elem) => ({
-                        ...elem.dataset,
+    return [...document.querySelectorAll(`.category${className}`)]
+        .map((curr) =>
+            [...curr.querySelectorAll("form.link-notes")]
+                .filter((elem) => elem.notes.value.trim())
+                .map((elem) => {
+                    const { categoryId, categoryName, ...data } = elem.dataset;
+                    return {
+                        ...data,
                         notes: elem.notes.value.trim(),
-                    }));
-            return links.length
-                ? {
-                      ...acc,
-                      [catId]: { category_name: catName, links },
-                  }
-                : acc;
-        },
-        {},
-    );
+                        category_id: categoryId,
+                        category_name: categoryName,
+                    };
+                }),
+        )
+        .flat(Infinity);
 }
 
 export { formatDate, getSearchQuery, getSources };

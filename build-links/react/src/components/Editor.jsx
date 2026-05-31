@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { formatDate } from "./App";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../scripts/firebase.js";
+import { formatDate, getSources } from "./App";
 
-export default function Editor({ links }) {
-    function Item({ link }) {
+export default function Editor({ links, sourceId }) {
+    function Item({ link, i }) {
         const [url, setUrl] = useState(link.link);
 
         async function handleGetSummary({ e, link }) {
@@ -43,13 +45,54 @@ export default function Editor({ links }) {
             }
         }
 
+        async function handleMove(i, increm) {
+            const sourceLinks = getSources(sourceId),
+                index = i + increm;
+            if (index < 0 || index >= sourceLinks.length) {
+                alert("Outside bounds!");
+                return;
+            }
+            const holder = sourceLinks[index];
+            sourceLinks[index] = sourceLinks[i];
+            sourceLinks[i] = holder;
+            try {
+                const docRef = doc(db, "links", sourceId);
+                await setDoc(docRef, {
+                    links: sourceLinks,
+                    date: new Date().toISOString(),
+                });
+            } catch (err) {
+                console.error(err);
+                alert(err);
+            }
+        }
+
         return (
             <li key={link.title}>
                 <a href={link.link} target="_blank">
                     {link.title}
                 </a>
                 <br />
-                <small>{formatDate(link.isoDate || link.date)}</small>
+                <small>
+                    {formatDate(link.isoDate || link.date)}
+                    <em>
+                        {" "}
+                        / {link.category_name} ({link.category_id})
+                    </em>
+                </small>
+                {sourceId && (
+                    <>
+                        <br />
+                        <nav>
+                            <button onClick={() => handleMove(i, -1)}>
+                                move up
+                            </button>
+                            <button onClick={() => handleMove(i, +1)}>
+                                move down
+                            </button>
+                        </nav>
+                    </>
+                )}
                 <details>
                     <summary>notes</summary>
                     <form
@@ -57,6 +100,8 @@ export default function Editor({ links }) {
                         data-link={url}
                         data-title={link.title}
                         data-date={link.isoDate || link.date}
+                        data-category-id={link.category_id}
+                        data-category-name={link.category_name}
                         onSubmit={(e) => handleGetSummary({ e, link })}
                     >
                         <textarea
@@ -80,8 +125,8 @@ export default function Editor({ links }) {
 
     return links?.length ? (
         <ul>
-            {links.map((link) => (
-                <Item {...{ link }} />
+            {links.map((link, i) => (
+                <Item {...{ link, i }} />
             ))}
         </ul>
     ) : (
