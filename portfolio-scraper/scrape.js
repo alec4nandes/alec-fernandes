@@ -8,7 +8,7 @@ const { chromium } = require("playwright"),
     { getOld } = require("./get-old.js");
 
 const MAX_CONCURRENT = 5,
-    NETWORK_TIMEOUT = 10_000,
+    NETWORK_TIMEOUT = 15_000,
     CLICK_TIMEOUT = 1_000,
     BASE_DIR = "portfolio/c2c",
     resourcesDir = `${BASE_DIR}/resources`;
