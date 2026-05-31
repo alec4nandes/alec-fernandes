@@ -3,8 +3,9 @@ const { chromium } = require("playwright"),
     slugify = require("slugify"),
     { articles, shows } = require("./work.json"),
     { downloadImages, saveImage } = require("./images.js"),
-    { removeElems } = require("./remove.js");
-const { cafe } = require("./cafe.js");
+    { removeElems } = require("./remove.js"),
+    { cafe } = require("./cafe.js"),
+    { getOld } = require("./get-old.js");
 
 const MAX_CONCURRENT = 5,
     NETWORK_TIMEOUT = 10_000,
@@ -20,21 +21,28 @@ async function main() {
     await fs.ensureDir(resourcesDir);
     const articleUrl = "https://www.coasttocoastam.com/article/",
         showUrl = "https://www.coasttocoastam.com/show/",
-        promises = Object.entries({
-            article: Object.keys(articles),
-            show: Object.keys(shows),
-        })
-            .map(([type, slugs]) => slugs.map((slug) => [type, slug]))
-            .flat()
-            .map(([type, slug]) => async () => {
-                const outputDir = `${BASE_DIR}/${type}`;
-                await fs.ensureDir(outputDir);
-                if (type === "show") {
-                    slug += "-show";
-                }
-                const url = (type === "article" ? articleUrl : showUrl) + slug;
-                await savePage({ url, slug, outputDir });
-            });
+        old = await getOld(),
+        data = {
+            article: Object.keys(articles).filter(
+                (key) => !old.articles.includes(key),
+            ),
+            show: Object.keys(shows).filter(
+                (key) => !old.shows.includes(key + "-show"),
+            ),
+        };
+    console.log(data);
+    const promises = Object.entries(data)
+        .map(([type, slugs]) => slugs.map((slug) => [type, slug]))
+        .flat()
+        .map(([type, slug]) => async () => {
+            const outputDir = `${BASE_DIR}/${type}`;
+            await fs.ensureDir(outputDir);
+            if (type === "show") {
+                slug += "-show";
+            }
+            const url = (type === "article" ? articleUrl : showUrl) + slug;
+            await savePage({ url, slug, outputDir });
+        });
     /* await */ cafe(promises, MAX_CONCURRENT);
 }
 

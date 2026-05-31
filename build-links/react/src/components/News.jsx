@@ -20,7 +20,8 @@ export default function News({ categories }) {
         e.target.disabled = true;
         try {
             const endpoint =
-                    "http://localhost:5001/alec-fernandes/us-central1/news",
+                    // "http://localhost:5001/alec-fernandes/us-central1/news",
+                    "https://news-o5yypoiiya-uc.a.run.app",
                 query = getSearchQuery(cat.queries),
                 dayMs = 1_000 * 60 * 60 * 24,
                 ms = dayMs * timeframe.unit * timeframe.interval,

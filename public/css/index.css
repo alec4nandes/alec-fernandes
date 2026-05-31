@@ -268,7 +268,7 @@ main {
 
                     a,
                     p {
-                        display: inline-block;
+                        /* display: inline-block; */
                         padding-right: 20px;
                     }
 

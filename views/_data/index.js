@@ -9,8 +9,8 @@ module.exports = async function () {
         nonPortfolioPosts = getNonPortfolioPosts(allPosts),
         top = nonPortfolioPosts[0],
         allLinksData = await getLinksData(),
-        links = getLinks(allLinksData[0]),
-        allLinks = allLinksData.map(getLinks).flat(),
+        links = allLinksData[0].links,
+        allLinks = allLinksData.map(({ links }) => links).flat(),
         featured = await getFeatured(top, nonPortfolioPosts),
         coast = findCategory(allPosts, "Coast to Coast AM").toSorted(
             sortDateDescend,
@@ -52,12 +52,6 @@ function slugifyCategories(post) {
         slug: slugifier(cat),
     }));
     return post;
-}
-
-function getLinks(linksData) {
-    return Object.values(linksData.categories)
-        .map(({ links }) => links)
-        .flat(Infinity);
 }
 
 async function getFeatured(top, nonPortfolioPosts) {

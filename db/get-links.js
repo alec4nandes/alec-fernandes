@@ -4,7 +4,7 @@ async function getLinksData() {
     const querySnapshot = await db.collection("links").get(),
         result = [];
     querySnapshot.forEach((doc) => {
-        result.push({ ...doc.data(), post_id: doc.id });
+        result.push(doc.data());
     });
     result.sort(sortDateDescending);
     return result;

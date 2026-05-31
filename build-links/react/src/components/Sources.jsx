@@ -79,8 +79,9 @@ function AddLink({ sources }) {
     async function handleAddLink(e) {
         try {
             e.preventDefault();
-            const data = Object.fromEntries(new FormData(e.target)),
-                sourceId = e.target.source_id.value;
+            const { source_id: sourceId, ...data } = Object.fromEntries(
+                new FormData(e.target),
+            );
             console.log(data);
             if (sourceId === "NEW") {
                 const colRef = collection(db, "links");
