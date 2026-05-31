@@ -1,8 +1,3 @@
-// TODO: move this and .env to blog folder
-// TODO: add deploy-script.js to .gitignore in blog folder
-
-// db functions
-
 const { db } = require("../db/database.js");
 
 async function getLatestTweet() {
