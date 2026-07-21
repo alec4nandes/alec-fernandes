@@ -97,3 +97,36 @@ exports.summary = onRequest(
         response.send(result);
     },
 );
+
+// GPT (chat feature)
+
+const { aiChat } = require("./gpt.js");
+
+exports.chat = onRequest(
+    {
+        cors: ["https://fern.haus", "http://localhost:5174"],
+        timeoutSeconds: 120,
+    },
+    async (request, response) => {
+        const stream = await aiChat(request.body);
+        let finalResponse;
+        for await (const event of stream) {
+            if (event.type === "response.output_text.delta") {
+                response.write(
+                    JSON.stringify({ type: "delta", text: event.delta }) + "\n",
+                );
+            }
+            if (event.type === "response.completed") {
+                finalResponse = event.response;
+            }
+        }
+        response.write(
+            JSON.stringify({
+                type: "done",
+                responseId: finalResponse.id,
+                usage: finalResponse.usage,
+            }) + "\n",
+        );
+        response.end();
+    },
+);
