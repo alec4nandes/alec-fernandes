@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     collection,
     deleteDoc,
@@ -11,7 +11,8 @@ import { formatDate } from "./App.jsx";
 
 export default function Posts() {
     const [posts, setPosts] = useState(),
-        [post, setPost] = useState();
+        [post, setPost] = useState(),
+        formRef = useRef();
 
     useEffect(() => {
         const colRef = collection(db, "posts"),
@@ -33,22 +34,15 @@ export default function Posts() {
     async function handleEditPost(e) {
         try {
             e.preventDefault();
-            const submitter = e.nativeEvent.submitter;
-            if (submitter.value === "update") {
-                const data = Object.fromEntries(new FormData(e.target)),
-                    docRef = doc(db, "posts", data.post_id),
-                    splitter = (str) => str.split(",").map((s) => s.trim());
-                data.categories = splitter(data.categories);
-                data.tags = splitter(data.tags);
-                data.date = new Date(data.date).toISOString();
-                await setDoc(docRef, data);
-                alert(`Post ${post.id ? "edited" : "added"}!`);
-                setPost();
-            } else if (submitter.value === "slugify") {
-                handleSlugifyTitle(e);
-            } else if (submitter.value === "caption") {
-                handleFormatCaption(e);
-            }
+            const data = Object.fromEntries(new FormData(e.target)),
+                docRef = doc(db, "posts", data.post_id),
+                splitter = (str) => str.split(",").map((s) => s.trim());
+            data.categories = splitter(data.categories);
+            data.tags = splitter(data.tags);
+            data.date = new Date(data.date).toISOString();
+            await setDoc(docRef, data);
+            alert(`Post ${post.id ? "edited" : "added"}!`);
+            setPost();
         } catch (err) {
             console.error(err);
             alert(err);
@@ -70,15 +64,20 @@ export default function Posts() {
     }
 
     function handleSlugifyTitle(e) {
-        e.target.post_id.value = e.target.title.value
-            .trim()
+        e.preventDefault();
+        formRef.current.post_id.value = formRef.current.title.value
             .toLowerCase()
-            .replaceAll(/[— –]/g, "-")
-            .replaceAll(/[‘’“”.,:;—–]/g, "");
+            .trim()
+            .normalize("NFD") // Splits accented characters into their base letters and diacritics
+            .replace(/[\u0300-\u036f]/g, "") // Removes the diacritics (accents)
+            .replace(/[^a-z0-9\s-]/g, "") // Removes anything that isn't a letter, number, space, or hyphen
+            .replace(/[\s_]+/g, "-") // Replaces spaces and underscores with a single hyphen
+            .replace(/^-+|-+$/g, ""); // Trims trailing or leading hyphens
     }
 
     function handleFormatCaption(e) {
-        const captionElem = e.target.feature_image_caption,
+        e.preventDefault();
+        const captionElem = formRef.current.feature_image_caption,
             caption = captionElem.value,
             formatted = caption.trim().replaceAll("<a ", `<a target="_blank" `);
         captionElem.value = formatted;
@@ -105,9 +104,9 @@ export default function Posts() {
             <h1>Posts</h1>
             {post ? (
                 <>
-                    <form onSubmit={handleEditPost}>
+                    <form ref={formRef} onSubmit={handleEditPost}>
                         <h2>Edit Post</h2>
-                        <label for="post-id">post id:</label>
+                        <label htmlFor="post-id">post id:</label>
                         <input
                             id="post-id"
                             name="post_id"
@@ -115,37 +114,39 @@ export default function Posts() {
                             required
                         />
                         <nav>
-                            <button type="submit" value="slugify">
+                            <button onClick={handleSlugifyTitle}>
                                 slugify title for ID
                             </button>
                         </nav>
-                        <label for="title">title:</label>
+                        <label htmlFor="title">title:</label>
                         <input
                             id="title"
                             name="title"
                             defaultValue={post.title}
                             required
                         />
-                        <label for="subtitle">subtitle:</label>
+                        <label htmlFor="subtitle">subtitle:</label>
                         <input
                             id="subtitle"
                             defaultValue={post.subtitle}
                             name="subtitle"
                         />
-                        <label for="content">content:</label>
+                        <label htmlFor="content">content:</label>
                         <textarea
                             id="content"
                             name="content"
                             defaultValue={post.content}
                             required
                         ></textarea>
-                        <label for="feature-image">feature image path:</label>
+                        <label htmlFor="feature-image">
+                            feature image path:
+                        </label>
                         <input
                             id="feature-image"
                             name="feature_image"
                             defaultValue={post.feature_image}
                         />
-                        <label for="feature-image-caption">
+                        <label htmlFor="feature-image-caption">
                             feature image caption:
                         </label>
                         <input
@@ -154,11 +155,11 @@ export default function Posts() {
                             defaultValue={post.feature_image_caption}
                         />
                         <nav>
-                            <button type="submit" value="caption">
+                            <button onClick={handleFormatCaption}>
                                 format caption
                             </button>
                         </nav>
-                        <label for="feature-image-alt">
+                        <label htmlFor="feature-image-alt">
                             feature image alt:
                         </label>
                         <input
@@ -166,16 +167,16 @@ export default function Posts() {
                             name="feature_image_alt"
                             defaultValue={post.feature_image_alt}
                         />
-                        <label for="categories">categories:</label>
+                        <label htmlFor="categories">categories:</label>
                         <input
                             id="categories"
                             name="categories"
                             defaultValue={post.categories}
                             required
                         />
-                        <label for="tags">tags:</label>
+                        <label htmlFor="tags">tags:</label>
                         <input id="tags" name="tags" defaultValue={post.tags} />
-                        <label for="date">date:</label>
+                        <label htmlFor="date">date:</label>
                         <input
                             id="date"
                             type="datetime-local"
@@ -191,7 +192,7 @@ export default function Posts() {
                                 />
                                 draft
                             </label>
-                            <button type="submit" value="update">
+                            <button type="submit">
                                 {post.id ? "update" : "add post"}
                             </button>
                         </nav>

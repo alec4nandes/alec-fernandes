@@ -50,7 +50,8 @@ export default function App() {
     }
 
     return (
-        isLoaded && (
+        isLoaded &&
+        (user ? (
             <div>
                 <nav>
                     <button onClick={() => signOut(auth)}>sign out</button>
@@ -74,42 +75,27 @@ export default function App() {
                     )}
                 </nav>
 
-                <hr />
-
                 {view === "posts" ? (
                     <Posts />
                 ) : (
-                    <>
+                    <div>
                         <h1>Blog Links</h1>
-                        {user ? (
-                            <div>
-                                {view === "categories" && (
-                                    <AddCategory {...{ categories }} />
-                                )}
-                                {view === "news" && (
-                                    <News {...{ categories }} />
-                                )}
-                                {view === "sources" && <Sources />}
-                            </div>
-                        ) : (
-                            <form id="sign-in" onSubmit={handleSignIn}>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="email..."
-                                />
-                                <input
-                                    type="password"
-                                    name="pw"
-                                    placeholder="password..."
-                                />
-                                <button type="submit">sign in</button>
-                            </form>
+                        {view === "categories" && (
+                            <AddCategory {...{ categories }} />
                         )}
-                    </>
+                        {view === "news" && <News {...{ categories }} />}
+                        {view === "sources" && <Sources />}
+                    </div>
                 )}
             </div>
-        )
+        ) : (
+            <form id="sign-in" onSubmit={handleSignIn}>
+                <h1>Sign In</h1>
+                <input type="email" name="email" placeholder="email..." />
+                <input type="password" name="pw" placeholder="password..." />
+                <button type="submit">sign in</button>
+            </form>
+        ))
     );
 }
 

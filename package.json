@@ -18,8 +18,9 @@
         "build-views": "node build-views/build-views-script.js",
         "elev": "npm run build-views && npx @11ty/eleventy",
         "reset": "npm run clear && npm run elev",
-        "deploy-tweet": "node deploy-tweet/deploy-tweet.js",
-        "deploy": "npm run reset && firebase deploy",
+        "build-admin": "cd admin-react/react && npm run build && cd ../..",
+        "build-chat": "bash build-chat.sh",
+        "deploy": "npm run build-admin && npm run build-chat && npm run reset && firebase deploy",
         "serve": "firebase serve --only functions,hosting",
         "portfolio": "cd public && node ../portfolio-scraper/scrape.js && cd ..",
         "compress": "cd compress && node compress.js && cd .."
