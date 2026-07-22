@@ -1,0 +1,39 @@
+body {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: 0;
+  text-align: center;
+}
+body .static-container {
+  height: 100%;
+  overflow: auto;
+}
+body .static-container nav {
+  position: relative;
+}
+body .static-container main {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 35px;
+  padding: 80px 15px 0;
+}
+body .static-container main h3 {
+  margin-top: 30px;
+}
+body .static-container main img.separator {
+  margin: 40px auto;
+}
+body .static-container main p {
+  margin: 0 auto;
+}
+body .static-container main table {
+  margin: 0 auto 30px;
+}
+
+@media only screen and (max-width: 300px) {
+  nav ul li a {
+    font-size: 13px;
+  }
+}/*# sourceMappingURL=static.css.map */

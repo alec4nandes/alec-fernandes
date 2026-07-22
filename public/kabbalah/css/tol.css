@@ -1,0 +1,265 @@
+.tol {
+  --width: clamp(150px, 30vh, 200px);
+  --offset: calc(var(--width) * 0.04);
+  --half-offset: calc(var(--offset) / 2);
+  --height: calc(var(--width) * (9 / 5) + (var(--offset) * 2));
+  --sef-dim: calc(var(--width) * 0.2);
+  --center: calc(50% - (var(--sef-dim) / 2));
+  --path-height: calc(var(--width) / 20);
+  --path-width: calc(var(--width) / 2.5);
+  height: var(--height);
+  width: var(--width);
+  margin: auto;
+  position: relative;
+}
+.tol.kircher {
+  --kircher-deg: 58deg;
+  --kircher-side: calc(var(--offset) * 3);
+  --kircher-push-text: calc(var(--path-height) * / -2);
+}
+.tol.kircher .koph,
+.tol.kircher .zayn {
+  width: calc(var(--path-width) * 1.75) !important;
+  top: calc(var(--sef-dim) * 5.5) !important;
+}
+.tol.kircher .koph {
+  transform: rotate(var(--kircher-deg)) !important;
+  left: var(--kircher-side) !important;
+}
+.tol.kircher .koph span {
+  transform: rotate(calc(var(--kircher-deg) * -1)) !important;
+  right: var(--kircher-push-text) !important;
+}
+.tol.kircher .zayn {
+  transform: rotate(calc(var(--kircher-deg) * -1)) !important;
+  right: var(--kircher-side) !important;
+}
+.tol.kircher .zayn span {
+  transform: rotate(var(--kircher-deg)) !important;
+  left: var(--kircher-push-text) !important;
+}
+.tol .sef,
+.tol .path {
+  position: absolute;
+}
+.tol .sef {
+  height: var(--sef-dim);
+  width: var(--sef-dim);
+  background-color: #b0bdff;
+  border: 2px solid #222;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #999;
+  box-sizing: border-box;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--width) / 10);
+  z-index: 5;
+}
+.tol .sef.highlight {
+  background-color: rgb(122, 0, 146);
+  color: #eee;
+}
+.tol .sef.center {
+  left: var(--center);
+}
+.tol .sef.top-row {
+  top: calc(var(--sef-dim) + var(--offset));
+}
+.tol .sef.middle-row {
+  top: calc(var(--sef-dim) * 3 + var(--offset));
+}
+.tol .sef.bottom-row {
+  top: calc(var(--sef-dim) * 5 + var(--offset));
+}
+.tol .sef.left-side {
+  left: var(--offset);
+}
+.tol .sef.right-side {
+  right: var(--offset);
+}
+.tol .sef.kether {
+  top: var(--offset);
+}
+.tol .sef.tiphareth {
+  top: calc(var(--sef-dim) * 4 + var(--offset));
+}
+.tol .sef.yesod {
+  top: calc(var(--sef-dim) * 6 + var(--offset));
+}
+.tol .sef.malkuth {
+  top: calc(var(--sef-dim) * 8 + var(--offset));
+}
+.tol .path {
+  height: var(--path-height);
+  width: var(--path-width);
+  background-color: #000;
+  border: 0.5px solid #888;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--width) / 10);
+  line-height: 0;
+  transform-origin: center;
+  z-index: 1;
+}
+.tol .path span {
+  position: relative;
+}
+.tol .path.mother, .tol .path.highlight {
+  background-color: rgb(122, 0, 146);
+}
+.tol .path.double {
+  background-color: rgb(71, 0, 11);
+}
+.tol .path.other {
+  background-color: rgb(0, 47, 62);
+}
+.tol .path.diag {
+  --side: calc(var(--sef-dim) / 2);
+  --deg: 30deg;
+}
+.tol .path.diag.heh, .tol .path.diag.vav {
+  top: calc(var(--sef-dim) / 2 + var(--half-offset));
+}
+.tol .path.diag.tzaddi, .tol .path.diag.chet {
+  top: calc(var(--sef-dim) * 3.5 + var(--half-offset));
+}
+.tol .path.diag.samekh, .tol .path.diag.yod {
+  top: calc(var(--sef-dim) * 4.45 + var(--half-offset));
+}
+.tol .path.diag.lamed, .tol .path.diag.nun {
+  top: calc(var(--sef-dim) * 5.5 + var(--half-offset));
+}
+.tol .path.diag.trans-right {
+  transform-origin: right;
+  transform: rotate(calc(var(--deg) * -1));
+}
+.tol .path.diag.trans-right span {
+  transform: rotate(var(--deg));
+}
+.tol .path.diag.trans-right.vav, .tol .path.diag.trans-right.samekh {
+  left: var(--side);
+}
+.tol .path.diag.trans-right.chet, .tol .path.diag.trans-right.nun {
+  right: calc(var(--side) + var(--offset));
+}
+.tol .path.diag.trans-left {
+  transform-origin: left;
+  transform: rotate(var(--deg));
+}
+.tol .path.diag.trans-left span {
+  transform: rotate(calc(var(--deg) * -1));
+}
+.tol .path.diag.trans-left.heh, .tol .path.diag.trans-left.yod {
+  right: var(--side);
+}
+.tol .path.diag.trans-left.tzaddi, .tol .path.diag.trans-left.lamed {
+  left: calc(var(--side) + var(--offset));
+}
+.tol .path.vertical {
+  --side: calc(var(--sef-dim) / -2 + var(--offset));
+  transform: rotate(90deg);
+}
+.tol .path.vertical span {
+  transform: rotate(-90deg);
+}
+.tol .path.vertical.gimmel, .tol .path.vertical.peh {
+  left: var(--side);
+}
+.tol .path.vertical.beth, .tol .path.vertical.kaph {
+  right: var(--side);
+}
+.tol .path.vertical.gimmel, .tol .path.vertical.beth {
+  top: calc(var(--sef-dim) * 2.5 + var(--half-offset));
+}
+.tol .path.vertical.peh, .tol .path.vertical.kaph {
+  top: calc(var(--sef-dim) * 4.5 + var(--half-offset));
+}
+.tol .path.vertical.middle {
+  transform-origin: left;
+  left: 50%;
+}
+.tol .path.vertical.middle.daleth {
+  width: calc(var(--path-width) * 2);
+  top: calc(var(--sef-dim) / 2 + var(--half-offset));
+  z-index: 3;
+}
+.tol .path.vertical.middle.rosh {
+  top: calc(var(--sef-dim) * 4.5 + var(--half-offset));
+}
+.tol .path.vertical.middle.rosh span {
+  right: calc(var(--path-height) * 1.5);
+}
+.tol .path.vertical.middle.tav {
+  top: calc(var(--sef-dim) * 6.5 + var(--half-offset));
+}
+.tol .path.horizontal {
+  --horiz-width: calc(var(--path-width) * 1.75);
+  width: var(--horiz-width);
+  left: calc(50% - var(--horiz-width) / 2);
+  transform-origin: center;
+  z-index: 4;
+}
+.tol .path.horizontal.shin {
+  top: calc(var(--sef-dim) * 1.5 + var(--half-offset));
+}
+.tol .path.horizontal.aleph {
+  top: calc(var(--sef-dim) * 3.5 + var(--half-offset));
+}
+.tol .path.horizontal.mem {
+  top: calc(var(--sef-dim) * 5.5 + var(--half-offset));
+}
+.tol .path.extra-long-diag, .tol .path.long-diag {
+  --side: calc(var(--sef-dim) / 1.35);
+  top: calc(var(--sef-dim) * 1.6);
+}
+.tol .path.extra-long-diag.koph, .tol .path.extra-long-diag.ayin, .tol .path.long-diag.koph, .tol .path.long-diag.ayin {
+  transform-origin: left;
+  left: var(--side);
+}
+.tol .path.extra-long-diag.zayn, .tol .path.extra-long-diag.teth, .tol .path.long-diag.zayn, .tol .path.long-diag.teth {
+  transform-origin: right;
+  right: var(--side);
+}
+.tol .path.extra-long-diag {
+  --deg: 29deg;
+  --push-text: calc(var(--path-height) * 4);
+  width: calc(var(--path-width) * 2);
+}
+.tol .path.extra-long-diag.koph {
+  transform: rotate(var(--deg));
+}
+.tol .path.extra-long-diag.koph span {
+  transform: rotate(calc(var(--deg) * -1));
+  right: var(--push-text);
+}
+.tol .path.extra-long-diag.zayn {
+  transform: rotate(calc(var(--deg) * -1));
+}
+.tol .path.extra-long-diag.zayn span {
+  transform: rotate(var(--deg));
+  left: var(--push-text);
+}
+.tol .path.long-diag {
+  --deg: 60deg;
+  --push-text: calc(var(--path-height) * 3);
+  width: calc(var(--path-width) * 1.75);
+  z-index: 2;
+}
+.tol .path.long-diag.ayin {
+  transform: rotate(var(--deg));
+}
+.tol .path.long-diag.ayin span {
+  transform: rotate(calc(var(--deg) * -1));
+  right: var(--push-text);
+}
+.tol .path.long-diag.teth {
+  transform: rotate(calc(var(--deg) * -1));
+}
+.tol .path.long-diag.teth span {
+  transform: rotate(var(--deg));
+  left: var(--push-text);
+}/*# sourceMappingURL=tol.css.map */

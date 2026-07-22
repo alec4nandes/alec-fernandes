@@ -14,11 +14,11 @@
                 box-sizing: border-box;
 
                 &[name="instructions"] {
-                    height: 60px;
+                    height: 40px;
                 }
 
                 &[name="input"] {
-                    height: 120px;
+                    height: 60px;
                 }
             }
         }
@@ -28,6 +28,7 @@
         max-width: 500px;
         width: 100%;
         flex: 1;
+        margin: auto;
         padding: 2em 0 300px;
         overflow: auto;
 

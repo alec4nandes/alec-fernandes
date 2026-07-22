@@ -104,7 +104,7 @@ const { aiChat } = require("./gpt.js");
 
 exports.chat = onRequest(
     {
-        cors: ["https://fern.haus", "http://localhost:5174"],
+        cors: ["https://fern.haus", "http://localhost:5173"],
         timeoutSeconds: 120,
     },
     async (request, response) => {

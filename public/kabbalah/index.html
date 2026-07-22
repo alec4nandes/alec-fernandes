@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Tarot and Kabbalah</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/tol.css" />
+        <link rel="stylesheet" href="css/nav.css" />
+        <link rel="stylesheet" href="css/static.css" />
+        <style>
+            img.separator {
+                display: flex;
+            }
+
+            .social a img {
+                margin-bottom: 0;
+            }
+
+            table {
+                width: 230px;
+            }
+
+            td {
+                padding: 2px 5px;
+            }
+
+            td:first-child {
+                opacity: 0.75;
+                text-align: right;
+                white-space: nowrap;
+            }
+
+            td:nth-child(2) {
+                text-align: left;
+            }
+
+            #trees {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="static-container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="./">INTRO</a>
+                    </li>
+                    <li>
+                        <a href="#traditional">TRADITIONAL</a>
+                    </li>
+                    <li>
+                        <a href="#sefirot">SEFIROT</a>
+                    </li>
+                    <li>
+                        <a href="#worlds">WORLDS</a>
+                    </li>
+                </ul>
+            </nav>
+            <main>
+                <h1>Delfai Oracle</h1>
+
+                <h2>Tarot and Kabbala</h2>
+
+                <p>Learn how the Tarot cards relate to Kabbalah!</p>
+
+                <img
+                    id="traditional"
+                    class="separator"
+                    src="assets/separator.png"
+                    alt="decorative dividing line made up of square swirls in the Greek style."
+                />
+
+                <h2>Realigning Kabbalah in Tarot with Jewish Mysticism</h2>
+
+                <p>
+                    The
+                    <a
+                        href="https://en.wikipedia.org/wiki/Hermetic_Order_of_the_Golden_Dawn"
+                        target="_blank"
+                        rel="noopener"
+                        >Order of the Golden Dawn</a
+                    >
+                    greatly expanded the esoteric symbolism of Tarot cards.
+                    Their system of the
+                    <a href="assets/wheel.png" target="_blank" rel="noopener"
+                        >decan calendar wheel</a
+                    >
+                    and how they assigned cards to Kabbalah's Tree of Life gave
+                    the deck a much deeper spiritual meaning. While I respect
+                    this group dearly, I do believe they made one key error with
+                    the Tree of Life.
+                </p>
+
+                <p>
+                    In Kabbalistic Tarot, the 22 Major Arcana cards match the 22
+                    letters of the Hebrew alphabet in sequence. The Order of the
+                    Golden Dawn assigned the Major Arcana cards and their Hebrew
+                    letters to the paths between spheres &mdash; or "sefirot"
+                    &mdash; on the Tree of Life starting from the top down, in
+                    fairly strict order. These paths, however, do not align with
+                    the traditional Tree of Life in Jewish mysticism.
+                </p>
+
+                <p>
+                    To understand this original tree, one must understand the 22
+                    letters of the Hebrew alphabet. These can be divided in to
+                    three categories: the “mother letters” (3 elements), the
+                    “double letters” (7 known “planets” of the ancient world),
+                    and the other letters (12 zodiac signs). Kabbalah texts
+                    identify the mother letters as
+                    <em>aleph (א), mem (מ), and shin (ש)</em>, and the double
+                    letters each have two distinct pronunciations in ancient
+                    Hebrew &mdash;
+                    <em
+                        >beth (ב), gimmel (ג), daleth (ד), kaph (כ), peh (פ),
+                        rosh (ר), and tav (ת)</em
+                    >.
+                </p>
+
+                <div id="letter-groups"></div>
+
+                <p>
+                    As you can see on the traditional tree, the lines, or paths,
+                    also fall into three different categories: horizontal lines
+                    (3), vertical lines (7), and diagonal lines (12). This
+                    design reflects the different groups of the Hebrew alphabet,
+                    and is therefore the most correct way to associate the 22
+                    Major Arcana Tarot cards.
+                </p>
+
+                <p>
+                    For example, the Fool, or <em>aleph (א)</em> — one of the
+                    three mother letters — should be on one of the three
+                    horizontal lines, and not at the very top of the tree as
+                    shown in the Golden Dawn layout. You’ll also notice the
+                    paths of the trees are slightly different. This is because
+                    the Order of the Golden Dawn used a version of the Tree of
+                    Life drawn by the non-Jewish scholar
+                    <a
+                        href="https://en.wikipedia.org/wiki/Athanasius_Kircher"
+                        target="_blank"
+                        rel="noopener"
+                        >Athanasius Kircher</a
+                    >
+                    from Germany. His depiction of the tree is not the
+                    traditional one revealed by
+                    <a
+                        href="https://en.wikipedia.org/wiki/Isaac_Luria"
+                        target="_blank"
+                        rel="noopener"
+                        >Ari Luria</a
+                    >.
+                </p>
+
+                <p>
+                    These are very technical distinctions, but I believe they
+                    are important. In an era when we are actively addressing
+                    cultural appropriation, it’s vital to realign Tarot with
+                    traditional Kabbalah as practiced by the Jewish people, and
+                    not the Kabbalah adopted and warped by Western outsiders at
+                    the turn of the 20th century.
+                </p>
+
+                <img
+                    id="sefirot"
+                    class="separator"
+                    src="assets/separator.png"
+                    alt="decorative dividing line made up of square swirls in the Greek style."
+                />
+
+                <h2>Sefirot of the Tree of Life</h2>
+
+                <div id="sefirot-info"></div>
+
+                <h2>Worlds of the Tree of Life</h2>
+
+                <div id="worlds-info"></div>
+                <br />
+            </main>
+        </div>
+
+        <script type="module">
+            import TreeOfLife from "./scripts/TreeOfLife.js";
+
+            const fetcher = async (fileName) =>
+                    await (await fetch(`json/${fileName}.json`)).json(),
+                sefirot = await fetcher("sefirot"),
+                worlds = await fetcher("worlds"),
+                kabbalahMajors = await fetcher("majors"),
+                sefElem = document.querySelector("#sefirot-info"),
+                worldsElem = document.querySelector("#worlds-info"),
+                groupsElem = document.querySelector("#letter-groups");
+
+            sefElem.innerHTML = Object.entries(sefirot)
+                .map(
+                    ([key, val], i, a) => `
+                    <div id="${key.toLowerCase()}">
+                        <h3>${val.rank}. ${key} </br> ${val.hebrew}</h3>
+                        ${TreeOfLife({ highlight: key })}
+                        <br/>
+                        <table>
+                            <tr><td>represents</td><td>${val.represents}</td></tr>
+                            <tr><td>quality</td><td>${val.quality}</td></tr>
+                            <tr><td>bodypart</td><td>${val.bodypart || "n/a"}</td></tr>
+                            <tr><td>world</td><td><a href="#${val.world.toLowerCase()}">${val.world}</a></td></tr>
+                        </table>
+                    </div>
+                    <img
+                        ${i === a.length - 1 ? 'id="worlds"' : ""}
+                        class="separator"
+                        src="assets/separator.png" alt="decorative dividing line made up of square swirls in the Greek style."
+                    >
+                `,
+                )
+                .join("");
+
+            worldsElem.innerHTML = Object.entries(worlds)
+                .map(([key, val]) => {
+                    const sefsContained = Object.entries(sefirot)
+                        .filter(([k, v]) => v.world === key)
+                        .map(([k]) => k);
+                    return `
+                    <div id="${key.toLowerCase()}">
+                        <h3 style="margin-bottom: 0">${key}</h3>
+                        <p style="margin-top: 0">${val.quality} World</p>
+                        <br/>
+                        ${TreeOfLife({ highlight: sefsContained })}
+                        <br/>
+                        <table>
+                            <tr><td>represents</td><td>${val.represents}</td></tr>
+                            <tr><td>soul</td><td>${val.english}: ${val.hebrew} <em>(${val.latin.toLowerCase()})</em></td></tr>
+                            <tr><td>sefirot</td><td>${sefsContained.map((sef) => `<a href="#${sef.toLowerCase()}">${sef}</a>`).join(", ")}</td></tr>
+                            <tr><td>element</td><td>${val.element} <em>(${val.suit})</em></td></tr>
+                            <tr><td>court cards</td><td>${val.court}</td></tr>
+                        </table>
+                    </div>
+                    <img class="separator" src="assets/separator.png" alt="decorative dividing line made up of square swirls in the Greek style.">
+                `;
+                })
+                .join("");
+
+            groupsElem.innerHTML = `
+                <div id="trees">
+                    <div>
+                        <h3 style="color: salmon">Golden Dawn</h3>
+                        ${TreeOfLife({ showGroups: true, isKircher: true, kabbalahMajors })}
+                    </div>
+                    <div>
+                        <h3 style="color: lightgreen">Traditional & Correct</h3>
+                        ${TreeOfLife({ showGroups: true })}
+                    </div>
+                </div>
+            `;
+
+            const jump = window.location.href.split("#")[1];
+            jump && document.querySelector(`#${jump}`).scrollIntoView();
+        </script>
+    </body>
+</html>

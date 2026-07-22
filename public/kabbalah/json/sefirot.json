@@ -1,0 +1,88 @@
+{
+    "Kether": {
+        "rank": 1,
+        "hebrew": "כתר",
+        "represents": "Crown",
+        "quality": "Creative Urge",
+        "bodypart": "Skull",
+        "world": "Atziluth",
+        "celestial": "Saturn"
+    },
+    "Chokmah": {
+        "rank": 2,
+        "hebrew": "הכמה",
+        "represents": "Wisdom",
+        "quality": "Force",
+        "bodypart": "Right Brain",
+        "world": "Atziluth"
+    },
+    "Binah": {
+        "rank": 3,
+        "hebrew": "בינה",
+        "represents": "Understanding",
+        "quality": "Concept",
+        "bodypart": "Left Brain",
+        "world": "Briah"
+    },
+    "Chesed": {
+        "rank": 4,
+        "hebrew": "חסד",
+        "represents": "Mercy",
+        "quality": "Expansion",
+        "bodypart": "Right Arm",
+        "world": "Briah",
+        "celestial": "Moon"
+    },
+    "Geburah": {
+        "rank": 5,
+        "hebrew": "גבורה",
+        "represents": "Strength",
+        "quality": "Restriction",
+        "bodypart": "Left Arm",
+        "world": "Briah"
+    },
+    "Tiphareth": {
+        "rank": 6,
+        "hebrew": "תפארת",
+        "represents": "Beauty",
+        "quality": "Illumination",
+        "bodypart": "Torso",
+        "world": "Yetzirah",
+        "celestial": "Venus"
+    },
+    "Netzach": {
+        "rank": 7,
+        "hebrew": "נצח",
+        "represents": "Victory",
+        "quality": "Creativity",
+        "bodypart": "Right Leg",
+        "world": "Yetzirah",
+        "celestial": "Mars"
+    },
+    "Hod": {
+        "rank": 8,
+        "hebrew": "הוד",
+        "represents": "Splendor",
+        "quality": "Logic",
+        "bodypart": "Left Leg",
+        "world": "Yetzirah",
+        "celestial": "Sun"
+    },
+    "Yesod": {
+        "rank": 9,
+        "hebrew": "יסוד",
+        "represents": "Foundation",
+        "quality": "Potential",
+        "bodypart": "Genitals",
+        "world": "Yetzirah",
+        "celestial": "Mercury"
+    },
+    "Malkuth": {
+        "rank": 10,
+        "hebrew": "מלכות",
+        "represents": "Kingdom",
+        "quality": "Manifestation",
+        "world": "Assiah",
+        "celestial": "Jupiter"
+    }
+}

@@ -2,6 +2,7 @@ db-dev.mjs
 firebase-config.js
 
 /public/admin
+/public/chat
 Archive.zip
 
 # Logs

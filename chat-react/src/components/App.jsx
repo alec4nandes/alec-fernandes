@@ -1,5 +1,12 @@
 import "../css/App.css";
 import { useEffect, useRef, useState } from "react";
+import {
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut,
+} from "firebase/auth";
+import { auth } from "../scripts/firebase.js";
+import { endpoints } from "../scripts/endpoints.js";
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
@@ -21,18 +28,26 @@ async function parseMarkdown(markdown) {
 }
 
 function App() {
-    const [chatHistory, setChatHistory] = useState([]),
+    const [isLoaded, setIsLoaded] = useState(false),
+        [user, setUser] = useState(),
+        [chatHistory, setChatHistory] = useState([]),
         [parsedChat, setParsedChat] = useState([]),
         [previousResponseId, setPreviousResponseId] = useState(),
         messagesRef = useRef(),
         streamRef = useRef(),
         efforts = ["none", "low", "medium", "high", "xhigh", "max"];
 
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, (userCred) => {
+            !isLoaded && setIsLoaded(true);
+            setUser(userCred?.email);
+        });
+        return unsub;
+    }, []);
+
     async function handleChat(e) {
         e.preventDefault();
-        const endpoint =
-                "http://localhost:5000/alec-fernandes/us-central1/chat",
-            instructions = e.target.instructions.value,
+        const instructions = e.target.instructions.value,
             input = e.target.input.value,
             effort = e.target.effort.value,
             body = { instructions, input, effort, previousResponseId };
@@ -44,7 +59,7 @@ function App() {
             top: messagesRef.current.scrollHeight,
             behavior: "smooth",
         });
-        const response = await fetch(endpoint, {
+        const response = await fetch(endpoints.chat, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body),
@@ -86,51 +101,82 @@ function App() {
         streamRef.current.style.display = "none";
     }
 
+    async function handleSignIn(e) {
+        try {
+            e.preventDefault();
+            const email = e.target.email.value,
+                pw = e.target.pw.value;
+            await signInWithEmailAndPassword(auth, email, pw);
+        } catch (err) {
+            console.error(err);
+            alert(err);
+        }
+    }
+
     return (
-        <div id="ai-chat">
-            <div id="inputs">
-                <h1>AI Chat</h1>
-
-                <form id="message-form" onSubmit={handleChat}>
-                    <textarea
-                        name="instructions"
-                        placeholder="instructions..."
-                    ></textarea>
+        isLoaded &&
+        (user ? (
+            <div id="ai-chat">
+                <div id="inputs">
+                    <h1>AI Chat</h1>
+                    <button onClick={() => signOut(auth)}>sign out</button>
 
                     <br />
-
-                    <textarea name="input" placeholder="input..."></textarea>
-
                     <br />
 
-                    <label>
-                        effort:{" "}
-                        <select name="effort" defaultValue="low">
-                            {efforts.map((effort) => (
-                                <option value={effort}>{effort}</option>
-                            ))}
-                        </select>
-                    </label>
+                    <form id="message-form" onSubmit={handleChat}>
+                        <textarea
+                            name="instructions"
+                            placeholder="instructions..."
+                        ></textarea>
 
-                    <br />
+                        <br />
 
-                    <button type="submit">submit</button>
-                </form>
-            </div>
-            <div ref={messagesRef} id="chat-messages">
-                {parsedChat.map((message) => (
+                        <textarea
+                            name="input"
+                            placeholder="input..."
+                        ></textarea>
+
+                        <br />
+
+                        <nav>
+                            <label>
+                                effort:{" "}
+                                <select name="effort" defaultValue="low">
+                                    {efforts.map((effort) => (
+                                        <option value={effort}>{effort}</option>
+                                    ))}
+                                </select>
+                            </label>{" "}
+                            <button type="submit">submit</button>
+                        </nav>
+                    </form>
+                </div>
+                <div ref={messagesRef} id="chat-messages">
+                    {parsedChat.map((message) => (
+                        <div
+                            className={`message ${message.type || ""}`.trim()}
+                            dangerouslySetInnerHTML={{ __html: message.text }}
+                        ></div>
+                    ))}
                     <div
-                        className={`message ${message.type || ""}`.trim()}
-                        dangerouslySetInnerHTML={{ __html: message.text }}
+                        ref={streamRef}
+                        className="message response streaming"
+                        style={{ display: "none" }}
                     ></div>
-                ))}
-                <div
-                    ref={streamRef}
-                    className="message response streaming"
-                    style={{ display: "none" }}
-                ></div>
+                </div>
             </div>
-        </div>
+        ) : (
+            <form id="sign-in" onSubmit={handleSignIn}>
+                <h1>AI Chat</h1>
+                <input type="email" name="email" placeholder="email..." />
+                <br />
+                <input type="password" name="pw" placeholder="password..." />
+                <br />
+                <br />
+                <button type="submit">sign in</button>
+            </form>
+        ))
     );
 }
 

@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [react()],
     base: "/chat",
     build: {
-        outDir: "../../public/chat",
+        outDir: "../public/chat",
         emptyOutDir: true,
     },
 });
