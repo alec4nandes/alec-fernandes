@@ -1,7 +1,5 @@
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const { slugifier } = require("../../db/get-posts.js");
-const { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
+const { slugifier } = require("../../db/get-posts.js"),
+    { getPostsData, sortDateDescending } = require("../../db/get-posts.js");
 
 module.exports = async function () {
     const allPosts = (await getPostsData()).sort(sortDateDescending),
