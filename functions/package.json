@@ -17,7 +17,6 @@
         "firebase-admin": "^13.10.0",
         "firebase-functions": "^7.2.5",
         "lune": "^0.4.0",
-        "openai": "^6.48.0",
         "rss-parser": "^3.13.0"
     },
     "devDependencies": {
