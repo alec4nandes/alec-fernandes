@@ -1,0 +1,55 @@
+.truths {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-wrap: pretty;
+
+    .truth {
+        background-color: #bbb;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 10px;
+
+        & > .truth {
+            background-color: #ddd;
+
+            .statement {
+                font-weight: normal;
+                font-style: italic;
+            }
+        }
+
+        .statement {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .passage-ref {
+            display: block;
+        }
+
+        .passage {
+            .passage-topic,
+            .passage-citation {
+                font-style: italic;
+            }
+
+            .passage-text {
+                text-align: left;
+
+                span {
+                    display: block;
+                    margin-bottom: 8px;
+                }
+            }
+
+            .passage-citation {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+                opacity: 0.8;
+                text-align: left;
+            }
+        }
+    }
+}

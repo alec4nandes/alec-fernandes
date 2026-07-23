@@ -1,0 +1,54 @@
+header {
+    text-align: center;
+}
+
+hr {
+    margin: 10px 0 !important;
+}
+
+.group,
+.path,
+.list {
+    padding: 10px;
+}
+
+.group,
+.path {
+    text-align: center;
+}
+
+.group * {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.list {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.summary {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ul.suttas-list {
+    width: fit-content;
+    margin: auto;
+    padding: 0;
+    text-align: left;
+}
+
+/* COLORS */
+
+.group {
+    background-color: #bbb;
+}
+
+.path {
+    background-color: #ddd;
+}
+
+.list {
+    background-color: #fff;
+}
