@@ -45,15 +45,24 @@ const Parser = require("rss-parser");
 
 exports.news = onRequest({ cors: true }, async (request, response) => {
     const { query, timeframe_ms: timeframe } = request.body,
-        endpoint =
+        url =
             `https://news.google.com/rss/search` +
-            `?q=${query}&hl=en-US&gl=US&ceid=US:en`;
-    response.send(await getNews({ endpoint, timeframe }));
+            `?q=${query}&hl=en-US&gl=US&ceid=US:en`,
+        xml = await fetch(
+            // AWS Lambda "fetcher": gets page html
+            "https://mcldtkgy5bvoy4bma42es4zlt40dsadq.lambda-url.us-east-2.on.aws/",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url }),
+            },
+        ).then((resp) => resp.text());
+    response.send(await getNews({ xml, timeframe }));
 });
 
-async function getNews({ endpoint, timeframe }) {
+async function getNews({ xml, timeframe }) {
     const parser = new Parser(),
-        { items } = await parser.parseURL(endpoint),
+        { items } = await parser.parseString(xml),
         cutoff = Date.now() - timeframe,
         getMs = (isoDate) => new Date(isoDate).getTime();
     return items

@@ -14,11 +14,16 @@ export default function Editor({ links, sourceId }) {
                 submitter.disabled = true;
                 if (submitter.value === "metadata") {
                     const endpoint =
+                            // AWS Lambda "playwrighter": gets real url
                             "https://zzzqjbtboqlphhhulu6a2kanse0ajemv.lambda-url.us-east-2.on.aws/",
                         resp = await fetch(endpoint, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ url: link.link }),
+                            body: JSON.stringify({
+                                url: link.link,
+                                timeout: 2_000,
+                                is_url_only: true,
+                            }),
                         });
                     if (resp.ok) {
                         const realUrl = await resp.text();
