@@ -1,0 +1,34 @@
+.social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+
+    .social-icons-row {
+        height: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+
+        a {
+            height: 100%;
+            display: inline-block;
+
+            svg {
+                height: 100%;
+
+                path {
+                    fill: #e6e6e6;
+                }
+            }
+        }
+    }
+}
+
+.dark-icons {
+    width: fit-content;
+
+    svg path {
+        fill: #222 !important;
+    }
+}

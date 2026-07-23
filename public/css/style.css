@@ -141,7 +141,9 @@ body {
         color: rgb(105, 138, 199);
 
         &:hover {
-            transition: color 0.5s, opacity 0.5s;
+            transition:
+                color 0.5s,
+                opacity 0.5s;
             opacity: 0.6;
         }
     }
@@ -190,8 +192,8 @@ body {
         background-color: #edf6ff;
         border-radius: 10px;
         box-sizing: border-box;
-        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-            monospace;
+        font-family:
+            source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
         overflow-x: auto;
         padding: 10px;
     }

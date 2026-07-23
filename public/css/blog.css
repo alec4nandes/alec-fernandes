@@ -332,31 +332,6 @@ hr {
     border: 0;
 }
 
-.social-icons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-
-    a {
-        height: 28px;
-        width: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-
-        &:hover {
-            box-shadow: 0 0 6px #eee;
-        }
-
-        img {
-            height: 100%;
-            width: 100%;
-        }
-    }
-}
-
 ul {
     display: flex;
     flex-direction: column;
@@ -648,9 +623,9 @@ footer {
 }
 
 #about-me-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    ul {
+        padding-left: 20px;
+    }
 
     img {
         height: 150px;
