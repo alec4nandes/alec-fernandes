@@ -118,7 +118,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api
+                        https://us-central1-alecfernandes.cloudfunctions.net/moon_sun_tides_api
                         <br />?<strong>latitude</strong>=34.0488&<strong>longitude</strong>=-118.2518
                         <br />&<strong>date</strong>=2022-11-30&<strong>time</strong>=16:32:09
                     </td>
@@ -250,7 +250,7 @@
                 navigator.geolocation.getCurrentPosition(
                     async (pos) => {
                         const { latitude: lat, longitude: lng } = pos.coords;
-                        const url = `https://us-central1-alec-fernandes.cloudfunctions.net/moon_sun_tides_api?latitude=${lat}&longitude=${lng}`,
+                        const url = `https://us-central1-alecfernandes.cloudfunctions.net/moon_sun_tides_api?latitude=${lat}&longitude=${lng}`,
                             resp = await fetch(url),
                             data = await resp.json();
                         displayRawText(data);

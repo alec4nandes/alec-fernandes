@@ -28,22 +28,25 @@ setGlobalOptions({ maxInstances: 10 });
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
+const cors = [
+    "https://fern.haus",
+    "https://alecfernandes.web.app",
+    "http://localhost/*",
+];
+
 // Moon-Sun-Tides API route, sample:
-// http://localhost:5001/alec-fernandes/us-central1/moon_sun_tides_api?latitude=32.8400896&longitude=-117.2078592&date=2022-11-30
+// http://localhost:5001/alecfernandes/us-central1/moon_sun_tides_api?latitude=32.8400896&longitude=-117.2078592&date=2022-11-30
 const { getMoonSunTidesData } = require("./moon-sun-tides.js");
 
-exports.moon_sun_tides_api = onRequest(
-    { cors: true },
-    async (request, response) => {
-        response.send(await getMoonSunTidesData(request));
-    },
-);
+exports.moon_sun_tides_api = onRequest({ cors }, async (request, response) => {
+    response.send(await getMoonSunTidesData(request));
+});
 
 // NEWS
 
 const Parser = require("rss-parser");
 
-exports.news = onRequest({ cors: true }, async (request, response) => {
+exports.news = onRequest({ cors }, async (request, response) => {
     const { query, timeframe_ms: timeframe } = request.body,
         url =
             `https://news.google.com/rss/search` +
@@ -72,37 +75,28 @@ async function getNews({ xml, timeframe }) {
 
 // SUMMARY
 
-exports.summary = onRequest(
-    {
-        cors: [
-            "https://fern.haus",
-            "http://localhost:5002",
-            "http://localhost:5173",
-        ],
-    },
-    async (request, response) => {
-        const { input } = request.body,
-            instructions =
-                `Use the url_context tool to read the specified URL and generate a ` +
-                `one-paragraph summary that aligns with the provided headline. ` +
-                `If the URL is inaccessible, search the web to summarize the topic.`,
-            settings = {
-                api_key: process.env.GEMINI_API_KEY,
-                model: "gemini-3.1-flash-lite",
-                stream: false, // Boolean
-                search: true, // Boolean, Gemini only
-                url_context: true, // Boolean, Gemini only
-                temperature: 1.2, // from 0.0 to 2.0, with some restrictions based on model
-                instructions, // optional
-                input: JSON.stringify(input),
-                effort: null, // none < low < medium < high < xhigh // (Claude: < low < medium < high < max)
-                budget: 20_000, // Gemini & Claude only, # of tokens for thinking (low ex: 2_000). Gemini: use in place of effort, not alongside
-            },
-            result = await fetch("https://ai-kmmlvbfnaq-uc.a.run.app", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(settings),
-            }).then((resp) => resp.json());
-        response.send(result);
-    },
-);
+exports.summary = onRequest({ cors }, async (request, response) => {
+    const { input } = request.body,
+        instructions =
+            `Use the url_context tool to read the specified URL and generate a ` +
+            `one-paragraph summary that aligns with the provided headline. ` +
+            `If the URL is inaccessible, search the web to summarize the topic.`,
+        settings = {
+            api_key: process.env.GEMINI_API_KEY,
+            model: "gemini-3.1-flash-lite",
+            stream: false, // Boolean
+            search: true, // Boolean, Gemini only
+            url_context: true, // Boolean, Gemini only
+            temperature: 1.2, // from 0.0 to 2.0, with some restrictions based on model
+            instructions, // optional
+            input: JSON.stringify(input),
+            effort: null, // none < low < medium < high < xhigh // (Claude: < low < medium < high < max)
+            budget: 20_000, // Gemini & Claude only, # of tokens for thinking (low ex: 2_000). Gemini: use in place of effort, not alongside
+        },
+        result = await fetch("https://ai-kmmlvbfnaq-uc.a.run.app", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(settings),
+        }).then((resp) => resp.json());
+    response.send(result);
+});

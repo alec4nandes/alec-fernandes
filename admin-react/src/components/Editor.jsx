@@ -33,8 +33,8 @@ export default function Editor({ links, sourceId }) {
                 } else if (submitter.value === "summary") {
                     const input = `HEADLINE: ${link.title}\nURL:${url}`,
                         endpoint =
-                            // "http://localhost:5001/alec-fernandes/us-central1/summary",
-                            "https://summary-o5yypoiiya-uc.a.run.app",
+                            // "http://localhost:5001/alecfernandes/us-central1/summary",
+                            "https://us-central1-alecfernandes.cloudfunctions.net/summary",
                         data = await fetch(endpoint, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
